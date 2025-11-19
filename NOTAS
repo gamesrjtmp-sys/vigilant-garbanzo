@@ -1,0 +1,38 @@
+src/
+ ┣ app/
+ ┃ ┣ core/                       # Services singleton, interceptors, error handling, models globales
+ ┃ ┃ ┣ auth/
+ ┃ ┃ ┃ ┣ auth.service.ts
+ ┃ ┃ ┃ ┣ auth.guard.ts
+ ┃ ┃ ┣ http/
+ ┃ ┃ ┃ ┣ api.interceptor.ts
+ ┃ ┃ ┃ ┣ api.service.ts           # wrapper global para llamadas HTTP, logging, retry
+ ┃ ┃ ┣ models/                   # interfaces / DTOs compartidas
+ ┃ ┃ ┣ utils/                    # helpers puros (sin efectos secundarios)
+ ┃ ┃ ┗ core.module.ts (opcional)
+ ┃ ┣ shared/                     # componentes, pipes, directives reutilizables (standalone)
+ ┃ ┃ ┣ components/
+ ┃ ┃ ┃ ┣ button/
+ ┃ ┃ ┃ ┣ modal/
+ ┃ ┃ ┃ ┗ product-card/
+ ┃ ┃ ┣ pipes/
+ ┃ ┃ ┣ directives/
+ ┃ ┃ ┗ index.ts
+ ┃ ┣ features/                   # cada feature es lazy-loaded
+ ┃ ┃ ┣ catalog/
+ ┃ ┃ ┃ ┣ components/
+ ┃ ┃ ┃ ┣ catalog.routes.ts
+ ┃ ┃ ┃ ┗ catalog.feature.ts      # entry (could be standalone component)
+ ┃ ┃ ┣ product/
+ ┃ ┃ ┃ ┣ product.routes.ts
+ ┃ ┃ ┃ ┗ product.feature.ts
+ ┃ ┃ ┣ checkout/
+ ┃ ┃ ┃ ┣ checkout.routes.ts
+ ┃ ┃ ┃ ┗ checkout.feature.ts
+ ┃ ┣ app.routes.ts               # routing principal (lazy-load)
+ ┃ ┣ app.component.ts
+ ┃ ┗ main.ts                     # bootstrapApplication + providers
+ ┣ assets/
+ ┣ environments/
+ ┣ styles/
+ ┗ tests/
