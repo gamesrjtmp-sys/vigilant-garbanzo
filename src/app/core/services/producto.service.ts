@@ -1,10 +1,9 @@
 import { Injectable, signal, computed } from '@angular/core';
 import { ApiService } from '../../core/http/api.service';
 import { map, catchError, tap } from 'rxjs/operators';
-import { of } from 'rxjs';
-import { Producto } from '../models/api/producto/producto';
 import { ProductoDto } from '../models/dto/producto/productoDto';
 import { mapProducto } from '../mappers/producto';
+import { Producto } from '../models/api/producto/producto';
 
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
@@ -15,6 +14,8 @@ export class ProductoService {
     readonly error = signal<string | null>(null);
 
     readonly total = computed(() => this._productos().length);
+
+    readonly productos = this._productos.asReadonly();
     
     constructor(private api: ApiService) {}
 
@@ -32,12 +33,19 @@ export class ProductoService {
                 },
                 error: err => {
                     console.error(err);
-                    this.error.set("No se pudo cargar productos");
+                    this.error.set("No se pudo el producto");
                 },
                 complete: () => {
                     this.loading.set(false);
                 }
             });
+    }
+
+    getProductById(id: number) {
+        return this.api.get<Producto>(`producto/${id}`)
+            .pipe(
+                map(dto => mapProducto(dto)) // Limpias la data aquí
+            );
     }
 
 

@@ -9,8 +9,10 @@ export function mapProducto(api: ProductoDto): Producto {
     Precio: (api.Precio ?? 0) / 100,
     Imagenes: api.Imagenes && api.Imagenes.length > 0
         ? [...api.Imagenes]
-        : ['/assets/images/default-product.webp'],
+        : ["assets/images/default_product.webp"],
     Descripcion: api.Descripcion ?? '',
     Stock: api.Stock ?? 0,
   };
 }
+
+  

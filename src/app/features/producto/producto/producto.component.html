@@ -1,5 +1,69 @@
- <h1>Total de productos: {{ productoService.total() }}</h1>
+<div class="max-w-6xl mx-auto p-6">
 
-<div class="bg-red-500 text-white p-4 rounded-lg">
-  Tailwind funciona 🎉
+  @if (loading()) {
+    <div class="flex justify-center items-center h-64">
+      <p class="text-xl text-gray-500 animate-pulse">Cargando producto...</p>
+    </div>
+  } 
+  @else {
+    
+    @if (producto(); as p) {
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+
+        <div>
+          <div class="border rounded-xl overflow-hidden shadow-sm bg-white">
+            <img 
+              [src]="imagenSeleccionada()"
+              [alt]="p.Nombre"
+              class="w-full h-[420px] object-contain p-4"
+            />
+          </div>
+
+          <div class="flex gap-3 mt-4 overflow-x-auto pb-2">
+            @for (img of p.Imagenes; track $index) {
+              <img 
+                [src]="img"
+                (click)="seleccionarImagen(img)"
+                class="w-20 h-20 object-cover rounded-lg border cursor-pointer transition hover:opacity-80"
+                [class.ring-2]="img === imagenSeleccionada()"
+                [class.ring-blue-500]="img === imagenSeleccionada()"
+              />
+            }
+          </div>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <h1 class="text-3xl font-bold text-gray-900 leading-tight">
+            {{ p.Nombre }}
+          </h1>
+
+          <p class="text-4xl font-semibold text-blue-600">
+            S/ {{ p.Precio }}
+          </p>
+
+          <button 
+            (click)="comprar()"
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white py-4 rounded-xl
+                   font-semibold text-lg shadow-md transition active:scale-95">
+            Comprar ahora
+          </button>
+
+          <div class="prose text-gray-700">
+            <h2 class="text-xl font-medium mb-2 text-black">Descripción</h2>
+            <p class="leading-relaxed">
+              {{ p.Descripcion }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+    } 
+    @else {
+      <div class="text-center py-10">
+        <h2 class="text-2xl text-gray-400">No se encontró el producto</h2>
+      </div>
+    }
+  }
+
 </div>
