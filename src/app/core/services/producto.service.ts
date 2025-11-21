@@ -19,32 +19,10 @@ export class ProductoService {
     
     constructor(private api: ApiService) {}
 
-    loadAll() {  
-        this.loading.set(true);
-        this.error.set(null);
-        console.log('Cargando productos desde API...');
-        this.api.get<ProductoDto[]>('producto')
-            .pipe(
-                map(list => list.map(mapProducto)),
-            )
-            .subscribe({
-                next: productos => {
-                    this._productos.set(productos);
-                },
-                error: err => {
-                    console.error(err);
-                    this.error.set("No se pudo el producto");
-                },
-                complete: () => {
-                    this.loading.set(false);
-                }
-            });
-    }
-
     getProductById(id: number) {
         return this.api.get<Producto>(`producto/${id}`)
             .pipe(
-                map(dto => mapProducto(dto)) // Limpias la data aquí
+                map(dto => mapProducto(dto))
             );
     }
 

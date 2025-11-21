@@ -4,7 +4,7 @@ import { ProductoDto } from "../models/dto/producto/productoDto";
 
 export function mapProducto(api: ProductoDto): Producto {
   return {
-    Id: api.Id,
+    id: api.id,
     Nombre: api.Nombre ?? 'Sin nombre',
     Precio: (api.Precio ?? 0) / 100,
     Imagenes: api.Imagenes && api.Imagenes.length > 0

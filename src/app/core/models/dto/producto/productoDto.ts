@@ -1,5 +1,5 @@
 export interface ProductoDto {
-  Id: number;
+  id: number;
   Nombre: string;
   Precio: number; // backend usa cents
   Imagenes?: string[] | null;

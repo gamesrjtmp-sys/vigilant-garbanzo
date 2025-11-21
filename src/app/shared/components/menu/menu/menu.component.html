@@ -1,0 +1,156 @@
+<!-- PROMO TICKER -->
+<div class="w-full bg-black text-white text-sm">
+  <div class="max-w-7xl mx-auto px-4 py-1 flex items-center justify-center">
+    <span class="truncate">
+      ¡Usa el código <strong>1ERACOMPRA10</strong> y obtén un <strong>10% OFF</strong> en tu primera compra!
+    </span>
+  </div>
+</div>
+
+<!-- HEADER PRINCIPAL -->
+<header class="w-full bg-white border-b shadow-sm sticky top-0 z-50" role="banner">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- izquierda: logo + principal nav (desktop) -->
+      <div class="flex items-center gap-6">
+        <!-- logo -->
+        <button (click)="goToHome()"
+                class="flex items-center gap-3 focus:outline-none"
+                aria-label="Ir al inicio">
+          <!-- Ajusté la ruta a assets para que te funcione localmente -->
+          <img src="assets/images/pelota.jpg"
+               alt="Logo Qué Patas" class="h-10 w-auto" />
+        </button>
+
+        <!-- nav desktop (hidden on mobile) -->
+        <nav class="hidden lg:flex items-center gap-4" aria-label="Categorías principales">
+          <div class="relative" (keydown.enter)="$event.stopPropagation()">
+            <button
+              (click)="toggleCatalogDropdown()"
+              class="px-3 py-2 text-sm text-gray-700 hover:text-orange-500 focus:outline-none"
+              aria-haspopup="true"
+              [attr.aria-expanded]="catalogDropdownOpen()"
+              aria-controls="catalog-dropdown"
+            >
+              Perros ▾
+            </button>
+
+            <!-- dropdown: Angular 18 Control Flow -->
+            @if (catalogDropdownOpen()) {
+              <div
+                id="catalog-dropdown"
+                class="absolute mt-2 bg-white border rounded shadow-lg w-56 z-50"
+                role="menu"
+                aria-label="Subcategorías perros"
+              >
+                <ul class="py-2">
+                  <li role="none">
+                    <a role="menuitem" routerLink="/catalogo" [queryParams]="{type: 'perros', cat: 'alimentos'}"
+                       class="block px-4 py-2 text-sm hover:bg-gray-50">Alimentos</a>
+                  </li>
+                  <li role="none">
+                    <a role="menuitem" routerLink="/catalogo" [queryParams]="{type: 'perros', cat: 'camas'}"
+                       class="block px-4 py-2 text-sm hover:bg-gray-50">Camas</a>
+                  </li>
+                  <li role="none">
+                    <a role="menuitem" routerLink="/catalogo" [queryParams]="{type: 'perros', cat: 'juguetes'}"
+                       class="block px-4 py-2 text-sm hover:bg-gray-50">Juguetes</a>
+                  </li>
+                </ul>
+              </div>
+            }
+          </div>
+
+          <!-- otras categorias -->
+          <a routerLink="/catalogo" [queryParams]="{type: 'gatos'}" class="text-sm text-gray-700 hover:text-orange-500">Gatos</a>
+          <a routerLink="/catalogo" class="text-sm text-gray-700 hover:text-orange-500">Todos</a>
+          <a routerLink="/catalogo" [queryParams]="{type: 'transportadores'}" class="text-sm text-gray-700 hover:text-orange-500">Transportadores</a>
+        </nav>
+      </div>
+
+      <!-- centro: search -->
+      <div class="flex-1 px-4">
+        <form (submit)="onSearchSubmit(); $event.preventDefault()" class="flex items-center justify-center" role="search" aria-label="Buscar productos">
+          <div class="w-full max-w-xl">
+            <div class="flex items-center bg-gray-50 border rounded-lg overflow-hidden shadow-sm">
+              <!-- binding con signals -->
+              <input
+                type="search"
+                class="flex-1 px-4 py-2 text-sm bg-transparent focus:outline-none"
+                placeholder="Buscar..."
+                [value]="searchQuery()"
+                (input)="searchQuery.set($any($event.target).value)"
+                aria-label="Buscar productos"
+              />
+
+              <button type="submit" class="px-4 py-2 bg-orange-500 text-white hover:bg-orange-600"
+                      aria-label="Buscar">
+                <!-- lupa SVG -->
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-4.35-4.35M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- derecha: icons / mobile toggle -->
+      <div class="flex items-center gap-4">
+        <!-- user icon -->
+        <a routerLink="/account" class="text-gray-700 hover:text-gray-900" aria-label="Mi cuenta">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M16 11c1.657 0 3-1.343 3-3S17.657 5 16 5s-3 1.343-3 3 1.343 3 3 3zM8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm8 2v6H8v-6a4 4 0 0 1 8 0z"/>
+          </svg>
+        </a>
+        
+        <a (click)="carrito.toggleCart()" 
+          class="relative text-gray-700 hover:text-gray-900 cursor-pointer" 
+          aria-label="Abrir Carrito"
+          role="button"> 
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6.2a1 1 0 0 0 .98 1.2h11.44a1 1 0 0 0 .98-1.2L17 13M7 13h10"/>
+            </svg>
+
+            <!-- @if (carrito.totalQuantity() > 0) {
+                <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"
+                      aria-live="polite">
+                    {{ carrito.totalQuantity() }}
+                </span>
+            } -->
+        </a>
+
+        <!-- mobile hamburger -->
+        <button class="lg:hidden p-2" (click)="toggleMobile()" aria-label="Abrir menú" [attr.aria-expanded]="mobileOpen()">
+          @if (!mobileOpen()) {
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          } @else {
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+            </svg>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE MENU -->
+  @if (mobileOpen()) {
+    <nav class="lg:hidden border-t bg-white" role="navigation" aria-label="Menú móvil">
+      <div class="px-4 py-3 space-y-2">
+        <a routerLink="/catalogo" class="block px-2 py-2 rounded hover:bg-gray-50">Todos</a>
+        <a routerLink="/catalogo" [queryParams]="{type: 'perros'}" class="block px-2 py-2 rounded hover:bg-gray-50">Perros</a>
+        <a routerLink="/catalogo" [queryParams]="{type: 'gatos'}" class="block px-2 py-2 rounded hover:bg-gray-50">Gatos</a>
+        <a routerLink="/account" class="block px-2 py-2 rounded hover:bg-gray-50">Mi cuenta</a>
+        <a (click)="carrito.toggleCart()" class="block px-2 py-2 rounded hover:bg-gray-50">Carrito (20)</a>
+        
+      </div>
+    </nav>
+  }
+</header>

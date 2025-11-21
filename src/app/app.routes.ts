@@ -18,6 +18,12 @@ export const routes: Routes = [
         path: 'producto/:id', 
         loadComponent: () => import('./features/producto/producto/producto.component')
             .then(m => m.ProductoComponent)
+    },
+
+    {
+        path: 'carrito', 
+        loadComponent: () => import('./features/carrito/carrito/carrito.component')
+            .then(m => m.CarritoComponent)
     }
 ];
     

@@ -1,7 +1,7 @@
 export interface Producto {
-  Id: number;
+  id: number;
   Nombre : string;
-  Precio: number; // backend usa cents
+  Precio: number; 
   Imagenes?: string[] | null;
   Descripcion?: string | null;
   Stock?: number | null;

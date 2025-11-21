@@ -1,0 +1,139 @@
+<!-- catalogo.component.html -->
+<div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+  <!-- SIDEBAR FILTROS (izquierda) -->
+  <aside class="lg:col-span-3">
+    <div class="bg-white border rounded-lg p-4 shadow-sm space-y-6">
+      <h3 class="font-semibold text-lg mb-2">Filtros</h3>
+
+      <!-- Ordenamiento -->
+      <div>
+        <h4 class="font-medium text-sm mb-2">Ordenamiento</h4>
+        <div class="space-y-2">
+          <button class="w-full text-left px-3 py-2 rounded border hover:bg-gray-50">Más vendidos</button>
+          <button class="w-full text-left px-3 py-2 rounded border hover:bg-gray-50">Precio: menor a mayor</button>
+          <button class="w-full text-left px-3 py-2 rounded border hover:bg-gray-50">Precio: mayor a menor</button>
+          <button class="w-full text-left px-3 py-2 rounded border hover:bg-gray-50">Fecha: reciente a antiguo</button>
+        </div>
+      </div>
+
+      <!-- Uso (ejemplo) -->
+      <div>
+        <h4 class="font-medium text-sm mb-2">Uso</h4>
+        <label class="flex items-center gap-2 text-sm">
+          <input type="checkbox" class="form-checkbox h-4 w-4" />
+          Exterior
+        </label>
+      </div>
+
+      <!-- Color (ejemplo) -->
+      <div>
+        <h4 class="font-medium text-sm mb-2">Color</h4>
+        <div class="flex gap-2 items-center">
+          <button class="w-6 h-6 rounded-full bg-yellow-300 ring-1 ring-gray-200"></button>
+          <button class="w-6 h-6 rounded-full bg-sky-300 ring-1 ring-gray-200"></button>
+          <button class="w-6 h-6 rounded-full bg-rose-300 ring-1 ring-gray-200"></button>
+        </div>
+      </div>
+
+      <!-- Reset filtros -->
+      <div>
+        <button class="w-full bg-gray-100 text-sm py-2 rounded">Limpiar filtros</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- CONTENIDO: GRID PRODUCTOS (derecha) -->
+  <main class="lg:col-span-9">
+
+    <!-- Header con total / loading -->
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-2xl font-bold">Catálogo</h1>
+
+      @if (productoService.loading()) {
+        <p class="text-sm text-gray-500">Cargando productos…</p>
+      } @else {
+        <p class="text-sm text-gray-500">Mostrando {{ productoService.total() }} productos</p>
+      }
+    </div>
+
+    <!-- Mensaje de error -->
+    @if (productoService.error()) {
+      <div class="mb-4 p-3 rounded bg-red-50 text-red-700 border border-red-100">
+        {{ productoService.error() }}
+      </div>
+    }
+
+    <!-- Grid -->
+    @if (productoService.productos().length === 0 && !productoService.loading()) {
+      <p class="text-gray-500">No se encontraron productos.</p>
+    } @else {
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        @for (p of productoService.productos(); track p.id) {
+          <!-- CARD -->
+          <a
+            [routerLink]="['/producto', p.id]"
+            class="block bg-white border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition relative"
+          >
+            <!-- badge descuento (si tuviera) -->
+            <!-- @if (p.Descuento) { -->
+              <div class="absolute left-3 top-3 bg-red-500 text-white text-xs font-semibold px-3 py-1 rounded-full z-10">
+                <!-- -{{ p.Descuento }}% -->30% OFF
+              </div>
+            <!-- } @else { } -->
+
+            <!-- imagen -->
+            <div class="w-full h-48 flex items-center justify-center bg-white">
+              <img
+                [src]="p.Imagenes?.[0] ?? '/mnt/data/9c2bb42b-1dde-4a7e-8e93-1a6bee263d5d.png'"
+                alt="{{ p.Nombre }}"
+                class="object-contain max-h-44"
+              />
+            </div>
+
+            <!-- tags -->
+            <div class="px-4 pt-3">
+              <div class="flex gap-2">
+                <span class="bg-pink-50 text-pink-600 text-xs font-medium px-2 py-1 rounded-full">Oferta</span>
+                <span class="bg-amber-50 text-amber-600 text-xs font-medium px-2 py-1 rounded-full">Llega hoy</span>
+              </div>
+            </div>
+
+            <!-- body -->
+            <div class="p-4">
+              <h3 class="text-sm md:text-base font-semibold text-gray-800 line-clamp-2">
+                {{ p.Nombre }}
+              </h3>
+
+              <div class="mt-3 flex items-end justify-between">
+                <div>
+                  <!-- precio tachado (si precioOriginal existe) -->
+                  <!-- @if (p.PrecioOriginal) { -->
+                    <div class="text-sm text-gray-400 line-through">S/ {{ (500/100) | number:'1.2-2' }}</div>
+                  <!-- } @else { } -->
+                  <div class="text-lg text-red-600 font-bold">S/ {{ (500/100) | number:'1.2-2' }}</div>
+                </div>
+
+                <div class="text-right text-xs text-gray-500">
+                  <!-- <div>{{ p.Stock ? (p.Stock + ' disponibles') : 'Sin stock' }}</div> -->
+                    <div>20 disponibles</div>
+                </div>
+              </div>
+            </div>
+          </a>
+          <!-- /CARD -->
+        }
+      </div>
+
+      <!-- PAGINACIÓN (simple) -->
+      <div class="mt-8 flex justify-center">
+        <nav class="inline-flex gap-2 items-center">
+          <button class="px-3 py-1 rounded border">Anterior</button>
+          <button class="px-3 py-1 rounded border">1</button>
+          <button class="px-3 py-1 rounded border">2</button>
+          <button class="px-3 py-1 rounded border">Siguiente</button>
+        </nav>
+      </div>
+    }
+  </main>
+</div>

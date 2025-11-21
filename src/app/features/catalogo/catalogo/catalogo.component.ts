@@ -1,25 +1,28 @@
 import { Component, inject, Input, signal } from '@angular/core';
 import { ProductoService } from '../../../core/services/producto.service';
 import { ProductoDto } from '../../../core/models/dto/producto/productoDto';
+import { RouterLink } from '@angular/router';
+import { DecimalPipe } from '@angular/common';
+import { CatalogoService } from '../../../core/services/catalogo.service';
 
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [],
+  imports: [RouterLink,DecimalPipe],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.scss'
 })
 export class CatalogoComponent {
 
+    public productoService = inject(CatalogoService);
 
-    // public productoService = inject(ProductoService);
+    constructor() {}
 
-    // constructor() {}
+    ngOnInit() {
+      this.productoService.loadAll();
+      console.log("Productos: " +   this.productoService.productos());
+    }
 
-    // ngOnInit() {
-    //   this.productoService.loadAll();
-    // }
-  
     
     // @Input() producto: any = {
     //   nombre: "Zapatillas Nike Air Max",

@@ -31,22 +31,11 @@ export class ProductoComponent {
     
     this.productoService.getProductById(productId).subscribe({
       next: (data) => {
-        // 1. Guardamos el producto
-       
-        // data.Imagenes =  [
-        //   "assets/images/pelota.jpg",
-        //   "assets/images/pelota.jpg",
-        //   "assets/images/pelota.jpg"
-        // ]
-
         this.producto.set(data);
-        
-        // 2. Inicializamos la imagen seleccionada con la primera del array (si existe)
+      
         if (data.Imagenes && data.Imagenes.length > 0) {
             this.imagenSeleccionada.set(data.Imagenes[0]);
         }
-
-        // 3. Quitamos el loading
         this.loading.set(false);
       },
       error: (err) => {
@@ -55,8 +44,6 @@ export class ProductoComponent {
       }
     });
   }
-  
-  // NUEVO: Método para cambiar la imagen al hacer click
   seleccionarImagen(img: string) {
       this.imagenSeleccionada.set(img);
   }
