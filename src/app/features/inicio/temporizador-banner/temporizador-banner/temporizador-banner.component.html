@@ -1,0 +1,15 @@
+<div class="w-full bg-orange-600 text-white text-sm sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-2 flex items-center justify-center text-center gap-4">
+    <strong class="font-bold whitespace-nowrap">¡Por tiempo limitado!</strong>
+    <span class="truncate">
+      Hasta 50% de DESCUENTO en TODA la tienda.
+    </span>
+
+    <div class="flex items-center text-lg font-bold bg-black/20 px-3 py-1 rounded-lg space-x-1">
+      <span class="w-8">{{ timeLeft().days | number: '2.0' }}</span> <span class="text-sm">d</span>
+      <span class="w-8">{{ timeLeft().hours | number: '2.0' }}</span> <span class="text-sm">h</span>
+      <span class="w-8">{{ timeLeft().minutes | number: '2.0' }}</span> <span class="text-sm">m</span>
+      <span class="w-8">{{ timeLeft().seconds | number: '2.0' }}</span> <span class="text-sm">s</span>
+    </div>
+  </div>
+</div>

@@ -26,67 +26,22 @@ export class ProductoService {
             );
     }
 
+    ListarProductos() {
+        this.loading.set(true);
+        this.error.set(null);
+        return this.api.get<Producto[]>(`producto`)
+            .pipe(
+                map(dtos => dtos.map(dto => mapProducto(dto))), 
+                tap(productos => {
+                    this._productos.set(productos);
+                    this.loading.set(false);
+                }),
+                catchError(err => {
+                    this.error.set('Error cargando productos');
+                    this.loading.set(false);
+                    throw err;
+                })
+            );  
+    }
 
-//#region 
-
-  // estado local
-//   private _productos = signal<Producto[]>([]);
-//   readonly productos = this._productos.asReadonly();
-
-//   readonly loading = signal(false);
-//   readonly error = signal<string | null>(null);
-
-//   // derivado útil
-//   readonly total = computed(() => this._productos().length);
-
-//   constructor(private api: ApiService) {}
-
-  // carga inicial o refresh
-//   loadAll() {
-//     this.loading.set(true);
-//     this.error.set(null);
-
-//     this.api.get<ProductoApiDto[]>('productos')
-//       .pipe(
-//         map(list => list.map(mapProducto)),
-//         tap(mapped => this._productos.set(mapped)),
-//         catchError(err => {
-//           console.error('Error cargando productos', err);
-//           this.error.set('No se pudo cargar productos');
-//           return of([] as Producto[]);
-//         }),
-//       )
-//       .subscribe(() => this.loading.set(false));
-//   }
-
-//   // obtener uno del state, si no existe podríamos pedir a la API
-//   getByIdFromState(id: number): Producto | undefined {
-//     return this._productos().find(p => p.id === id);
-//   }
-
-//   // traer por id desde la API (si lo deseas)
-//   loadById(id: number) {
-//     this.loading.set(true);
-//     return this.api.get<ProductoApiDto>(`productos/${id}`).pipe(
-//       map(mapProducto),
-//       tap(p => {
-//         const list = this._productos();
-//         const idx = list.findIndex(x => x.id === p.id);
-//         if (idx >= 0) list[idx] = p;
-//         else list.push(p);
-//         this._productos.set([...list]);
-//       }),
-//       catchError(err => {
-//         this.error.set('No se pudo cargar el producto');
-//         return of(undefined);
-//       }),
-//       tap(() => this.loading.set(false))
-//     );
-//   }
-
-//   // crear, actualizar, etc.
-//   create(productoDto: any) {
-//     return this.api.post('productos', productoDto);
-//   }
-//#endregion
 }

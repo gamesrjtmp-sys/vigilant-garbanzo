@@ -18,7 +18,7 @@ export class CatalogoService {
     
     constructor(private api: ApiService) {}
 
-    loadAll() {  
+    loadAll(){  
         this.loading.set(true);
         this.error.set(null);
         

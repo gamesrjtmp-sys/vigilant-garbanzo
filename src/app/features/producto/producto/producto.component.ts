@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { ProductoService } from '../../../core/services/producto.service';
 import { ProductoDto } from '../../../core/models/dto/producto/productoDto';
 

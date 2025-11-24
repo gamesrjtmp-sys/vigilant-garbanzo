@@ -4,7 +4,13 @@ export const routes: Routes = [
 
 
     // 1. Redirección inicial: Manda al usuario al CATÁLOGO (Lista)
-    { path: '', redirectTo: 'catalogo', pathMatch: 'full' },
+    { path: '', redirectTo: 'inicio', pathMatch: 'full' },
+
+    {
+        path: 'inicio',
+        loadComponent: () => import('./features/inicio/inicio/inicio.component')
+            .then(m => m.InicioComponent)
+    },
 
     // 2. Ruta del Catálogo (Lista de productos) - NO pide ID
     {

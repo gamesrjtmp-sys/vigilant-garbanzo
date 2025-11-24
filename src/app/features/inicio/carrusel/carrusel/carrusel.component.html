@@ -1,0 +1,51 @@
+<div class="relative w-full overflow-hidden bg-black text-white">
+  
+  <div class="relative h-[60vh] md:h-[80vh] flex items-center justify-center">
+    
+    @for (slide of slides; track slide.id) {
+      
+      @if (currentIndex() === $index) {
+        
+        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out"
+             
+             [style.backgroundImage]="'url(' + slide.imgUrl + ')'" 
+             style="background-size: cover; background-position: center;">
+          
+          <div class="max-w-7xl mx-auto p-8 h-full flex items-center justify-start sm:justify-center text-center">
+            <div class="space-y-4">
+              <h3 class="text-4xl md:text-8xl font-extrabold text-orange-500 tracking-tighter">{{ slide.promo }}</h3>
+              <!-- <p class="text-xl md:text-3xl font-light">{{ slide.title }}</p> -->
+              
+              <button (click)="goToPromo(slide.link)"
+                      class="bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 transition duration-300">
+                COMPRA HOY
+              </button>
+            </div>
+          </div>
+
+        </div>
+      }
+    }
+  </div>
+
+  <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 p-3 rounded-full text-white hover:bg-black/50 transition z-10 ml-4"
+          (click)="prevSlide()" aria-label="Anterior">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 p-3 rounded-full text-white hover:bg-black/50 transition z-10 mr-4"
+          (click)="nextSlide()" aria-label="Siguiente">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+  </button>
+
+  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
+    @for (slide of slides; track slide.id) {
+      <button
+        [class.bg-white]="currentIndex() === $index"
+        [class.bg-white]="currentIndex() !== $index"
+        class="w-3 h-3 rounded-full transition-colors"
+        (click)="goToSlide($index)"
+        [attr.aria-label]="'Ir al slide ' + ($index + 1)"
+      ></button>
+    }
+  </div>
+</div>

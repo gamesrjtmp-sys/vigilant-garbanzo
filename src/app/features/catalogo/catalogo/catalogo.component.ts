@@ -1,43 +1,37 @@
 import { Component, inject, Input, signal } from '@angular/core';
 import { ProductoService } from '../../../core/services/producto.service';
 import { ProductoDto } from '../../../core/models/dto/producto/productoDto';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 import { CatalogoService } from '../../../core/services/catalogo.service';
+import { Producto } from '../../../core/models/api/producto/producto';
+import { ProductCardComponent } from '../../../shared/components/product-card/product-card/product-card.component';
 
 @Component({
   selector: 'app-catalogo',
   standalone: true,
-  imports: [RouterLink,DecimalPipe],
+  imports: [RouterLink,DecimalPipe,ProductCardComponent],
   templateUrl: './catalogo.component.html',
   styleUrl: './catalogo.component.scss'
 })
 export class CatalogoComponent {
 
-    public productoService = inject(CatalogoService);
+public productoService = inject(CatalogoService);
+  private router = inject(Router);
 
-    constructor() {}
+  ngOnInit() {
+    this.productoService.loadAll();
+  }
 
-    ngOnInit() {
-      this.productoService.loadAll();
-      console.log("Productos: " +   this.productoService.productos());
-    }
+  // Método para navegar al detalle
+  verDetalle(id: number) {
+    this.router.navigate(['/producto', id]);
+  }
 
-    
-    // @Input() producto: any = {
-    //   nombre: "Zapatillas Nike Air Max",
-    //   precio: 359.90,
-    //   descripcion: "Zapatillas de alto rendimiento con cámara de aire mejorada.",
-    //   imagenes: [
-    //     "assets/images/default_product.webp",
-    //     "assets/images/pelota.jpg",
-    //     "assets/images/pelota.jpg"
-    //   ]
-    // };
-  
-    // imagenSeleccionada = this.producto.imagenes[0];
-  
-    // seleccionarImagen(img: string) {
-    //   this.imagenSeleccionada = img;
-    // }
+  /**
+   * ADAPTADOR:
+   * Tu HTML anterior mostraba propiedades como 'p.Nombre', 'p.Imagenes', etc.
+   * La tarjeta espera 'nombre', 'imagen' (singular).
+   * Este método transforma el dato "sucio" del backend al dato "limpio" de la tarjeta.
+   */
 }
