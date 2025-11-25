@@ -1,38 +1,81 @@
-import { Injectable } from '@angular/core';
-import { of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable, of, shareReplay, tap } from 'rxjs';
+import { UbigeoDto } from '../models/dto/ubigeo/ubigeoDto';
+import { mapUbigeo } from '../mappers/ubigeo.mapper';
 
 export interface Ubigeo { id: string; nombre: string; parentId?: string; }
 
 @Injectable({ providedIn: 'root' })
 export class UbigeoService {
-  // Datos simulados (En producción, esto vendría de un JSON o API)
-  private departamentos: Ubigeo[] = [
-    { id: '01', nombre: 'Lima' },
-    { id: '02', nombre: 'Arequipa' },
-    { id: '03', nombre: 'Cusco' }
-  ];
 
-  private provincias: Ubigeo[] = [
-    { id: '0101', nombre: 'Lima', parentId: '01' },
-    { id: '0102', nombre: 'Cañete', parentId: '01' },
-    { id: '0201', nombre: 'Arequipa', parentId: '02' }
-  ];
+   private http = inject(HttpClient);
 
-  private distritos: Ubigeo[] = [
-    { id: '010101', nombre: 'Miraflores', parentId: '0101' },
-    { id: '010102', nombre: 'San Isidro', parentId: '0101' },
-    { id: '010103', nombre: 'Surco', parentId: '0101' },
-    { id: '010201', nombre: 'San Vicente', parentId: '0102' },
-    { id: '020101', nombre: 'Yanahuara', parentId: '0201' }
-  ];
+    // Rutas a tus archivos en assets
+    private readonly DEP_URL = 'assets/data/departamentos.json';
+    private readonly PROV_URL = 'assets/data/provincias.json';
+    private readonly DIST_URL = 'assets/data/distritos.json';
 
-  getDepartamentos() { return of(this.departamentos); }
-  
-  getProvincias(depId: string) {
-    return of(this.provincias.filter(p => p.parentId === depId));
-  }
+    // Cachés
+    private depCache$: Observable<UbigeoDto[]> | null = null;
+    private provCache$: Observable<UbigeoDto[]> | null = null;
+    private distCache$: Observable<UbigeoDto[]> | null = null;
 
-  getDistritos(provId: string) {
-    return of(this.distritos.filter(d => d.parentId === provId));
-  }
+    // --- MÉTODOS PRIVADOS (RAW) ---
+
+    private getRawDepartamentos(): Observable<UbigeoDto[]> {
+        if (!this.depCache$) {
+        this.depCache$ = this.http.get<UbigeoDto[]>(this.DEP_URL).pipe(
+            // 2. Usamos 'tap' para ver los datos cuando lleguen
+            //tap(data => console.log('📦 JSON RAW Departamentos:', data)),
+            
+            shareReplay(1) // Guarda la respuesta en memoria
+        );
+        }
+        return this.depCache$;
+    }
+
+    private getRawProvincias(): Observable<UbigeoDto[]> {
+        if (!this.provCache$) {
+        this.provCache$ = this.http.get<UbigeoDto[]>(this.PROV_URL).pipe(shareReplay(1));
+        }
+        return this.provCache$;
+    }
+
+    private getRawDistritos(): Observable<UbigeoDto[]> {
+        if (!this.distCache$) {
+        this.distCache$ = this.http.get<UbigeoDto[]>(this.DIST_URL).pipe(shareReplay(1));
+        }
+        return this.distCache$;
+    }
+
+    // --- MÉTODOS PÚBLICOS (ADAPTADOS CON MAPPER) ---
+
+    // 1. Departamentos
+    getDepartamentos(): Observable<Ubigeo[]> {
+        return this.getRawDepartamentos().pipe(
+        // Usamos el mapper importado en lugar de escribir la lógica aquí
+        map(data => data.map(item => mapUbigeo(item)))
+        );
+    }
+
+    // 2. Provincias (Filtradas por Dpto)
+    getProvincias(depId: string): Observable<Ubigeo[]> {
+        return this.getRawProvincias().pipe(
+        map(data => data
+            .filter(p => p.department_id === depId)
+            .map(item => mapUbigeo(item)) // Reutilizamos el mapper
+        )
+        );
+    }
+
+    // 3. Distritos (Filtrados por Prov)
+    getDistritos(provId: string): Observable<Ubigeo[]> {
+        return this.getRawDistritos().pipe(
+        map(data => data
+            .filter(d => d.province_id === provId)
+            .map(item => mapUbigeo(item)) // Reutilizamos el mapper
+        )
+        );
+    }
 }

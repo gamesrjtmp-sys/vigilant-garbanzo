@@ -2,7 +2,7 @@ import { Injectable, signal, computed } from '@angular/core';
 import { ApiService } from '../../core/http/api.service';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ProductoDto } from '../models/dto/producto/productoDto';
-import { mapProducto } from '../mappers/producto';
+import { mapProducto } from '../mappers/producto.mapper';
 import { Producto } from '../models/api/producto/producto';
 
 @Injectable({ providedIn: 'root' })
