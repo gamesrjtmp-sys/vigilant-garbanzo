@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { ProductoService } from '../../../core/services/producto.service';
 import { ProductoDto } from '../../../core/models/dto/producto/productoDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-producto',
@@ -21,6 +22,8 @@ export class ProductoComponent {
   imagenSeleccionada = signal<string | null>(null);
 
   @Input() id!: string; 
+
+  private router = inject(Router)
 
   ngOnInit() {
     this.cargarProducto();
@@ -48,7 +51,14 @@ export class ProductoComponent {
       this.imagenSeleccionada.set(img);
   }
 
-  comprar() {
-      console.log("Comprando ID:", this.id);
+  comprar(): void {
+    // 3. Ejecutar la navegación programática
+    this.router.navigate(['/checkout']);
+  }
+
+  // Si necesitas pasar parámetros (por ejemplo, el ID del carrito):
+  public goToCheckoutWithId(cartId: number): void {
+    // Ejemplo: /checkout/12345
+    this.router.navigate(['/checkout', cartId]);
   }
 }
