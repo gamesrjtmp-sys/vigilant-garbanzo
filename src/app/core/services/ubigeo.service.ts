@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, of, shareReplay, tap } from 'rxjs';
-import { UbigeoDto } from '../models/dto/ubigeo/ubigeoDto';
 import { mapUbigeo } from '../mappers/ubigeo.mapper';
+import { UbigeoDto } from '../models/dto/ubigeo/ubigeoDto';
 
 export interface Ubigeo { id: string; nombre: string; parentId?: string; }
 

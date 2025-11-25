@@ -56,6 +56,11 @@ export class ProductoComponent {
     this.router.navigate(['/checkout']);
   }
 
+  agregarCarrito(): void {
+    // 3. Ejecutar la navegación programática
+    console.log('Producto agregado al carrito');
+  }
+
   // Si necesitas pasar parámetros (por ejemplo, el ID del carrito):
   public goToCheckoutWithId(cartId: number): void {
     // Ejemplo: /checkout/12345

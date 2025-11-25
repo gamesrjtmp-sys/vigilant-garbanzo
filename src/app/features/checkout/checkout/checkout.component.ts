@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CheckoutPasosComponent } from '../checkout-pasos/checkout-pasos.component';
-import { Ubigeo, UbigeoService } from '../../../core/services/ubigeo';
+import { Ubigeo, UbigeoService } from '../../../core/services/ubigeo.service';
 
 @Component({
   selector: 'app-checkout',
