@@ -1,0 +1,1 @@
+export interface Ubigeo { id: string; nombre: string; parentId?: string; }
