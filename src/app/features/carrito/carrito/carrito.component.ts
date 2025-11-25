@@ -11,16 +11,9 @@ import { CommonModule } from '@angular/common';
 })
 export class CarritoComponent {
 
- // La inyección es correcta.
     public cartService = inject(CarritoService); 
-
-    // 🚨 ELIMINA: public isOpen = signal(false);
-    // 🚨 ELIMINA: public totalQuantity = signal(20);
-
-    // Método toggleCart() ya no es necesario aquí, lo llama el menú directamente al servicio.
-
+    
     close() {
-        // Correcto: Llama al servicio para cerrar la señal global
         this.cartService.isOpen.set(false); 
     }
     
