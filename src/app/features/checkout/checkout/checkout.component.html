@@ -1,139 +1,237 @@
-<section class="min-h-screen bg-[#F8FAFC] pb-24 font-sans selection:bg-emerald-100 selection:text-emerald-900">
+<section class="min-h-screen bg-[#F8FAFC] pb-32 font-sans selection:bg-emerald-100 selection:text-emerald-900">
   
-  <!-- CABECERA -->
-  <header class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40 supports-[backdrop-filter]:bg-white/60">
+  <!-- HEADER STICKY -->
+  <header class="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-40 transition-all duration-300">
     <div class="max-w-4xl mx-auto px-6 h-16 flex items-center justify-between">
-      <div class="flex items-center gap-2">
-        <div class="w-8 h-8 bg-black rounded-lg flex items-center justify-center text-white font-bold text-lg">T</div>
-        <span class="font-bold text-xl tracking-tight text-gray-900">TuTienda</span>
+      <div class="flex items-center gap-3 cursor-pointer group" routerLink="/">
+        <div class="w-9 h-9 bg-black text-white rounded-xl flex items-center justify-center font-bold text-lg shadow-lg shadow-gray-200 group-hover:shadow-xl transition-all duration-300">T</div>
+        <span class="font-bold text-xl tracking-tight text-gray-900 group-hover:text-emerald-600 transition-colors">TuTienda</span>
       </div>
-      <div class="flex items-center gap-2 text-xs font-medium text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-full border border-emerald-100">
+      
+      <div class="hidden sm:flex items-center gap-2 text-xs font-bold text-emerald-700 bg-emerald-50 px-4 py-2 rounded-full border border-emerald-100 shadow-sm">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4"><path fill-rule="evenodd" d="M10 1a4.5 4.5 0 00-4.5 4.5V9H5a2 2 0 00-2 2v6a2 2 0 002 2h10a2 2 0 002-2v-6a2 2 0 00-2-2h-.5V5.5A4.5 4.5 0 0010 1zm3 8V5.5a3 3 0 10-6 0V9h6z" clip-rule="evenodd" /></svg>
-        Checkout Seguro SSL
+        Checkout Seguro
       </div>
     </div>
   </header>
 
-  <main class="max-w-3xl mx-auto px-4 mt-10">
+  <main class="max-w-3xl mx-auto px-4 mt-8 sm:mt-12">
 
-    <!-- STEPPER (Barra de Progreso) -->
-    <div class="mb-12 relative px-4">
-       <!-- Línea base -->
-       <div class="absolute top-5 left-0 w-full h-1 bg-gray-200 rounded-full -z-10"></div>
-       <!-- Línea de progreso animada -->
-       <div class="absolute top-5 left-0 h-1 bg-emerald-500 rounded-full transition-all duration-700 ease-out -z-0" [style.width]="progressWidth()"></div>
-       
-       <div class="flex justify-between w-full relative z-10">
-          <!-- Paso 1 -->
-          <div (click)="goToStep(1)" class="flex flex-col items-center group cursor-pointer">
-             <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all bg-white"
-                  [class.bg-emerald-500]="currentStep() >= 1" [class.border-emerald-500]="currentStep() >= 1" [class.text-white]="currentStep() >= 1">
-                  @if(currentStep() > 1){ ✓ } @else { 1 }
-             </div>
-             <span class="mt-2 text-xs font-bold uppercase tracking-wider">Envío</span>
-          </div>
-          <!-- Paso 2 -->
-          <div (click)="goToStep(2)" class="flex flex-col items-center group cursor-pointer">
-             <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all bg-white"
-                  [class.bg-emerald-500]="currentStep() >= 2" [class.border-emerald-500]="currentStep() >= 2" [class.text-white]="currentStep() >= 2">
-                  @if(currentStep() > 2){ ✓ } @else { 2 }
-             </div>
-             <span class="mt-2 text-xs font-bold uppercase tracking-wider">Pago</span>
-          </div>
-          <!-- Paso 3 -->
-          <div (click)="goToStep(3)" class="flex flex-col items-center group cursor-pointer">
-             <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 transition-all bg-white"
-                  [class.bg-emerald-500]="currentStep() >= 3" [class.border-emerald-500]="currentStep() >= 3" [class.text-white]="currentStep() >= 3">
-                  3
-             </div>
-             <span class="mt-2 text-xs font-bold uppercase tracking-wider">Fin</span>
-          </div>
-       </div>
-    </div>
-
-
-    <!-- FORMULARIO PRINCIPAL -->
-    <form [formGroup]="checkoutForm" class="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden relative">
+    <!-- ========================================== -->
+    <!-- VISTA DE COMPRA (SI NO ESTÁ CONFIRMADO) -->
+    <!-- ========================================== -->
+    @if (!orderConfirmed()) {
       
-      <div class="p-6 sm:p-10">
-        @switch (currentStep()) {
+      <!-- 🟢 STEPPER MINIMALISTA (Estilo Foto 4) -->
+      <div class="mb-10 relative px-4 sm:px-12">
+         <!-- Línea Base -->
+         <div class="absolute top-5 left-0 w-full h-1 bg-gray-100 rounded-full -z-10"></div>
+         <!-- Línea Progreso -->
+         <div class="absolute top-5 left-0 h-1 bg-emerald-500 rounded-full transition-all duration-700 ease-out -z-0" [style.width]="progressWidth()"></div>
+         
+         <div class="flex justify-between w-full relative z-10">
+            
+            <!-- PASO 1: ENVÍO -->
+            <div (click)="goToStep(1)" class="flex flex-col items-center group cursor-pointer w-24">
+               <!-- Círculo -->
+               <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 relative border-2"
+                    [class.bg-emerald-500]="currentStep() > 1" 
+                    [class.border-emerald-500]="currentStep() >= 1"
+                    [class.bg-white]="currentStep() === 1"
+                    [class.text-white]="currentStep() > 1"
+                    [class.text-emerald-600]="currentStep() === 1">
+                    
+                    @if(currentStep() > 1){ 
+                      <!-- Check icon -->
+                      <svg class="w-5 h-5 animate-scale-in" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg> 
+                    } @else { 
+                      1 
+                    }
+               </div>
+               <span class="mt-2 text-[10px] font-extrabold uppercase tracking-widest transition-colors duration-300" 
+                     [class.text-emerald-600]="currentStep() >= 1" [class.text-gray-300]="currentStep() < 1">Envío</span>
+            </div>
 
-          <!-- PASO 1: DATOS DE ENVÍO -->
+            <!-- PASO 2: PAGO -->
+            <div (click)="goToStep(2)" class="flex flex-col items-center group cursor-pointer w-24">
+               <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 relative border-2"
+                    [class.bg-emerald-500]="currentStep() > 2" 
+                    [class.border-emerald-500]="currentStep() >= 2"
+                    [class.bg-white]="currentStep() <= 2"
+                    [class.text-white]="currentStep() > 2"
+                    [class.text-emerald-600]="currentStep() === 2"
+                    [class.border-gray-200]="currentStep() < 2"
+                    [class.text-gray-400]="currentStep() < 2">
+                    
+                    @if(currentStep() > 2){ 
+                      <svg class="w-5 h-5 animate-scale-in" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg> 
+                    } @else { 
+                      2 
+                    }
+                    
+                    <!-- Glow activo -->
+                    @if(currentStep() === 2) { <div class="absolute inset-0 rounded-full ring-4 ring-emerald-50 animate-pulse"></div> }
+               </div>
+               <span class="mt-2 text-[10px] font-extrabold uppercase tracking-widest transition-colors duration-300" 
+                     [class.text-emerald-600]="currentStep() >= 2" [class.text-gray-300]="currentStep() < 2">Pago</span>
+            </div>
+
+            <!-- PASO 3: FIN -->
+            <div (click)="goToStep(3)" class="flex flex-col items-center group cursor-pointer w-24">
+               <div class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 relative border-2"
+                    [class.bg-emerald-500]="currentStep() > 3"
+                    [class.border-emerald-500]="currentStep() >= 3"
+                    [class.bg-white]="currentStep() <= 3" 
+                    [class.text-emerald-600]="currentStep() === 3"
+                    [class.border-gray-200]="currentStep() < 3"
+                    [class.text-gray-400]="currentStep() < 3">
+                    3
+                    @if(currentStep() === 3) { <div class="absolute inset-0 rounded-full ring-4 ring-emerald-50 animate-pulse"></div> }
+               </div>
+               <span class="mt-2 text-[10px] font-extrabold uppercase tracking-widest transition-colors duration-300" 
+                     [class.text-emerald-600]="currentStep() >= 3" [class.text-gray-300]="currentStep() < 3">Fin</span>
+            </div>
+         </div>
+      </div>
+
+      <!-- TARJETA DEL FORMULARIO (Estilo Foto 2 y 3) -->
+      <form [formGroup]="checkoutForm" class="bg-white rounded-3xl shadow-xl shadow-gray-100 border border-white overflow-hidden relative">
+        
+        <div class="p-6 sm:p-10 min-h-[400px]">
+          @switch (currentStep()) {
+
+          <!-- ================= PASO 1: ENVÍO ================= -->
           @case (1) {
-             <div class="animate-in fade-in slide-in-from-right-4 duration-300">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Datos de Envío</h2>
+            <div class="animate-in slide-in-from-right-8 duration-500 fade-in">
+              <h2 class="text-2xl font-bold text-gray-900 mb-1">¿Dónde lo enviamos?</h2>
+              <p class="text-sm text-gray-500 mb-8">Ingresa tus datos para la entrega.</p>
+              
+              <!-- CONTACTO -->
+              <div formGroupName="datosCliente" class="mb-8 p-4 bg-gray-50 rounded-2xl border border-gray-100">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-4 flex items-center gap-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" /></svg>
+                  Datos Personales
+                </h3>
+                <div class="space-y-4">
+                  <div>
+                    <input formControlName="name" type="text" placeholder="Nombre Completo" 
+                      class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 outline-none transition-all placeholder:text-gray-400 text-gray-900"
+                      [class.border-red-300]="checkoutForm.get('datosCliente.name')?.invalid && checkoutForm.get('datosCliente.name')?.touched">
+                      @if(checkoutForm.get('datosCliente.name')?.invalid && checkoutForm.get('datosCliente.name')?.touched) {
+                        <p class="text-red-500 text-xs mt-1 ml-1">Ingresa tu nombre para el envío.</p>
+                      }
+                  </div>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input formControlName="email" type="email" placeholder="Correo Electrónico" 
+                      class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-emerald-500 outline-none transition-all">
+                    <div>
+                      <input formControlName="phone" type="tel" placeholder="Celular (9 dígitos)" 
+                        class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-emerald-500 outline-none transition-all"
+                        [class.border-red-300]="checkoutForm.get('datosCliente.phone')?.invalid && checkoutForm.get('datosCliente.phone')?.touched">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- DIRECCIÓN -->
+              <div formGroupName="datosEnvio">
+                <h3 class="text-xs font-bold text-gray-400 uppercase tracking-wide mb-4 flex items-center gap-2 px-1">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" /></svg>
+                  Ubicación de Entrega
+                </h3>
                 
-                <div formGroupName="datosCliente" class="space-y-4 mb-6">
-                   <div class="space-y-1">
-                      <label class="text-xs font-bold text-gray-500 uppercase">Nombre Completo</label>
-                      <input formControlName="name" type="text" placeholder="Ej: Juan Pérez" class="w-full border border-gray-200 p-3 rounded-lg focus:ring-2 focus:ring-black outline-none transition">
-                   </div>
-                   <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div class="space-y-1">
-                        <label class="text-xs font-bold text-gray-500 uppercase">Email</label>
-                        <input formControlName="email" type="email" placeholder="juan@mail.com" class="w-full border border-gray-200 p-3 rounded-lg focus:ring-2 focus:ring-black outline-none transition">
-                      </div>
-                      <div class="space-y-1">
-                        <label class="text-xs font-bold text-gray-500 uppercase">Celular</label>
-                        <input formControlName="phone" type="tel" placeholder="999 999 999" class="w-full border border-gray-200 p-3 rounded-lg focus:ring-2 focus:ring-black outline-none transition">
-                      </div>
-                   </div>
+                <div class="grid grid-cols-3 gap-3 mb-4">
+                  <div class="relative group">
+                    <select formControlName="departamento" class="w-full bg-white border border-gray-200 rounded-xl px-3 py-3.5 appearance-none focus:ring-2 focus:ring-emerald-500 outline-none cursor-pointer text-sm font-medium text-gray-700 shadow-sm transition-all hover:border-emerald-300">
+                      <option value="">Dpto.</option>
+                      @for(d of departamentos(); track d.id) { <option [value]="d.id">{{d.nombre}}</option> }
+                    </select>
+                  </div>
+                  <div class="relative group">
+                    <select formControlName="provincia" class="w-full bg-white border border-gray-200 rounded-xl px-3 py-3.5 appearance-none focus:ring-2 focus:ring-emerald-500 outline-none cursor-pointer text-sm font-medium text-gray-700 shadow-sm transition-all hover:border-emerald-300 disabled:bg-gray-50 disabled:text-gray-400">
+                      <option value="">Prov.</option>
+                      @for(p of provincias(); track p.id) { <option [value]="p.id">{{p.nombre}}</option> }
+                    </select>
+                  </div>
+                  <div class="relative group">
+                    <select formControlName="distrito" class="w-full bg-white border border-gray-200 rounded-xl px-3 py-3.5 appearance-none focus:ring-2 focus:ring-emerald-500 outline-none cursor-pointer text-sm font-medium text-gray-700 shadow-sm transition-all hover:border-emerald-300 disabled:bg-gray-50 disabled:text-gray-400">
+                      <option value="">Dist.</option>
+                      @for(d of distritos(); track d.id) { <option [value]="d.id">{{d.nombre}}</option> }
+                    </select>
+                  </div>
                 </div>
 
-                <div formGroupName="datosEnvio" class="space-y-4">
-                   <label class="text-xs font-bold text-gray-500 uppercase">Dirección de Entrega</label>
-                   <div class="grid grid-cols-3 gap-3">
-                      <select formControlName="departamento" class="border border-gray-200 p-3 rounded-lg w-full bg-white focus:ring-2 focus:ring-black outline-none">
-                         <option value="">Dpto</option>
-                         @for(d of departamentos(); track d.id){ <option [value]="d.id">{{d.nombre}}</option> }
-                      </select>
-                      <select formControlName="provincia" class="border border-gray-200 p-3 rounded-lg w-full bg-white focus:ring-2 focus:ring-black outline-none">
-                         <option value="">Prov</option>
-                         @for(p of provincias(); track p.id){ <option [value]="p.id">{{p.nombre}}</option> }
-                      </select>
-                      <select formControlName="distrito" class="border border-gray-200 p-3 rounded-lg w-full bg-white focus:ring-2 focus:ring-black outline-none">
-                         <option value="">Dist</option>
-                         @for(d of distritos(); track d.id){ <option [value]="d.id">{{d.nombre}}</option> }
-                      </select>
-                   </div>
-                   <textarea formControlName="direccion" placeholder="Calle, Número, Mz, Lote..." class="w-full border border-gray-200 p-3 rounded-lg focus:ring-2 focus:ring-black outline-none resize-none h-24"></textarea>
+                <div class="space-y-4">
+                  <textarea formControlName="direccion" rows="2" placeholder="Dirección exacta (Calle, Número, Mz, Lote)"
+                    class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-emerald-500 outline-none transition-all resize-none shadow-sm placeholder:text-gray-400 text-gray-900"
+                    [class.border-red-300]="checkoutForm.get('datosEnvio.direccion')?.invalid && checkoutForm.get('datosEnvio.direccion')?.touched"></textarea>
+                  
+                  <input formControlName="referencia" type="text" placeholder="Referencia (Opcional: Color de casa, frente a...)" 
+                    class="w-full bg-white border border-gray-200 rounded-xl px-4 py-3.5 focus:ring-2 focus:ring-emerald-500 outline-none transition-all shadow-sm">
                 </div>
-             </div>
+              </div>
+
+            </div>
           }
 
-          <!-- PASO 2: MÉTODO DE PAGO -->
-          @case (2) {
-             <div class="animate-in fade-in slide-in-from-right-4 duration-300" formGroupName="datosPago">
-                <h2 class="text-2xl font-bold text-gray-900 mb-6">Método de Pago</h2>
-                <div class="grid gap-4">
-                   <!-- Opción Yape -->
-                   <label class="flex items-center p-5 border-2 rounded-xl cursor-pointer hover:bg-gray-50 transition-all" 
-                          [class.border-emerald-500]="paymentMethod() === 'QR'" 
-                          [class.bg-emerald-50]="paymentMethod() === 'QR'">
-                      <input type="radio" formControlName="method" value="QR" (click)="selectPayment('QR')" class="mr-4 accent-emerald-600 w-5 h-5">
-                      <div class="flex-1">
-                        <span class="font-bold text-gray-900 block">Yape / Plin (QR)</span>
-                        <span class="text-sm text-gray-500">Escanea y paga al instante</span>
-                      </div>
-                      <span class="text-2xl">📱</span>
-                   </label>
+            <!-- ================= PASO 2: PAGO (Modificado s/n tu pedido) ================= -->
+            @case (2) {
+               <div class="animate-in slide-in-from-right-8 duration-500" formGroupName="datosPago">
+                  
+                  <div class="mb-8">
+                    <h2 class="text-2xl font-extrabold text-gray-900 mb-2">Método de Pago</h2>
+                    <p class="text-gray-500 text-sm">Selecciona cómo prefieres pagar.</p>
+                  </div>
 
-                   <!-- Opción Contra Entrega -->
-                   <label class="flex items-center p-5 border-2 rounded-xl cursor-pointer hover:bg-gray-50 transition-all"
-                          [class.border-emerald-500]="paymentMethod() === 'CASH'"
-                          [class.bg-emerald-50]="paymentMethod() === 'CASH'">
-                      <input type="radio" formControlName="method" value="CASH" (click)="selectPayment('CASH')" class="mr-4 accent-emerald-600 w-5 h-5">
-                      <div class="flex-1">
-                        <span class="font-bold text-gray-900 block">Contra Entrega</span>
-                        <span class="text-sm text-gray-500">Paga en efectivo al recibir</span>
-                      </div>
-                      <span class="text-2xl">💵</span>
-                   </label>
-                </div>
-             </div>
-          }
+                  <div class="grid gap-5">
+                    
+                    <!-- Opción 1: CONTRA ENTREGA (Activa y Resaltada) -->
+                    <label class="relative flex items-start p-5 border-2 rounded-2xl cursor-pointer transition-all duration-200 group bg-white shadow-sm hover:shadow-md"
+                           [class.border-emerald-500]="paymentMethod() === 'CASH'"
+                           [class.bg-emerald-50]="paymentMethod() === 'CASH'"
+                           [class.border-gray-200]="paymentMethod() !== 'CASH'">
+                       
+                       <input type="radio" formControlName="method" value="CASH" (click)="selectPayment('CASH')" class="peer sr-only">
+                       
+                       <!-- Icono -->
+                       <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mr-4 shrink-0 group-hover:scale-110 transition-transform">
+                         💵
+                       </div>
+                       
+                       <!-- Texto -->
+                       <div class="flex-1">
+                         <div class="flex justify-between items-center mb-1">
+                            <h3 class="font-bold text-gray-900 text-lg">Contra Entrega</h3>
+                            <!-- Check animado -->
+                            <div class="w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all"
+                                 [class.border-emerald-500]="paymentMethod() === 'CASH'"
+                                 [class.bg-emerald-500]="paymentMethod() === 'CASH'"
+                                 [class.border-gray-300]="paymentMethod() !== 'CASH'">
+                               <svg class="w-3.5 h-3.5 text-white transition-transform" [class.scale-0]="paymentMethod() !== 'CASH'" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+                            </div>
+                         </div>
+                         <p class="text-sm text-gray-500 leading-snug">Paga en efectivo o Yape al recibir tu pedido en la puerta de tu casa.</p>
+                       </div>
+                    </label>
 
-          <!-- ================= PASO 3: RESUMEN FINAL ================= -->
+                    <!-- Opción 2: PRONTO MÁS MÉTODOS (Desactivada / Placeholder) -->
+                    <div class="relative flex items-center p-5 border border-gray-100 rounded-2xl bg-gray-50 opacity-60 cursor-not-allowed grayscale">
+                       <div class="w-12 h-12 rounded-xl bg-gray-200 text-gray-400 flex items-center justify-center text-xl mr-4 shrink-0">
+                         🔒
+                       </div>
+                       <div class="flex-1">
+                         <h3 class="font-bold text-gray-400 text-lg">Más métodos pronto</h3>
+                         <p class="text-sm text-gray-400">Estamos trabajando para aceptar tarjetas directamente.</p>
+                       </div>
+                       <!-- Candado mini -->
+                       <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" /></svg>
+                    </div>
+
+                  </div>
+               </div>
+            }
+
+            <!-- ================= PASO 3: RESUMEN FINAL ================= -->
           @case (3) {
             <div class="animate-in zoom-in-95 duration-500 fade-in">
               
@@ -249,40 +347,65 @@
         }
       </div>
 
-      <!-- FOOTER DE NAVEGACIÓN -->
-      <div class="bg-gray-50/80 px-8 py-6 border-t border-gray-100 flex gap-4 backdrop-blur-sm sticky bottom-0 z-20">
-        @if (currentStep() > 1) {
-          <button 
-            type="button" 
-            (click)="prevStep()"
-            class="px-6 py-3.5 rounded-xl border-2 border-gray-200 text-gray-600 font-bold hover:bg-white hover:border-gray-300 transition-all">
-            Atrás
-          </button>
-        }
-
-        <button 
-          type="button" 
-          (click)="currentStep() === 3 ? confirmOrder() : nextStep()"
-          class="flex-1 px-8 py-4 rounded-xl bg-gray-900 text-white font-bold text-lg shadow-xl shadow-gray-200 hover:bg-black hover:shadow-2xl hover:shadow-gray-300 hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center gap-2"
-          [disabled]="(currentStep() === 1 && (checkoutForm.get('datosCliente')?.invalid || checkoutForm.get('datosEnvio')?.invalid)) || (currentStep() === 2 && checkoutForm.get('datosPago')?.invalid)">
-          
-          @if (currentStep() === 3) {
-            <span>Confirmar Pedido</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-          } @else {
-            <span>Continuar</span>
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+        <!-- FOOTER NAVEGACIÓN (Sticky) -->
+        <div class="bg-white/90 px-6 sm:px-10 py-6 border-t border-gray-100 flex gap-4 backdrop-blur-md sticky bottom-0 z-20">
+          @if (currentStep() > 1) {
+            <button type="button" (click)="prevStep()" class="px-6 py-4 rounded-xl border-2 border-gray-200 text-gray-500 font-bold hover:border-gray-400 hover:text-gray-700 transition-all active:scale-95">
+              Atrás
+            </button>
           }
-        </button>
-      </div>
+          
+          <button type="button" (click)="currentStep() === 3 ? confirmOrder() : nextStep()" 
+            class="flex-1 px-8 py-4 rounded-xl bg-black text-white font-bold text-lg shadow-xl shadow-gray-200 hover:bg-gray-800 hover:shadow-2xl hover:-translate-y-1 transition-all flex items-center justify-center gap-3 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none active:scale-[0.98] group"
+            [disabled]="(currentStep() === 1 && checkoutForm.invalid) || (currentStep() === 2 && checkoutForm.get('datosPago')?.invalid)">
+            
+            @if (currentStep() === 3) {
+              <span>Confirmar Pedido</span>
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            } @else {
+              <span>Siguiente</span>
+              <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
+            }
+          </button>
+        </div>
+      </form>
 
-    </form>
-    
-    <!-- Sellos de confianza -->
-    <div class="text-center mt-8 opacity-40 flex justify-center gap-4 grayscale">
-      <div class="h-5 w-8 bg-gray-300 rounded"></div>
-      <div class="h-5 w-8 bg-gray-300 rounded"></div>
-      <div class="h-5 w-8 bg-gray-300 rounded"></div>
+    } @else {
+      
+      <!-- ========================================== -->
+      <!-- VISTA 2: THANK YOU PAGE (POST-VENTA) -->
+      <!-- ========================================== -->
+      <div class="animate-in zoom-in-95 duration-700 py-10 text-center">
+        
+        <div class="w-24 h-24 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-6 border-4 border-white shadow-xl">
+          <svg class="w-12 h-12 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+        </div>
+        
+        <h2 class="text-4xl font-extrabold text-gray-900 mb-4 tracking-tight">¡Gracias por tu compra!</h2>
+        <p class="text-gray-500 text-lg mb-10 max-w-md mx-auto">
+          Hola <span class="font-bold text-black">{{ confirmedOrderData().cliente.name }}</span>, hemos registrado tu pedido. Te escribiremos al WhatsApp para coordinar la entrega.
+        </p>
+
+        <!-- CTA WhatsApp -->
+        <a [href]="'https://wa.me/51999999999?text=Hola, hice el pedido a nombre de ' + confirmedOrderData().cliente.name" 
+           target="_blank"
+           class="inline-flex items-center justify-center gap-3 bg-[#25D366] hover:bg-[#1DA851] text-white font-bold py-4 px-8 rounded-full shadow-lg shadow-green-200 transition-all transform hover:-translate-y-1 text-lg">
+           <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+           Contactar por WhatsApp
+        </a>
+        
+        <div class="mt-8">
+           <button routerLink="/" class="text-sm font-bold text-gray-400 hover:text-gray-900 underline transition-colors">Volver a la tienda</button>
+        </div>
+
+      </div>
+    }
+
+    <!-- Footer Sellos -->
+    <div class="mt-12 flex justify-center gap-6 opacity-30 grayscale hover:grayscale-0 transition-all duration-500">
+      <div class="h-6 w-10 bg-gray-300 rounded"></div>
+      <div class="h-6 w-10 bg-gray-300 rounded"></div>
+      <div class="h-6 w-10 bg-gray-300 rounded"></div>
     </div>
 
   </main>

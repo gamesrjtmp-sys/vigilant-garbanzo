@@ -26,6 +26,10 @@ export class CheckoutComponent implements OnInit {
   currentStep = signal<number>(1);
   totalSteps = 3;
   
+  // 1. ESTADO DE LA PANTALLA FINAL (SOLUCIÓN A TU ERROR)
+  orderConfirmed = signal<boolean>(false); // <--- FALTABA ESTO: Controla si mostramos el éxito
+  confirmedOrderData = signal<any>(null);  // <--- FALTABA ESTO: Guarda los datos para mostrar en el recibo
+
   progressWidth = computed(() => {
     return ((this.currentStep() - 1) / (this.totalSteps - 1)) * 100 + '%';
   });
@@ -59,6 +63,7 @@ export class CheckoutComponent implements OnInit {
   ngOnInit() {
     this.ubigeoService.getDepartamentos().subscribe(data => this.departamentos.set(data));
     this.setupUbigeoListeners();
+    this.selectPayment('CASH');
   }
 
   // --- LÓGICA DE CONFIRMACIÓN (FINAL) ---
