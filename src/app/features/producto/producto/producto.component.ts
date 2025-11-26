@@ -1,8 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
+import { Component, inject, Input, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductoService } from '../../../core/services/producto.service';
 import { ProductoDto } from '../../../core/models/dto/producto/productoDto';
-import { Router } from '@angular/router';
+// 1. IMPORTAR EL SERVICIO DE CARRITO
+import { CarritoService } from '../../../core/services/carrito.service';
 
 @Component({
   selector: 'app-producto',
@@ -11,19 +13,19 @@ import { Router } from '@angular/router';
   templateUrl: './producto.component.html',
   styleUrl: './producto.component.scss'
 })
-export class ProductoComponent {  
+export class ProductoComponent implements OnInit {  
 
- public productoService = inject(ProductoService);
+  private productoService = inject(ProductoService);
+  private router = inject(Router);
+  // 2. INYECTAR EL SERVICIO (Público si lo usas en el HTML, privado si no)
+  private carritoService = inject(CarritoService); 
   
   // Signals de estado
   producto = signal<ProductoDto | null>(null);
   loading = signal(true);
-  // NUEVO: Signal para la imagen que el usuario selecciona (click)
   imagenSeleccionada = signal<string | null>(null);
 
   @Input() id!: string; 
-
-  private router = inject(Router)
 
   ngOnInit() {
     this.cargarProducto();
@@ -35,35 +37,44 @@ export class ProductoComponent {
     this.productoService.getProductById(productId).subscribe({
       next: (data) => {
         this.producto.set(data);
-      
+        
+        // Inicializar imagen seleccionada con la primera
         if (data.Imagenes && data.Imagenes.length > 0) {
-            this.imagenSeleccionada.set(data.Imagenes[0]);
+           this.imagenSeleccionada.set(data.Imagenes[0]);
         }
         this.loading.set(false);
       },
       error: (err) => {
-          console.error(err);
-          this.loading.set(false);
+         console.error(err);
+         this.loading.set(false);
       }
     });
   }
+
   seleccionarImagen(img: string) {
       this.imagenSeleccionada.set(img);
   }
 
-  comprar(): void {
-    // 3. Ejecutar la navegación programática
-    this.router.navigate(['/checkout']);
-  }
+  // --- ACCIONES DE COMPRA ---
 
+  // Opción 1: Agregar al carrito (Mantiene al usuario en la página y abre el drawer)
   agregarCarrito(): void {
-    // 3. Ejecutar la navegación programática
-    console.log('Producto agregado al carrito');
+    const prod = this.producto();
+    if (!prod) return; // Validación de seguridad
+
+    // Llamamos al servicio. El servicio ya se encarga de abrir el drawer (isOpen.set(true))
+    this.carritoService.addToCart(prod);
   }
 
-  // Si necesitas pasar parámetros (por ejemplo, el ID del carrito):
-  public goToCheckoutWithId(cartId: number): void {
-    // Ejemplo: /checkout/12345
-    this.router.navigate(['/checkout', cartId]);
+  // Opción 2: Comprar ahora (Reemplaza carrito y lleva al checkout)
+  comprar(): void {
+    const prod = this.producto();
+    if (!prod) return;
+
+    // Usamos el método especial buyNow del servicio
+    this.carritoService.buyNow(prod);
+    
+    // Navegamos inmediatamente al checkout
+    this.router.navigate(['/checkout']);
   }
 }

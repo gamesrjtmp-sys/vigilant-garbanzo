@@ -139,7 +139,8 @@
             <div class="flex gap-3">
               <!-- BOTÓN 1: AGREGAR AL CARRITO (Secundario/Borde) -->
               <button 
-                class="flex-1 py-4 px-4 rounded-full border-2 border-gray-300 text-gray-800 font-bold text-base hover:border-black hover:text-black transition-all duration-200 flex items-center justify-center bg-white"
+                (click)="agregarCarrito()" 
+                class="flex-1 py-4 px-4 rounded-full border-2 border-gray-300 text-gray-800 font-bold text-base hover:border-black hover:text-black transition-all duration-200 flex items-center justify-center bg-white active:scale-95"
               >
                 Agregar al carrito
               </button>

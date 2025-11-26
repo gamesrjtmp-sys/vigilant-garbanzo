@@ -1,19 +1,26 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { CheckoutPasosComponent } from '../checkout-pasos/checkout-pasos.component';
+import { Router, RouterModule } from '@angular/router'; // Importante para redirigir
 import { Ubigeo, UbigeoService } from '../../../core/services/ubigeo.service';
+// 1. IMPORTAR EL SERVICIO DE CARRITO
+import { CarritoService } from '../../../core/services/carrito.service';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,CheckoutPasosComponent],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.scss'
 })
-export class CheckoutComponent {
- private fb = inject(FormBuilder);
+export class CheckoutComponent implements OnInit {
+  
+  private fb = inject(FormBuilder);
   private ubigeoService = inject(UbigeoService);
+  private router = inject(Router);
+  
+  // 2. INYECTAR COMO PÚBLICO (Para usarlo en el HTML)
+  public cartService = inject(CarritoService);
 
   // --- ESTADO UI ---
   currentStep = signal<number>(1);
@@ -30,7 +37,7 @@ export class CheckoutComponent {
   provincias = signal<Ubigeo[]>([]);
   distritos = signal<Ubigeo[]>([]);
 
-  // --- FORMULARIO PRINCIPAL ---
+  // --- FORMULARIO ---
   checkoutForm: FormGroup = this.fb.group({
     datosCliente: this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -54,23 +61,47 @@ export class CheckoutComponent {
     this.setupUbigeoListeners();
   }
 
+  // --- LÓGICA DE CONFIRMACIÓN (FINAL) ---
+  confirmOrder() {
+    if (this.checkoutForm.valid) {
+      
+      // Armamos el objeto de pedido con DATOS REALES del servicio
+      const pedido = {
+        cliente: this.checkoutForm.value.datosCliente,
+        envio: this.checkoutForm.value.datosEnvio,
+        pago: this.paymentMethod(),
+        items: this.cartService.items(),     // Productos reales
+        total: this.cartService.grandTotal() // Total calculado
+      };
+
+      console.log('🚀 PEDIDO CONFIRMADO:', pedido);
+      alert(`¡Gracias por tu compra de S/ ${pedido.total}! Te enviaremos un correo.`);
+      
+      // Limpiamos el carrito y redirigimos
+      this.cartService.items.set([]); 
+      this.router.navigate(['/']); // O a una página de 'Gracias'
+    } else {
+      this.checkoutForm.markAllAsTouched();
+    }
+  }
+
+  // ... (RESTO DE TUS MÉTODOS: setupUbigeoListeners, resetField, goToStep, etc.) ...
+  // Mantenlos igual que en tu código anterior, no cambian.
+  
   private setupUbigeoListeners() {
     this.checkoutForm.get('datosEnvio.departamento')?.valueChanges.subscribe(depId => {
       this.resetField('provincia');
       this.resetField('distrito');
       this.provincias.set([]);
       this.distritos.set([]);
-      
       if (depId) {
         this.ubigeoService.getProvincias(depId).subscribe(data => this.provincias.set(data));
         this.checkoutForm.get('datosEnvio.provincia')?.enable();
       }
     });
-
     this.checkoutForm.get('datosEnvio.provincia')?.valueChanges.subscribe(provId => {
       this.resetField('distrito');
       this.distritos.set([]);
-
       if (provId) {
         this.ubigeoService.getDistritos(provId).subscribe(data => this.distritos.set(data));
         this.checkoutForm.get('datosEnvio.distrito')?.enable();
@@ -84,42 +115,23 @@ export class CheckoutComponent {
     field?.disable();
   }
 
-  // --- NAVEGACIÓN INTELIGENTE ---
-  
-  // Nuevo método para manejar clics en el stepper
   goToStep(targetStep: number) {
     const current = this.currentStep();
-    
-    // 1. Si hace clic en el mismo paso, no hacer nada
     if (targetStep === current) return;
-
-    // 2. Si quiere volver atrás (ej: de 3 a 1), SIEMPRE permitirlo
     if (targetStep < current) {
       this.currentStep.set(targetStep);
       return;
     }
-
-    // 3. Si quiere avanzar haciendo clic (ej: de 1 a 3), validar los pasos intermedios
-    // Para ir al paso 2, el paso 1 debe ser válido
     if (targetStep === 2) {
-      if (this.isStep1Valid()) {
-        this.currentStep.set(2);
-      } else {
-        this.checkoutForm.markAllAsTouched(); // Mostrar errores si intenta saltar sin llenar
-      }
+      if (this.isStep1Valid()) this.currentStep.set(2);
+      else this.checkoutForm.markAllAsTouched();
     }
-
-    // Para ir al paso 3, paso 1 Y paso 2 deben ser válidos
     if (targetStep === 3) {
-      if (this.isStep1Valid() && this.isStep2Valid()) {
-        this.currentStep.set(3);
-      } else {
-        this.checkoutForm.markAllAsTouched();
-      }
+      if (this.isStep1Valid() && this.isStep2Valid()) this.currentStep.set(3);
+      else this.checkoutForm.markAllAsTouched();
     }
   }
 
-  // Validaciones auxiliares
   private isStep1Valid(): boolean {
     const cliente = this.checkoutForm.get('datosCliente');
     const envio = this.checkoutForm.get('datosEnvio');
@@ -135,9 +147,7 @@ export class CheckoutComponent {
       this.checkoutForm.markAllAsTouched();
       return;
     }
-    if (this.currentStep() === 2 && !this.isStep2Valid()) {
-      return;
-    }
+    if (this.currentStep() === 2 && !this.isStep2Valid()) return;
     
     this.currentStep.update(v => Math.min(v + 1, this.totalSteps));
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -151,13 +161,6 @@ export class CheckoutComponent {
   selectPayment(method: 'QR' | 'CASH') {
     this.paymentMethod.set(method);
     this.checkoutForm.patchValue({ datosPago: { method } });
-  }
-
-  confirmOrder() {
-    if (this.checkoutForm.valid) {
-      console.log('Pedido:', this.checkoutForm.getRawValue());
-      alert('¡Gracias por tu compra!');
-    }
   }
 
   get nombreDepartamento() {
