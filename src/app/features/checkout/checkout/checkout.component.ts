@@ -5,6 +5,8 @@ import { Router, RouterModule } from '@angular/router'; // Importante para redir
 import { Ubigeo, UbigeoService } from '../../../core/services/ubigeo.service';
 // 1. IMPORTAR EL SERVICIO DE CARRITO
 import { CarritoService } from '../../../core/services/carrito.service';
+import { ProductoDto } from '../../../core/models/dto/producto/productoDto';
+import { ProductoService } from '../../../core/services/producto.service';
 
 @Component({
   selector: 'app-checkout',
@@ -29,6 +31,35 @@ export class CheckoutComponent implements OnInit {
   // 1. ESTADO DE LA PANTALLA FINAL (SOLUCIÓN A TU ERROR)
   orderConfirmed = signal<boolean>(false); // <--- FALTABA ESTO: Controla si mostramos el éxito
   confirmedOrderData = signal<any>(null);  // <--- FALTABA ESTO: Guarda los datos para mostrar en el recibo
+
+  private productoService = inject(ProductoService);
+  // 2. Estado de UI
+  loading = signal<boolean>(false);
+  error = signal<string | null>(null);
+   // Productos sugeridos para el Cross-Selling (Paso 4)
+  // Idealmente esto vendría de tu backend: "Productos relacionados"
+  suggestedProducts = signal<ProductoDto[]>([]);
+   cargarOfertas() {
+    // Iniciar estado de carga
+    this.loading.set(true);
+    this.error.set(null);
+
+    this.productoService.ListarProductos().subscribe({
+      next: (data) => {
+        // Lógica de Negocio: Filtrar o cortar las ofertas
+        const ofertas = data.slice(0, 10); 
+        this.suggestedProducts.set(ofertas);
+      },
+      error: (err) => {
+        console.error('Error cargando ofertas:', err);
+        this.error.set("No se pudieron cargar las ofertas del mes.");
+        this.loading.set(false);
+      },
+      complete: () => {
+        this.loading.set(false);
+      }
+    });
+  }
 
   progressWidth = computed(() => {
     return ((this.currentStep() - 1) / (this.totalSteps - 1)) * 100 + '%';
@@ -64,30 +95,41 @@ export class CheckoutComponent implements OnInit {
     this.ubigeoService.getDepartamentos().subscribe(data => this.departamentos.set(data));
     this.setupUbigeoListeners();
     this.selectPayment('CASH');
+    this.cargarOfertas();
   }
 
   // --- LÓGICA DE CONFIRMACIÓN (FINAL) ---
   confirmOrder() {
-    if (this.checkoutForm.valid) {
-      
-      // Armamos el objeto de pedido con DATOS REALES del servicio
-      const pedido = {
+   if (this.checkoutForm.valid) {
+      const orderPayload = {
         cliente: this.checkoutForm.value.datosCliente,
         envio: this.checkoutForm.value.datosEnvio,
-        pago: this.paymentMethod(),
-        items: this.cartService.items(),     // Productos reales
-        total: this.cartService.grandTotal() // Total calculado
+        items: this.cartService.items(),
+        total: this.cartService.grandTotal(),
+        metodoPago: 'CASH',
+        codigoPedido: 'ORD-' + Math.floor(Math.random() * 10000) // Simulación de ID
       };
 
-      console.log('🚀 PEDIDO CONFIRMADO:', pedido);
-      alert(`¡Gracias por tu compra de S/ ${pedido.total}! Te enviaremos un correo.`);
+      console.log('🎉 VENTA CERRADA:', orderPayload);
       
-      // Limpiamos el carrito y redirigimos
-      this.cartService.items.set([]); 
-      this.router.navigate(['/']); // O a una página de 'Gracias'
+      this.confirmedOrderData.set(orderPayload);
+      this.orderConfirmed.set(true); // Activamos la pantalla de éxito
+      
+      // Limpiamos el carrito actual para que pueda empezar uno nuevo
+      this.cartService.items.set([]);
+      this.cartService.isOpen.set(false);
+      
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
       this.checkoutForm.markAllAsTouched();
     }
+  }
+
+  // --- MÉTODO PARA AGREGAR SUGERENCIA ---
+  addSuggestionToNewCart(product: ProductoDto) {
+    this.cartService.addToCart(product);
+    // Opcional: Mostrar un toast o abrir el carrito
+    alert('¡Agregado! Empieza tu siguiente pedido.');
   }
 
   // ... (RESTO DE TUS MÉTODOS: setupUbigeoListeners, resetField, goToStep, etc.) ...
