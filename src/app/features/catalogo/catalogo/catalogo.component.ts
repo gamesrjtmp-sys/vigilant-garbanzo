@@ -22,16 +22,8 @@ public productoService = inject(CatalogoService);
   ngOnInit() {
     this.productoService.loadAll();
   }
-
-  // Método para navegar al detalle
+  
   verDetalle(id: number) {
     this.router.navigate(['/producto', id]);
   }
-
-  /**
-   * ADAPTADOR:
-   * Tu HTML anterior mostraba propiedades como 'p.Nombre', 'p.Imagenes', etc.
-   * La tarjeta espera 'nombre', 'imagen' (singular).
-   * Este método transforma el dato "sucio" del backend al dato "limpio" de la tarjeta.
-   */
 }

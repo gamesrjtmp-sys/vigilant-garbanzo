@@ -1,0 +1,229 @@
+{
+  "catalogos": [
+    {
+      "idCatalogo": 1,
+      "nombreCatalogo": "Cuidado Cabello",
+      "subcategorias": [
+        {
+          "idSubcategoria": 101,
+          "nombreSubcategoria": "Champús",
+          "productos": [
+            {
+              "idProducto": 1001,
+              "idCatalogo": 1,
+              "idSubcategoria": 101,
+              "nombreProducto": "Champú Hidratante Profesional",
+              "precio": 29.90,
+              "imagen": "assets/images/default_product.webp"
+            },
+            {
+              "idProducto": 1002,
+              "idCatalogo": 1,
+              "idSubcategoria": 101,
+              "nombreProducto": "Champú Reparador Keratina",
+              "precio": 34.50,
+              "imagen": "assets/images/default_product.webp"
+            }
+          ]
+        },
+        {
+          "idSubcategoria": 102,
+          "nombreSubcategoria": "Planchas",
+          "productos": [
+            {
+              "idProducto": 1003,
+              "idCatalogo": 1,
+              "idSubcategoria": 102,
+              "nombreProducto": "Plancha TITANIUM Pro 450°F",
+              "precio": 159.90,
+              "imagen": "assets/images/default_product.webp"
+            },
+            {
+              "idProducto": 1004,
+              "idCatalogo": 1,
+              "idSubcategoria": 102,
+              "nombreProducto": "Plancha Cerámica Ionic",
+              "precio": 129.00,
+              "imagen": "assets/images/default_product.webp"
+            }
+          ]
+        },
+        {
+          "idSubcategoria": 103,
+          "nombreSubcategoria": "Tratamientos",
+          "productos": [
+            {
+              "idProducto": 1005,
+              "idCatalogo": 1,
+              "idSubcategoria": 103,
+              "nombreProducto": "Tratamiento Capilar Nutritivo",
+              "precio": 49.90,
+              "imagen": "assets/images/default_product.webp"
+            },
+            {
+              "idProducto": 1006,
+              "idCatalogo": 1,
+              "idSubcategoria": 103,
+              "nombreProducto": "Ampollas Reparadoras Pro",
+              "precio": 39.90,
+              "imagen": "assets/images/default_product.webp"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "idCatalogo": 2,
+      "nombreCatalogo": "Cuidado Piel",
+      "subcategorias": [
+        {
+          "idSubcategoria": 201,
+          "nombreSubcategoria": "Faciales",
+          "productos": [
+            {
+              "idProducto": 2001,
+              "idCatalogo": 2,
+              "idSubcategoria": 201,
+              "nombreProducto": "Sérum de Vitamina C 20%",
+              "precio": 59.90,
+              "imagen": "assets/images/default_product.webp"
+            },
+            {
+              "idProducto": 2002,
+              "idCatalogo": 2,
+              "idSubcategoria": 201,
+              "nombreProducto": "Crema Facial Hidratante Hyaluronic",
+              "precio": 44.90,
+              "imagen": "assets/images/default_product.webp"
+            }
+          ]
+        },
+        {
+          "idSubcategoria": 202,
+          "nombreSubcategoria": "Corporales",
+          "productos": [
+            {
+              "idProducto": 2003,
+              "idCatalogo": 2,
+              "idSubcategoria": 202,
+              "nombreProducto": "Gel Reductor Anticelulitis",
+              "precio": 39.90,
+              "imagen": "assets/images/default_product.webp"
+            },
+            {
+              "idProducto": 2004,
+              "idCatalogo": 2,
+              "idSubcategoria": 202,
+              "nombreProducto": "Crema Corporal de Colágeno",
+              "precio": 29.90,
+              "imagen": "assets/images/default_product.webp"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "idCatalogo": 3,
+      "nombreCatalogo": "Equipos Profesionales",
+      "subcategorias": [
+        {
+          "idSubcategoria": 301,
+          "nombreSubcategoria": "Herramientas",
+          "productos": [
+            {
+              "idProducto": 3001,
+              "idCatalogo": 3,
+              "idSubcategoria": 301,
+              "nombreProducto": "Secadora Profesional 3000W",
+              "precio": 199.90,
+              "imagen": "assets/images/default_product.webp"
+            },
+            {
+              "idProducto": 3002,
+              "idCatalogo": 3,
+              "idSubcategoria": 301,
+              "nombreProducto": "Máquina de Corte Barber PRO",
+              "precio": 149.90,
+              "imagen": "assets/images/default_product.webp"
+            }
+          ]
+        },
+        {
+          "idSubcategoria": 302,
+          "nombreSubcategoria": "Electroestética",
+          "productos": [
+            {
+              "idProducto": 3003,
+              "idCatalogo": 3,
+              "idSubcategoria": 302,
+              "nombreProducto": "Vaporizador Facial NanoMist",
+              "precio": 229.00,
+              "imagen": "assets/images/default_product.webp"
+            },
+            {
+              "idProducto": 3004,
+              "idCatalogo": 3,
+              "idSubcategoria": 302,
+              "nombreProducto": "Lámpara LED UV 54W",
+              "precio": 89.90,
+              "imagen": "assets/images/default_product.webp"
+            }
+          ]
+        }
+      ]
+    },
+
+    {
+      "idCatalogo": 4,
+      "nombreCatalogo": "Maquillaje",
+      "subcategorias": [
+        {
+          "idSubcategoria": 401,
+          "nombreSubcategoria": "Rostro",
+          "productos": [
+            {
+              "idProducto": 4001,
+              "idCatalogo": 4,
+              "idSubcategoria": 401,
+              "nombreProducto": "Base Líquida Alta Cobertura",
+              "precio": 49.90,
+              "imagen": "assets/images/default_product.webp"
+            },
+            {
+              "idProducto": 4002,
+              "idCatalogo": 4,
+              "idSubcategoria": 401,
+              "nombreProducto": "Polvo Compacto Profesional",
+              "precio": 32.00,
+              "imagen": "assets/images/default_product.webp"
+            }
+          ]
+        },
+        {
+          "idSubcategoria": 402,
+          "nombreSubcategoria": "Ojos",
+          "productos": [
+            {
+              "idProducto": 4003,
+              "idCatalogo": 4,
+              "idSubcategoria": 402,
+              "nombreProducto": "Delineador Líquido Waterproof",
+              "precio": 25.00,
+              "imagen": "assets/images/default_product.webp"
+            },
+            {
+              "idProducto": 4004,
+              "idCatalogo": 4,
+              "idSubcategoria": 402,
+              "nombreProducto": "Mascara Volumen Extremo",
+              "precio": 29.90,
+              "imagen": "assets/images/default_product.webp"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

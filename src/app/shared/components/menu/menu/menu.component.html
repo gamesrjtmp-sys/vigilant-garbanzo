@@ -33,7 +33,7 @@
               [attr.aria-expanded]="catalogDropdownOpen()"
               aria-controls="catalog-dropdown"
             >
-              Perros ▾
+              Cuidado del Cabello ▾
             </button>
 
             <!-- dropdown: Angular 18 Control Flow -->
@@ -42,20 +42,28 @@
                 id="catalog-dropdown"
                 class="absolute mt-2 bg-white border rounded shadow-lg w-56 z-50"
                 role="menu"
-                aria-label="Subcategorías perros"
+                aria-label="Cuidado del Cabello"
               >
                 <ul class="py-2">
                   <li role="none">
                     <a role="menuitem" routerLink="/catalogo" [queryParams]="{type: 'perros', cat: 'alimentos'}"
-                       class="block px-4 py-2 text-sm hover:bg-gray-50">Alimentos</a>
+                       class="block px-4 py-2 text-sm hover:bg-gray-50">Tratamientos</a>
                   </li>
                   <li role="none">
                     <a role="menuitem" routerLink="/catalogo" [queryParams]="{type: 'perros', cat: 'camas'}"
-                       class="block px-4 py-2 text-sm hover:bg-gray-50">Camas</a>
+                       class="block px-4 py-2 text-sm hover:bg-gray-50">Champú profesional</a>
                   </li>
                   <li role="none">
                     <a role="menuitem" routerLink="/catalogo" [queryParams]="{type: 'perros', cat: 'juguetes'}"
-                       class="block px-4 py-2 text-sm hover:bg-gray-50">Juguetes</a>
+                       class="block px-4 py-2 text-sm hover:bg-gray-50">Planchas</a>
+                  </li>
+                  <li role="none">
+                    <a role="menuitem"
+                      routerLink="/catalogo-comun"
+                      [queryParams]="{ id: 2 }"
+                      class="block px-4 py-2 text-sm hover:bg-gray-50">
+                      Prueba
+                    </a>
                   </li>
                 </ul>
               </div>
@@ -63,9 +71,9 @@
           </div>
 
           <!-- otras categorias -->
-          <a routerLink="/catalogo" [queryParams]="{type: 'gatos'}" class="text-sm text-gray-700 hover:text-orange-500">Gatos</a>
-          <a routerLink="/catalogo" class="text-sm text-gray-700 hover:text-orange-500">Todos</a>
-          <a routerLink="/catalogo" [queryParams]="{type: 'transportadores'}" class="text-sm text-gray-700 hover:text-orange-500">Transportadores</a>
+          <a routerLink="/catalogo" [queryParams]="{type: 'gatos'}" class="text-sm text-gray-700 hover:text-orange-500">Cuidado de la Piel</a>
+          <a routerLink="/catalogo" class="text-sm text-gray-700 hover:text-orange-500">Maquillaje</a>
+          <a routerLink="/catalogo" [queryParams]="{type: 'transportadores'}" class="text-sm text-gray-700 hover:text-orange-500">Equipos Profesionales</a>
         </nav>
       </div>
 
@@ -101,17 +109,13 @@
       <div class="flex items-center gap-4">
         <!-- user icon -->
         <a routerLink="/account" class="text-gray-700 hover:text-gray-900" aria-label="Mi cuenta">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M16 11c1.657 0 3-1.343 3-3S17.657 5 16 5s-3 1.343-3 3 1.343 3 3 3zM8 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm8 2v6H8v-6a4 4 0 0 1 8 0z"/>
-          </svg>
         </a>
         
         <a (click)="carrito.toggleCart()" 
           class="relative text-gray-700 hover:text-gray-900 cursor-pointer" 
           aria-label="Abrir Carrito"
           role="button"> 
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6.2a1 1 0 0 0 .98 1.2h11.44a1 1 0 0 0 .98-1.2L17 13M7 13h10"/>
             </svg>

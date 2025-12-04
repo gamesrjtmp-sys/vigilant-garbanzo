@@ -32,6 +32,12 @@ export const routes: Routes = [
         path: 'checkout', 
         loadComponent: () => import('./features/checkout/checkout/checkout.component')
             .then(m => m.CheckoutComponent)
+    },
+
+    {
+        path: 'catalogo-comun', 
+        loadComponent: () => import('./shared/components/catalogo-comun/catalogo-comun/catalogo-comun.component')
+            .then(m => m.CatalogoComunComponent)
     }
 ];
     

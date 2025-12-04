@@ -16,8 +16,8 @@ export class CarruselComponent implements OnInit, OnDestroy {
   // Array de imágenes y datos para el carrusel
   // 🚨 CORRECCIÓN: Se añade la propiedad 'link' para que el botón funcione.
   readonly slides = [
-    { id: 1, imgUrl: 'assets/images/default_product-.webp', promo: 'Hasta 50% OFF', subtitle: 'Descubre nuestra mejor colección...', link: '/catalogo/black' },
-    { id: 2, imgUrl: 'assets/images/default_product-.webp', promo: '¡Nuevos Juguetes!', subtitle: 'Diversión bajo el sol...', link: '/catalogo/verano' },
+    { id: 1, imgUrl: 'assets/images/default_product.webp', promo: 'Hasta 50% OFF', subtitle: 'Descubre nuestra mejor colección...', link: '/catalogo/black' },
+    { id: 2, imgUrl: 'assets/images/default_product.webp', promo: '¡Nuevos Juguetes!', subtitle: 'Diversión bajo el sol...', link: '/catalogo/verano' },
   ];
   
   // Estado reactivo: Señal para controlar qué slide se muestra

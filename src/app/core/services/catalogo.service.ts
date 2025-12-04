@@ -1,8 +1,11 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
 import { ApiService } from '../../core/http/api.service';
 import { map, catchError, tap } from 'rxjs/operators';
 import { ProductoDto } from '../models/dto/producto/productoDto';
 import { mapProducto } from '../mappers/producto.mapper';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Catalogo, ProductoJson } from '../models/api/catalogo/catalogo';
 
 @Injectable({ providedIn: 'root' })
 export class CatalogoService {
@@ -18,6 +21,34 @@ export class CatalogoService {
     
     constructor(private api: ApiService) {}
 
+
+    private http = inject(HttpClient);
+    private readonly JSON_URL = 'assets/data/catalogo/catalogo.json';
+
+    /** ------------------------
+     *  OBTENER SOLO LOS CATALOGOS
+     *  ------------------------ */
+    getCatalogos(): Observable<Catalogo[]> {
+        return this.http.get<{ catalogos: Catalogo[] }>(this.JSON_URL).pipe(
+        map(data => data.catalogos)
+        );
+    }
+
+    /** ----------------------------------------------
+     *  OBTENER TODOS LOS PRODUCTOS POR ID DE CATALOGO
+     *  ---------------------------------------------- */
+    getProductosByCatalogo(idCatalogo: number): Observable<ProductoJson[]> {
+        return this.http.get<{ catalogos: Catalogo[] }>(this.JSON_URL).pipe(
+        map(data => {
+            const catalogo = data.catalogos.find(c => c.idCatalogo === idCatalogo);
+            if (!catalogo) return [];
+
+            return catalogo.subcategorias.flatMap(sub => sub.productos);
+        })
+        );
+    }
+
+    
     loadAll(){  
         this.loading.set(true);
         this.error.set(null);
@@ -41,4 +72,6 @@ export class CatalogoService {
                 }
             });
     }
+
+
 }
