@@ -1,101 +1,156 @@
-<!-- <h2>Categorías</h2>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+  
+  <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
 
-<ul>
-  @for (c of catalogos(); track c.idCatalogo) {
-    <li (click)="cargarProductos(c.idCatalogo)" class="cursor-pointer">
-      {{ c.nombreCatalogo }}
-    </li>
-  }
-</ul>
-
-<hr> -->
-
-<div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
-
-  <!-- SIDEBAR FILTROS -->
-  <aside class="lg:col-span-3">
-    <div class="bg-white border rounded-lg p-4 shadow-sm space-y-6">
-      <h3 class="font-semibold text-lg mb-2">Filtros</h3>
-
-      <!-- Ordenamiento -->
-      <div>
-        <h4 class="font-medium text-sm mb-2">Ordenamiento</h4>
-        <div class="space-y-2">
-          <button class="w-full text-left px-3 py-2 rounded border hover:bg-gray-50">Más vendidos</button>
-          <button class="w-full text-left px-3 py-2 rounded border hover:bg-gray-50">Precio: menor a mayor</button>
-          <button class="w-full text-left px-3 py-2 rounded border hover:bg-gray-50">Precio: mayor a menor</button>
-          <button class="w-full text-left px-3 py-2 rounded border hover:bg-gray-50">Fecha: reciente a antiguo</button>
+    <!-- ========================================== -->
+    <!-- NUEVO SIDEBAR (Navegación + Valor)         -->
+    <!-- ========================================== -->
+    <aside class="lg:col-span-3 hidden lg:block">
+      <div class="sticky top-24 space-y-8">
+        
+        <!-- 1. Menú de Categorías (Estilo Clean) -->
+        <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
+          <h3 class="font-bold text-gray-900 text-lg mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+            Explorar
+          </h3>
+          
+          <ul class="space-y-1">
+            @for (cat of categorias(); track cat.nombre) {
+              <li>
+                <button 
+                  class="w-full text-left px-4 py-3 rounded-xl text-sm font-medium transition-all duration-200 flex justify-between items-center group"
+                  [class.bg-gray-50]="categoriaActiva() === cat.nombre"
+                  [class.text-emerald-700]="categoriaActiva() === cat.nombre"
+                  [class.text-gray-600]="categoriaActiva() !== cat.nombre"
+                  (click)="categoriaActiva.set(cat.nombre)"
+                >
+                  <span class="group-hover:translate-x-1 transition-transform">{{ cat.nombre }}</span>
+                  <span class="text-xs text-gray-400 bg-white border border-gray-100 px-2 py-0.5 rounded-full group-hover:bg-emerald-50 group-hover:text-emerald-600 group-hover:border-emerald-100 transition-colors">
+                    {{ cat.count }}
+                  </span>
+                </button>
+              </li>
+            }
+          </ul>
         </div>
-      </div>
 
-      <!-- Filtros extra ejemplos -->
-      <div>
-        <h4 class="font-medium text-sm mb-2">Uso</h4>
-        <label class="flex items-center gap-2 text-sm">
-          <input type="checkbox" class="form-checkbox h-4 w-4" />
-          Profesional
-        </label>
-      </div>
-
-      <div>
-        <h4 class="font-medium text-sm mb-2">Color</h4>
-        <div class="flex gap-2 items-center">
-          <button class="w-6 h-6 rounded-full bg-yellow-300 ring-1 ring-gray-200"></button>
-          <button class="w-6 h-6 rounded-full bg-sky-300 ring-1 ring-gray-200"></button>
-          <button class="w-6 h-6 rounded-full bg-rose-300 ring-1 ring-gray-200"></button>
-        </div>
-      </div>
-
-      <div>
-        <button class="w-full bg-gray-100 text-sm py-2 rounded">Limpiar filtros</button>
-      </div>
-    </div>
-  </aside>
-
-  <!-- CONTENIDO PRINCIPAL -->
-  <main class="lg:col-span-9">
-
-    <!-- Header -->
-    <div class="flex items-center justify-between mb-6">
-      <h1 class="text-2xl font-bold">Productos</h1>
-
-      @if (productos().length === 0) {
-        <p class="text-sm text-gray-500">Cargando productos…</p>
-      } @else {
-        <p class="text-sm text-gray-500">Mostrando {{ productos().length }} productos</p>
-      }
-    </div>
-
-    <!-- No productos -->
-    @if (productos().length === 0) {
-      <p class="text-gray-500">No se encontraron productos.</p>
-    } @else {
-
-      <!-- GRID DE PRODUCTOS -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
-        @for (p of productos(); track p.idProducto) {
-
-          <div 
-            class="border rounded-lg p-3 shadow-sm hover:shadow-md transition cursor-pointer bg-white"
-          >
-            <img 
-              [src]="p.imagen" 
-              alt="{{ p.nombreProducto }}"
-              class="w-full h-40 object-cover rounded mb-3"
-            />
-
-            <h3 class="font-semibold text-gray-800">{{ p.nombreProducto }}</h3>
-
-            <!-- <p class="text-gray-600 text-sm mt-1">{{ p.descripcion }}</p> -->
-
-            <p class="text-pink-600 font-bold text-lg mt-2">
-              S/ {{ p.precio }}
-            </p>
+        <!-- 2. Banner de Confianza (Estático pero útil) -->
+        <!-- Llena el espacio y da seguridad -->
+        <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100 relative overflow-hidden">
+          <div class="relative z-10">
+            <h4 class="text-emerald-900 font-bold text-lg mb-2">Envío Gratis 🚚</h4>
+            <p class="text-emerald-700 text-sm mb-4">En compras superiores a S/ 200 en todo el país.</p>
+            <div class="h-1 w-12 bg-emerald-300 rounded-full"></div>
           </div>
+          <!-- Decoración de fondo -->
+          <svg class="absolute -bottom-4 -right-4 w-24 h-24 text-emerald-100 rotate-12" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd"/></svg>
+        </div>
 
-        }
+        <!-- 3. Producto Recomendado (Mini Card) -->
+        <!-- Si no tienes data real, puedes ocultar esto o poner uno hardcodeado -->
+        <div class="bg-white border border-gray-100 rounded-2xl p-4 shadow-sm">
+          <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Recomendado</p>
+          <div class="flex gap-4 items-center group cursor-pointer">
+            <div class="w-16 h-16 bg-gray-100 rounded-lg overflow-hidden">
+               <!-- Usa una imagen genérica si no tienes una -->
+               <img src="assets/images/placeholder.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform">
+            </div>
+            <div>
+              <p class="text-sm font-bold text-gray-900 leading-tight group-hover:text-emerald-600 transition-colors">Pack Esencial</p>
+              <p class="text-xs text-gray-500 mt-1">Lo más llevado</p>
+              <p class="text-sm font-bold text-black mt-1">S/ 89.00</p>
+            </div>
+          </div>
+        </div>
+
       </div>
-    }
-  </main>
+    </aside>
+
+    <!-- ========================================== -->
+    <!-- CONTENIDO PRINCIPAL (Tu Grid de Productos) -->
+    <!-- ========================================== -->
+    <main class="lg:col-span-9">
+       <!-- ... AQUÍ PEGAS TU CÓDIGO DEL GRID DE PRODUCTOS (El que te pasé antes) ... -->
+       <!-- Mantenlo tal cual, ya está optimizado -->
+       
+       <!-- Header de la sección -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-4 border-b border-gray-100">
+        <div>
+          <h1 class="text-3xl font-extrabold text-gray-900 tracking-tight">Catálogo</h1>
+          <p class="text-sm text-gray-500 mt-1">Explora nuestra colección seleccionada</p>
+        </div>
+        <div class="mt-4 sm:mt-0 text-sm font-medium text-gray-500 bg-gray-50 px-3 py-1 rounded-full border border-gray-200">
+          {{ productos().length }} productos encontrados
+        </div>
+      </div>
+
+      <!-- Empty State -->
+      @if (productos().length === 0) {
+        <div class="flex flex-col items-center justify-center py-20 bg-gray-50 rounded-2xl border border-dashed border-gray-200">
+          <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 text-3xl">📦</div>
+          <h3 class="text-lg font-bold text-gray-900">No encontramos productos</h3>
+          <p class="text-gray-500 text-sm mt-1">Intenta ajustar los filtros o vuelve más tarde.</p>
+        </div>
+      } 
+      @else {
+        
+        <!-- GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
+          
+          @for (p of productos(); track p.idProducto) {
+            <!-- PRODUCT CARD -->
+            <article class="group bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:shadow-gray-200/60 transition-all duration-300 flex flex-col h-full hover:-translate-y-1 cursor-pointer">
+              
+              <!-- Imagen -->
+              <div class="relative aspect-square overflow-hidden bg-gray-100">
+                <img 
+                  [src]="p.imagen || 'assets/placeholder.png'" 
+                  [alt]="p.nombreProducto" 
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 mix-blend-multiply"
+                  loading="lazy"
+                >
+                
+                <!-- Badge 'Nuevo' (Simulado, o podrías usar una lógica p.esNuevo) -->
+                @if ($index < 2) {
+                  <span class="absolute top-3 left-3 bg-black text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Nuevo</span>
+                }
+
+                <!-- Botón Acción Rápida (Aparece en Hover) -->
+                <div class="absolute bottom-4 left-0 w-full px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
+                  <button class="w-full bg-white/90 backdrop-blur text-black font-bold py-3 rounded-xl shadow-lg text-sm hover:bg-black hover:text-white transition-colors">
+                    Ver Detalles
+                  </button>
+                </div>
+              </div>
+
+              <!-- Info -->
+              <div class="p-5 flex-1 flex flex-col">
+                <div class="flex-1">
+                  <h3 class="text-base font-bold text-gray-900 group-hover:text-emerald-600 transition-colors line-clamp-2">
+                    {{ p.nombreProducto }}
+                  </h3>
+                  <!-- Descripción corta opcional -->
+                  <!-- <p class="text-sm text-gray-500 mt-2 line-clamp-2">{{ p.descripcion }}</p> -->
+                </div>
+                
+                <div class="mt-4 flex items-center justify-between">
+                  <div class="flex flex-col">
+                    <span class="text-xs text-gray-400 font-medium">Precio</span>
+                    <span class="text-xl font-bold text-gray-900">S/ {{ p.precio }}</span>
+                  </div>
+                  <button class="w-10 h-10 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-emerald-50 group-hover:text-emerald-600 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+                  </button>
+                </div>
+              </div>
+
+            </article>
+          }
+
+        </div>
+      }
+    </main>
+
+  </div>
 </div>

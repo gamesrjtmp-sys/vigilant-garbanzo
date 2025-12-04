@@ -1,6 +1,8 @@
 import { Component, effect, inject, input, signal } from '@angular/core';
 import { Catalogo, ProductoJson } from '../../../../core/models/api/catalogo/catalogo';
 import { CatalogoService } from '../../../../core/services/catalogo.service';
+import { toObservable, toSignal } from '@angular/core/rxjs-interop';
+import { switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-catalogo-comun',
@@ -13,25 +15,24 @@ export class CatalogoComunComponent {
 
   private catalogoSrv = inject(CatalogoService);
 
-  idCatalogo = input<number>(2);
+  idCatalogo = input.required<number>();
 
-  productos = signal<ProductoJson[]>([]);
+  // Señal para saber en qué categoría estamos (simulada por ahora)
+  categoriaActiva = signal<string>('Todos');
 
-  constructor() {
-    console.log("CONS:"+this.idCatalogo)
-    effect(() => {
-      const id = this.idCatalogo();
-      console.log("iddddd" + id)
-      if (2 > 0) {
-        console.log("CONS ENTRA IF")
-        this.cargarProductos(4);
-      }
-    });
-  }
-  private cargarProductos(idCatalogo: number) {
-    console.log("llega cargarProductos")
-    this.catalogoSrv
-      .getProductosByCatalogo(idCatalogo)
-      .subscribe((prod) => this.productos.set(prod));
-  }
+  // Datos Mock para el Sidebar (Ya que no vienen de BD aún)
+  categorias = signal([
+    { nombre: 'Todos los productos', count: 120 },
+    { nombre: 'Nuevos Ingresos', count: 15 },
+    { nombre: 'Más Vendidos', count: 32 },
+    { nombre: 'Ofertas', count: 8 }
+  ]);
+  
+  productos = toSignal(
+    toObservable(this.idCatalogo).pipe(
+      tap((id) => console.log('🔄 Cargando catálogo ID:', id)), // Debug limpio
+      switchMap((id) => this.catalogoSrv.getProductosByCatalogo(id))
+    ),
+    { initialValue: [] as ProductoJson[] } // Valor inicial para evitar nulos
+  );
 }
