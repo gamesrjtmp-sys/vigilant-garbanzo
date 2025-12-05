@@ -37,14 +37,18 @@ export class CatalogoService {
     /** ----------------------------------------------
      *  OBTENER TODOS LOS PRODUCTOS POR ID DE CATALOGO
      *  ---------------------------------------------- */
-    getProductosByCatalogo(idCatalogo: number): Observable<ProductoJson[]> {
+    getProductosBySubcategoria(idSubcategoria: number): Observable<ProductoJson[]> {
         return this.http.get<{ catalogos: Catalogo[] }>(this.JSON_URL).pipe(
-        map(data => {
-            const catalogo = data.catalogos.find(c => c.idCatalogo === idCatalogo);
-            if (!catalogo) return [];
+            map(data => {
+            // 1. Obtenemos una lista plana de TODAS las subcategorías de todos los catálogos
+            const todasLasSubcategorias = data.catalogos.flatMap(c => c.subcategorias);
+            
+            // 2. Buscamos la subcategoría específica
+            const subcategoriaEncontrada = todasLasSubcategorias.find(s => s.idSubcategoria === idSubcategoria);
 
-            return catalogo.subcategorias.flatMap(sub => sub.productos);
-        })
+            // 3. Retornamos sus productos o array vacío si no existe
+            return subcategoriaEncontrada ? subcategoriaEncontrada.productos : [];
+            })
         );
     }
 

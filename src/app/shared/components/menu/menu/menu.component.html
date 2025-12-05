@@ -44,36 +44,54 @@
                 role="menu"
                 aria-label="Cuidado del Cabello"
               >
-                <ul class="py-2">
+                <ul>
                   <li role="none">
-                    <a role="menuitem" routerLink="/catalogo" [queryParams]="{type: 'perros', cat: 'alimentos'}"
-                       class="block px-4 py-2 text-sm hover:bg-gray-50">Tratamientos</a>
-                  </li>
-                  <li role="none">
-                    <a role="menuitem" routerLink="/catalogo" [queryParams]="{type: 'perros', cat: 'camas'}"
-                       class="block px-4 py-2 text-sm hover:bg-gray-50">Champú profesional</a>
-                  </li>
-                  <li role="none">
-                    <a role="menuitem" routerLink="/catalogo" [queryParams]="{type: 'perros', cat: 'juguetes'}"
-                       class="block px-4 py-2 text-sm hover:bg-gray-50">Planchas</a>
+                    <a role="menuitem"
+                      routerLink="/catalogo-comun"
+                      [queryParams]="{ id: 103}"
+                      class="block px-4 py-2 text-sm hover:bg-gray-50">
+                      Tratamientos
+                    </a>
                   </li>
                   <li role="none">
                     <a role="menuitem"
                       routerLink="/catalogo-comun"
-                      [queryParams]="{ id: 2 }"
+                      [queryParams]="{ id: 101}"
                       class="block px-4 py-2 text-sm hover:bg-gray-50">
-                      Prueba
+                      Champú profesional
+                    </a>
+                  </li>
+                  <li role="none">
+                    <a role="menuitem"
+                      routerLink="/catalogo-comun"
+                      [queryParams]="{ id: 102}"
+                      class="block px-4 py-2 text-sm hover:bg-gray-50">
+                      Planchas
                     </a>
                   </li>
                 </ul>
               </div>
             }
           </div>
-
-          <!-- otras categorias -->
-          <a routerLink="/catalogo" [queryParams]="{type: 'gatos'}" class="text-sm text-gray-700 hover:text-orange-500">Cuidado de la Piel</a>
-          <a routerLink="/catalogo" class="text-sm text-gray-700 hover:text-orange-500">Maquillaje</a>
-          <a routerLink="/catalogo" [queryParams]="{type: 'transportadores'}" class="text-sm text-gray-700 hover:text-orange-500">Equipos Profesionales</a>
+          
+          <a role="menuitem"
+            routerLink="/catalogo-comun"
+            [queryParams]="{ id: 201}"
+            class="block px-4 py-2 text-sm hover:bg-gray-50">
+            Cuidado de la Piel
+          </a>
+          <a role="menuitem"
+            routerLink="/catalogo-comun"
+            [queryParams]="{ id: 401}"
+            class="block px-4 py-2 text-sm hover:bg-gray-50">
+            Maquillaje
+          </a>
+          <a role="menuitem"
+            routerLink="/catalogo-comun"
+            [queryParams]="{ id: 301}"
+            class="block px-4 py-2 text-sm hover:bg-gray-50">
+            Equipos Profesionales
+          </a>
         </nav>
       </div>
 
