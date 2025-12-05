@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, inject, Output, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CatalogoService } from '../../../../core/services/catalogo.service';
 import { CarritoService } from '../../../../core/services/carrito.service';
@@ -11,14 +11,13 @@ import { CarritoService } from '../../../../core/services/carrito.service';
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent {
-   // estado local (UI)
+  public router = inject(Router);
+  public carrito = inject(CarritoService);
+
+  // Estados UI
   public mobileOpen = signal(false);
   public catalogDropdownOpen = signal(false);
   public searchQuery = signal('');
-
-  constructor(
-  public router: Router, 
-  public carrito: CarritoService) {}
 
   toggleMobile() {
     this.mobileOpen.update(v => !v);
@@ -26,6 +25,11 @@ export class MenuComponent {
 
   toggleCatalogDropdown() {
     this.catalogDropdownOpen.update(v => !v);
+  }
+  
+  // Método explícito para cerrar (más seguro que toggle en ciertos casos)
+  closeDropdown() {
+    this.catalogDropdownOpen.set(false);
   }
 
   onSearchSubmit() {

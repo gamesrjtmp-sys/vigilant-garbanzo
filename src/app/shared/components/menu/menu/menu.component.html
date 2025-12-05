@@ -8,146 +8,162 @@
 </div>
 
 <!-- HEADER PRINCIPAL -->
-<header class="w-full bg-white border-b shadow-sm sticky top-0 z-50" role="banner">
+<header class="w-full bg-white border-b shadow-sm sticky top-0 z-50 font-sans" role="banner">
   <div class="max-w-7xl mx-auto px-4">
     <div class="flex items-center justify-between h-16">
 
-      <!-- izquierda: logo + principal nav (desktop) -->
-      <div class="flex items-center gap-6">
-        <!-- logo -->
-        <button (click)="goToHome()"
-                class="flex items-center gap-3 focus:outline-none"
-                aria-label="Ir al inicio">
-          <!-- Ajusté la ruta a assets para que te funcione localmente -->
-          <img src="assets/images/pelota.jpg"
-               alt="Logo Qué Patas" class="h-10 w-auto" />
+      <!-- IZQUIERDA: Logo + Nav Principal -->
+      <div class="flex items-center gap-8">
+        
+        <!-- Logo -->
+        <button (click)="goToHome()" class="flex items-center gap-3 focus:outline-none hover:opacity-80 transition-opacity" aria-label="Ir al inicio">
+          <img src="assets/images/pelota.jpg" alt="Logo Qué Patas" class="h-10 w-auto object-contain" />
         </button>
-
-        <!-- nav desktop (hidden on mobile) -->
-        <nav class="hidden lg:flex items-center gap-4" aria-label="Categorías principales">
-          <div class="relative" (keydown.enter)="$event.stopPropagation()">
+        
+        <!-- NAV DESKTOP (Menú Principal) -->
+        <nav class="hidden lg:flex items-center gap-6" aria-label="Categorías principales">
+          
+          <!-- DROPDOWN: Cuidado del Cabello (HOVER + CLICK OUTSIDE) -->
+          <div class="relative h-full flex items-center" 
+            (clickOutside)="closeDropdown()" 
+            (mouseenter)="catalogDropdownOpen.set(true)"
+            (mouseleave)="catalogDropdownOpen.set(false)"
+            (keydown.enter)="$event.stopPropagation()">
+          
             <button
               (click)="toggleCatalogDropdown()"
-              class="px-3 py-2 text-sm text-gray-700 hover:text-orange-500 focus:outline-none"
+              class="text-sm font-medium text-gray-700 hover:text-orange-500 focus:outline-none flex items-center gap-1 transition-colors h-full"
               aria-haspopup="true"
               [attr.aria-expanded]="catalogDropdownOpen()"
               aria-controls="catalog-dropdown"
             >
-              Cuidado del Cabello ▾
+              Cuidado del Cabello 
+              <!-- Icono rotativo -->
+              <svg class="w-4 h-4 transition-transform duration-200 text-gray-400" [class.rotate-180]="catalogDropdownOpen()" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
             </button>
 
-            <!-- dropdown: Angular 18 Control Flow -->
+            <!-- Dropdown Panel -->
             @if (catalogDropdownOpen()) {
               <div
                 id="catalog-dropdown"
-                class="absolute mt-2 bg-white border rounded shadow-lg w-56 z-50"
+                class="absolute top-full left-0 mt-[-10px] pt-4 bg-transparent w-64 z-50 animate-in fade-in slide-in-from-top-2 duration-200"
                 role="menu"
                 aria-label="Cuidado del Cabello"
               >
-                <ul>
-                  <li role="none">
-                    <a role="menuitem"
-                      routerLink="/catalogo-comun"
-                      [queryParams]="{ id: 103}"
-                      class="block px-4 py-2 text-sm hover:bg-gray-50">
-                      Tratamientos
-                    </a>
-                  </li>
-                  <li role="none">
-                    <a role="menuitem"
-                      routerLink="/catalogo-comun"
-                      [queryParams]="{ id: 101}"
-                      class="block px-4 py-2 text-sm hover:bg-gray-50">
-                      Champú profesional
-                    </a>
-                  </li>
-                  <li role="none">
-                    <a role="menuitem"
-                      routerLink="/catalogo-comun"
-                      [queryParams]="{ id: 102}"
-                      class="block px-4 py-2 text-sm hover:bg-gray-50">
-                      Planchas
-                    </a>
-                  </li>
-                </ul>
+                 <!-- Contenedor Blanco interno (Para manejar el gap del hover sin que se cierre) -->
+                 <div class="bg-white border border-gray-100 rounded-xl shadow-xl overflow-hidden">
+                    <ul class="py-1 text-gray-700">
+                      <li role="none">
+                        <a role="menuitem"
+                          routerLink="/catalogo-comun"
+                          [queryParams]="{ id: 103 }"
+                          (click)="closeDropdown()" 
+                          class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-orange-50 hover:text-orange-600 transition-colors cursor-pointer border-b border-gray-50">
+                          <span class="w-1 h-1 bg-gray-300 rounded-full"></span> Tratamientos
+                        </a>
+                      </li>
+                      <li role="none">
+                        <a role="menuitem"
+                          routerLink="/catalogo-comun"
+                          [queryParams]="{ id: 101 }"
+                          (click)="closeDropdown()"
+                          class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-orange-50 hover:text-orange-600 transition-colors cursor-pointer border-b border-gray-50">
+                          <span class="w-1 h-1 bg-gray-300 rounded-full"></span> Champú profesional
+                        </a>
+                      </li>
+                      <li role="none">
+                        <a role="menuitem"
+                          routerLink="/catalogo-comun"
+                          [queryParams]="{ id: 102 }"
+                          (click)="closeDropdown()"
+                          class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-orange-50 hover:text-orange-600 transition-colors cursor-pointer">
+                          <span class="w-1 h-1 bg-gray-300 rounded-full"></span> Planchas
+                        </a>
+                      </li>
+                    </ul>
+                 </div>
               </div>
             }
           </div>
+
+          <!-- Opciones Adicionales (Restauradas) -->
+          <a routerLink="/catalogo-comun" 
+             [queryParams]="{ id: 201}"
+             class="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors cursor-pointer">
+             Cuidado de la Piel
+          </a>
           
-          <a role="menuitem"
-            routerLink="/catalogo-comun"
-            [queryParams]="{ id: 201}"
-            class="block px-4 py-2 text-sm hover:bg-gray-50">
-            Cuidado de la Piel
+          <a routerLink="/catalogo-comun" 
+             [queryParams]="{ id: 401}"
+             class="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors cursor-pointer">
+             Maquillaje
           </a>
-          <a role="menuitem"
-            routerLink="/catalogo-comun"
-            [queryParams]="{ id: 401}"
-            class="block px-4 py-2 text-sm hover:bg-gray-50">
-            Maquillaje
+
+          <a routerLink="/catalogo-comun" 
+             [queryParams]="{ id: 301}"
+             class="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors cursor-pointer">
+             Equipos Profesionales
           </a>
-          <a role="menuitem"
-            routerLink="/catalogo-comun"
-            [queryParams]="{ id: 301}"
-            class="block px-4 py-2 text-sm hover:bg-gray-50">
-            Equipos Profesionales
-          </a>
+
         </nav>
       </div>
 
-      <!-- centro: search -->
-      <div class="flex-1 px-4">
-        <form (submit)="onSearchSubmit(); $event.preventDefault()" class="flex items-center justify-center" role="search" aria-label="Buscar productos">
-          <div class="w-full max-w-xl">
-            <div class="flex items-center bg-gray-50 border rounded-lg overflow-hidden shadow-sm">
-              <!-- binding con signals -->
-              <input
-                type="search"
-                class="flex-1 px-4 py-2 text-sm bg-transparent focus:outline-none"
-                placeholder="Buscar..."
-                [value]="searchQuery()"
-                (input)="searchQuery.set($any($event.target).value)"
-                aria-label="Buscar productos"
-              />
-
-              <button type="submit" class="px-4 py-2 bg-orange-500 text-white hover:bg-orange-600"
-                      aria-label="Buscar">
-                <!-- lupa SVG -->
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M21 21l-4.35-4.35M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/>
-                </svg>
-              </button>
-            </div>
+      <!-- CENTRO: Search Bar -->
+      <div class="hidden xl:flex flex-1 px-8 max-w-xl justify-center">
+        <form (submit)="onSearchSubmit(); $event.preventDefault()" class="w-full" role="search" aria-label="Buscar productos">
+          <div class="relative flex items-center w-full">
+            <input
+              type="search"
+              class="w-full pl-5 pr-12 py-2.5 text-sm bg-gray-100 border-transparent rounded-full focus:bg-white focus:border-orange-500 focus:ring-2 focus:ring-orange-100 outline-none transition-all placeholder:text-gray-400"
+              placeholder="Buscar..."
+              [value]="searchQuery()"
+              (input)="searchQuery.set($any($event.target).value)"
+              aria-label="Buscar productos"
+            />
+            <button type="submit" class="absolute right-1.5 p-1.5 bg-white text-gray-500 rounded-full hover:text-orange-500 transition-colors" aria-label="Buscar">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-4.35-4.35M11 19a8 8 0 1 1 0-16 8 8 0 0 1 0 16z"/>
+              </svg>
+            </button>
           </div>
         </form>
       </div>
 
-      <!-- derecha: icons / mobile toggle -->
-      <div class="flex items-center gap-4">
-        <!-- user icon -->
-        <a routerLink="/account" class="text-gray-700 hover:text-gray-900" aria-label="Mi cuenta">
+      <!-- DERECHA: Iconos / Mobile Toggle -->
+      <div class="flex items-center gap-2 sm:gap-4">
+        
+        <!-- Search Icon (Mobile/Tablet Only) -->
+        <button class="xl:hidden p-2 text-gray-600" (click)="toggleMobile()">
+           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+        </button>
+
+        <!-- User Icon -->
+        <a routerLink="/account" class="p-2 text-gray-600 hover:text-black hover:bg-gray-100 rounded-full transition-all hidden sm:block" aria-label="Mi cuenta">
+           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
         </a>
         
+        <!-- Cart Icon -->
+        <!-- Cart Icon Button -->
         <a (click)="carrito.toggleCart()" 
-          class="relative text-gray-700 hover:text-gray-900 cursor-pointer" 
+          class="relative group p-2.5 text-gray-600 hover:bg-gray-100 rounded-full transition-all cursor-pointer" 
           aria-label="Abrir Carrito"
           role="button"> 
-            <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.2 6.2a1 1 0 0 0 .98 1.2h11.44a1 1 0 0 0 .98-1.2L17 13M7 13h10"/>
-            </svg>
+          
+          <!-- Ícono de Carrito (Shopping Cart) -->
+          <svg class="w-6 h-6 group-hover:text-black transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/>
+          </svg>
 
-            <!-- @if (carrito.totalQuantity() > 0) {
-                <span class="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center"
-                      aria-live="polite">
-                    {{ carrito.totalQuantity() }}
-                </span>
-            } -->
+          <!-- Badge Carrito (Contador) -->
+          @if (carrito.count() > 0) {
+            <span class="absolute top-0.5 right-0.5 flex h-5 w-5 items-center justify-center rounded-full border-2 border-white bg-orange-600 text-[10px] font-bold text-white shadow-sm group-hover:scale-110 transition-transform animate-in zoom-in duration-200">
+              {{ carrito.count() }}
+            </span>
+          }
         </a>
 
-        <!-- mobile hamburger -->
-        <button class="lg:hidden p-2" (click)="toggleMobile()" aria-label="Abrir menú" [attr.aria-expanded]="mobileOpen()">
+        <!-- Mobile Hamburger -->
+        <button class="lg:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors ml-1" (click)="toggleMobile()" aria-label="Abrir menú" [attr.aria-expanded]="mobileOpen()">
           @if (!mobileOpen()) {
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -159,20 +175,52 @@
           }
         </button>
       </div>
+
     </div>
   </div>
 
-  <!-- MOBILE MENU -->
+  <!-- MOBILE MENU (Expandible) -->
   @if (mobileOpen()) {
-    <nav class="lg:hidden border-t bg-white" role="navigation" aria-label="Menú móvil">
-      <div class="px-4 py-3 space-y-2">
-        <a routerLink="/catalogo" class="block px-2 py-2 rounded hover:bg-gray-50">Todos</a>
-        <a routerLink="/catalogo" [queryParams]="{type: 'perros'}" class="block px-2 py-2 rounded hover:bg-gray-50">Perros</a>
-        <a routerLink="/catalogo" [queryParams]="{type: 'gatos'}" class="block px-2 py-2 rounded hover:bg-gray-50">Gatos</a>
-        <a routerLink="/account" class="block px-2 py-2 rounded hover:bg-gray-50">Mi cuenta</a>
-        <a (click)="carrito.toggleCart()" class="block px-2 py-2 rounded hover:bg-gray-50">Carrito (20)</a>
-        
+    <div class="lg:hidden border-t border-gray-100 bg-white absolute w-full z-40 shadow-xl animate-slide-in-top max-h-[calc(100vh-64px)] overflow-y-auto">
+      
+      <!-- Mobile Search -->
+      <div class="p-4 pb-2">
+        <div class="relative">
+           <input type="search" class="w-full bg-gray-50 border border-gray-200 rounded-lg py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-orange-500/20" placeholder="Buscar productos...">
+        </div>
       </div>
-    </nav>
+
+      <nav class="px-4 pb-6 pt-2 space-y-1" role="navigation">
+        <a routerLink="/catalogo" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-orange-600 transition-colors">Todos los productos</a>
+        
+        <!-- Categorías Principales -->
+        <a routerLink="/catalogo" [queryParams]="{type: 'perros'}" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-orange-600 transition-colors">Perros</a>
+        <a routerLink="/catalogo" [queryParams]="{type: 'gatos'}" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-orange-600 transition-colors">Gatos</a>
+        
+        <!-- Submenú Mobile: Cuidado del Cabello -->
+        <div class="py-2 border-t border-b border-gray-50 my-2">
+           <p class="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Cuidado del Cabello</p>
+           <a routerLink="/catalogo-comun" [queryParams]="{id: 103}" (click)="toggleMobile()" class="block px-4 py-2 text-sm text-gray-600 hover:text-orange-600 pl-8">Tratamientos</a>
+           <a routerLink="/catalogo-comun" [queryParams]="{id: 101}" (click)="toggleMobile()" class="block px-4 py-2 text-sm text-gray-600 hover:text-orange-600 pl-8">Champú</a>
+           <a routerLink="/catalogo-comun" [queryParams]="{id: 102}" (click)="toggleMobile()" class="block px-4 py-2 text-sm text-gray-600 hover:text-orange-600 pl-8">Planchas</a>
+        </div>
+        
+        <!-- Otras Categorías -->
+        <a routerLink="/catalogo-comun" [queryParams]="{id: 201}" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-orange-600 transition-colors">Cuidado de la Piel</a>
+        <a routerLink="/catalogo-comun" [queryParams]="{id: 401}" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-orange-600 transition-colors">Maquillaje</a>
+        <a routerLink="/catalogo-comun" [queryParams]="{id: 301}" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-orange-600 transition-colors">Equipos Profesionales</a>
+
+        <a routerLink="/ofertas" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-bold text-red-500 hover:bg-red-50 transition-colors mt-2">🔥 Ofertas</a>
+        
+        <div class="border-t border-gray-100 my-2 pt-2">
+           <a routerLink="/account" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl text-gray-600 hover:bg-gray-50 transition-colors flex items-center gap-3">
+              <div class="w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center">
+                 <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg>
+              </div>
+              Mi cuenta
+           </a>
+        </div>
+      </nav>
+    </div>
   }
 </header>

@@ -35,7 +35,6 @@ export class CatalogoComunComponent {
     { nombre: 'Ofertas Flash', count: 8 }
   ]);
 
-  // --- LÓGICA DE PRODUCTOS (Reactiva) ---
   // --- LÓGICA DE PRODUCTOS REACTIVA ---
   productos = toSignal(
     toObservable(this.idSubcategoria).pipe(

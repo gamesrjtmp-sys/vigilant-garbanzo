@@ -1,5 +1,7 @@
-import { Injectable, signal, computed } from '@angular/core';
+import { Injectable, signal, computed, inject } from '@angular/core';
 import { ProductoDto } from '../models/dto/producto/productoDto';
+import { CatalogoService } from './catalogo.service';
+import { map } from 'rxjs';
 
 // Interfaz para el item del carrito
 export interface CartItem {
@@ -12,39 +14,47 @@ export interface CartItem {
 })
 export class CarritoService {
 
+  private catalogoService = inject(CatalogoService);
   // 1. ESTADO (SIGNALS)
   
   // Controla si el drawer lateral está visible
   isOpen = signal(false);
   
   // Lista de productos en el carrito
-  items = signal<CartItem[]>([
-    {
-      product: { 
-        id: 1, 
-        Nombre: 'Gimnasio de Madera', 
-        Precio: 367.00, 
-        Imagenes: ['assets/images/pelota.jpg'] 
-      },
-      quantity: 1
-    }
-  ]);
+  items = signal<CartItem[]>([]);
 
   // Productos sugeridos (Upsell) que se muestran abajo en el carrito
-  upsellItems = signal<ProductoDto[]>([
-    { 
-      id: 99, 
-      Nombre: 'Puerta de Seguridad', 
-      Precio: 200.00, 
-      Imagenes: ['assets/images/pelota.jpg'] 
-    },
-    { 
-      id: 98, 
-      Nombre: 'Collarín Donut', 
-      Precio: 45.00, 
-      Imagenes: ['assets/images/pelota.jpg'] 
-    }
-  ]);
+  upsellItems = signal<ProductoDto[]>([]);
+
+  constructor() {
+    // Cargamos datos iniciales (Mock ID 101 por ejemplo)
+    this.loadUpsellProducts(101); 
+  }
+
+  private loadUpsellProducts(idSubcategoria: number) {
+    
+    this.catalogoService.getProductosBySubcategoria(idSubcategoria)
+      .pipe(
+        // 🟢 MAPEO: Aquí transformamos el JSON "sucio" al DTO "limpio"
+        map(productosJson => productosJson.map(item => ({
+          id: item.idProducto,
+          Nombre: item.nombreProducto,
+          Precio: item.precio,
+          // El JSON trae 1 string 'imagen', el DTO quiere array 'Imagenes[]'
+          Imagenes: item.imagen ? [item.imagen] : ['assets/images/pelota.jpg'],
+          //Descripcion: item.descripcion || '',
+          Stock: 10 // Valor por defecto si no viene del back
+        } as ProductoDto)))
+      )
+      .subscribe({
+        next: (productosMapeados) => {
+          // Ahora sí coinciden los tipos
+          // Tomamos solo los primeros 4 para no llenar el carrito de sugerencias
+          this.upsellItems.set(productosMapeados.slice(0, 4));
+        },
+        error: (err) => console.error('Error cargando sugerencias:', err)
+      });
+  }
 
   // 2. CÁLCULOS AUTOMÁTICOS (COMPUTED)
 
