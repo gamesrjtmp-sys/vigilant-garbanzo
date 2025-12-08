@@ -12,7 +12,7 @@ import { interval, Subscription } from 'rxjs';
 export class TemporizadorBannerComponent implements OnInit, OnDestroy {
   
   // La fecha objetivo para el fin de la promoción
-  private readonly targetDate = new Date('2025-12-01T00:00:00');
+  private readonly targetDate = new Date('2025-12-21T00:00:00');
   
   // Signal para almacenar el tiempo restante (en días, horas, etc.)
   timeLeft = signal({ days: 0, hours: 0, minutes: 0, seconds: 0 });

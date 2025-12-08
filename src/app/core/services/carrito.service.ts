@@ -78,7 +78,7 @@ export class CarritoService {
   );
 
   // Meta para envío gratis (S/ 300.00)
-  readonly freeShippingThreshold = 300;
+  readonly freeShippingThreshold = 50;
   
   // Costo de envío (0 si supera la meta, 15 si no)
   deliveryCost = computed(() => {
