@@ -91,19 +91,24 @@
       } 
       @else {
         
-        <!-- GRID -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
-          
-          @for (p of productos(); track p.id) { 
+          <!-- GRID -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8">
             
-            <!-- ✅ AQUÍ USAMOS TU COMPONENTE REUTILIZABLE -->
-            <div class="h-full">
-               <app-product-card [producto]="p"></app-product-card>
-            </div>
+            @for (p of productos(); track p.id) { 
+              
+              <!-- ✅ AQUÍ USAMOS TU COMPONENTE REUTILIZABLE -->
+              <!-- <div class="h-full">
+                <app-product-card [producto]="p"></app-product-card>
+              </div>  -->
 
-          }
+              <app-product-card
+                  [producto]="p"
+                  (click)="onViewDetail(p.id)">
+              </app-product-card>
 
-        </div>
+            }
+
+          </div>
       }
 
     </main>

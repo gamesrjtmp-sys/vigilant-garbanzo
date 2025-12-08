@@ -6,6 +6,7 @@ import { map, switchMap, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { ProductoDto } from '../../../../core/models/dto/producto/productoDto';
 import { ProductCardComponent } from '../../product-card/product-card/product-card.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalogo-comun',
@@ -17,6 +18,7 @@ import { ProductCardComponent } from '../../product-card/product-card/product-ca
 export class CatalogoComunComponent {
 
   private catalogoSrv = inject(CatalogoService);
+  private router = inject(Router);
 
   // Input de la URL (?id=2)
   idSubcategoria = input.required<number, string>({
@@ -52,4 +54,8 @@ export class CatalogoComunComponent {
     ),
     { initialValue: [] as ProductoDto[] } // Ahora la señal es de tipo DTO
   );
+
+   onViewDetail(id: number) {
+    this.router.navigate(['/producto', id]);
+  }
 }

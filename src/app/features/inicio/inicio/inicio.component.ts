@@ -12,7 +12,7 @@ import { Producto } from '../../../core/models/api/producto/producto';
   selector: 'app-inicio',
   standalone: true,
   imports: [TemporizadorBannerComponent,GridOfertaComponent,CarruselComponent],
-  templateUrl: './inicio.component.html',
+  templateUrl:'./inicio.component.html',
   styleUrl: './inicio.component.scss'
 })
 export class InicioComponent {
@@ -38,7 +38,7 @@ export class InicioComponent {
     this.loading.set(true);
     this.error.set(null);
 
-    this.productoService.ListarProductos().subscribe({
+    this.productoService.ListarProductosJson().subscribe({
       next: (data) => {
         // Lógica de Negocio: Filtrar o cortar las ofertas
         const ofertas = data.slice(0, 10); 

@@ -28,7 +28,7 @@ export class ProductoComponent implements OnInit {
   @Input() id!: string; 
 
   ngOnInit() {
-    this.cargarProducto();
+    this.cargarProductoJson();
   }
 
   cargarProducto() {
@@ -40,6 +40,26 @@ export class ProductoComponent implements OnInit {
         
         // Inicializar imagen seleccionada con la primera
         if (data.Imagenes && data.Imagenes.length > 0) {
+           this.imagenSeleccionada.set(data.Imagenes[0]);
+        }
+        this.loading.set(false);
+      },
+      error: (err) => {
+         console.error(err);
+         this.loading.set(false);
+      }
+    });
+  }
+
+   cargarProductoJson() {
+    const productId = Number(this.id);
+    console.log("aqui llega")
+    this.productoService.getProductByIdJson(productId).subscribe({
+      next: (data) => {
+        this.producto.set(data);
+        
+        // Inicializar imagen seleccionada con la primera
+        if (data?.Imagenes && data.Imagenes.length > 0) {
            this.imagenSeleccionada.set(data.Imagenes[0]);
         }
         this.loading.set(false);

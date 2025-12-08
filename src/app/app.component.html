@@ -1,11 +1,21 @@
-<div class="relative z-50">
-  <app-menu></app-menu>
+<!-- CONTENEDOR PRINCIPAL (Mínimo toda la altura de la pantalla) -->
+<div class="min-h-screen flex flex-col font-sans bg-[#F8FAFC]">
+
+  <!-- 1. HEADER (z-50) -->
+  <!-- No necesitas wrapper relative si el componente ya maneja su posición sticky/fixed -->
+  <app-menu class="relative z-50"></app-menu>
+
+  <!-- 2. CONTENIDO (Flex-1 hace que ocupe todo el espacio disponible) -->
+  <!-- Esto empuja el footer hacia abajo si falta contenido -->
+  <main class="flex-1 relative z-0">
+    <router-outlet></router-outlet>
+  </main>
+
+  <!-- 3. FOOTER -->
+  <app-footer></app-footer>
+
 </div>
 
-<div class="relative z-40">
-  <router-outlet></router-outlet>
-</div>
-
-<div class="relative z-60">
-  <app-carrito></app-carrito>
-</div>
+<!-- 4. GLOBALES (Fuera del flujo normal) -->
+<!-- El carrito es 'fixed', así que es mejor que esté en la raíz para evitar conflictos de stacking context -->
+<app-carrito class="relative z-[60]"></app-carrito>

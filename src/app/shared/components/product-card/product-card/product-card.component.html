@@ -17,7 +17,7 @@
     <!-- Badge Descuento (Lógica original, Diseño nuevo) -->
     @if (producto().Precio) { 
        <!-- Aquí iría tu lógica real de descuento si tienes precio original -->
-       <div class="absolute top-3 left-3 z-10 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm"> - {{producto().Precio}} </div>
+       <div class="absolute top-3 left-3 z-10 bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded shadow-sm"> -  50%   </div>
     }
 
     <!-- Botón Flotante (Agregar al Carrito) -->
@@ -61,8 +61,8 @@
     <div class="mt-4 pt-4 border-t border-gray-50 flex items-center justify-between">
       <div class="flex flex-col">
         <!-- Precio Anterior (Tachado) -->
-        <span class="text-gray-400 text-[10px] uppercase font-bold tracking-wider line-through decoration-red-400">
-           {{ producto().Precio | currency:'PEN':'symbol':'1.2-2' }}
+        <span class="text-gray-400 text-[14px] uppercase font-bold tracking-wider line-through decoration-red-400">
+           {{ producto().Precio * 2 | currency:'PEN':'symbol':'1.2-2' }}
         </span>
         
         <!-- Precio Actual -->

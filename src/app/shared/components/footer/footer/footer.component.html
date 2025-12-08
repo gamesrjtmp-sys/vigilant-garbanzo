@@ -1,0 +1,149 @@
+<footer class="bg-gray-900 text-white pt-16 pb-8 font-sans border-t-4 border-emerald-500">
+  
+  <!-- 1. BARRA DE CONFIANZA (Top Footer) -->
+  <div class="max-w-7xl mx-auto px-6 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 pb-12 border-b border-gray-800">
+      
+      <!-- Item 1 -->
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-2xl shrink-0">🚚</div>
+        <div>
+          <h4 class="font-bold text-lg mb-1">Envíos a todo el Perú</h4>
+          <p class="text-sm text-gray-400">Llegamos a la puerta de tu casa, estés donde estés.</p>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-2xl shrink-0">🤝</div>
+        <div>
+          <h4 class="font-bold text-lg mb-1">Pago Contra Entrega</h4>
+          <p class="text-sm text-gray-400">Paga en Efectivo o Yape recién al recibir tu pedido. Cero riesgos.</p>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="flex items-start gap-4">
+        <div class="w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center text-2xl shrink-0">🛡️</div>
+        <div>
+          <h4 class="font-bold text-lg mb-1">Compra Segura</h4>
+          <p class="text-sm text-gray-400">Con seguimiento continuo por medios de contacto</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- 2. CONTENIDO PRINCIPAL (Columnas) -->
+  <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+    
+    <!-- Columna 1: Branding -->
+    <div class="space-y-4">
+      <div class="flex items-center gap-2 mb-2">
+        <!-- Logo en Blanco/Negro o Invertido para footer -->
+        <div class="w-8 h-8 bg-white rounded-lg flex items-center justify-center text-black font-bold text-lg">T</div>
+        <span class="font-bold text-2xl tracking-tight">TuTienda</span>
+      </div>
+      <p class="text-sm text-gray-400 leading-relaxed">
+        Expertos en resaltar tu esencia y bienestar. Te ofrecemos una selección exclusiva de productos, envíos rápidos y la atención dedicada que mereces en todo el Perú.
+      </p>
+      
+      <!-- Redes Sociales -->
+      <!-- <div class="flex gap-4 pt-2">
+        @for (social of socialLinks; track social.name) {
+          <a [href]="social.url" class="w-8 h-8 bg-gray-800 hover:bg-emerald-600 rounded-full flex items-center justify-center transition-colors" [title]="social.name">
+            {{ social.icon }}
+          </a>
+        }
+      </div> -->
+    </div>
+
+    <!-- Columna 2: Navegación Rápida -->
+    <div>
+      <h3 class="font-bold text-lg mb-4 text-white">Explorar</h3>
+      <ul class="space-y-3 text-sm text-gray-400">
+        <li><a routerLink="/catalogo-comun" 
+             [queryParams]="{ id: 301}"
+             class="hover:text-emerald-400 transition-colors">
+             Top Productos
+          </a>
+        </li>
+        <li><a routerLink="/catalogo-comun" 
+             [queryParams]="{ id: 201}"
+             class="hover:text-emerald-400 transition-colors">
+             Cuidado de la Piel
+          </a>
+        </li>
+        <li><a routerLink="/catalogo-comun" 
+             [queryParams]="{ id: 401}"
+             class="hover:text-emerald-400 transition-colors">
+             Maquillaje
+          </a>
+        </li>
+        <li><a routerLink="/catalogo-comun" 
+             [queryParams]="{ id: 301}"
+             class="hover:text-emerald-400 transition-colors">
+             Equipos Profesionales
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  
+    <!-- Columna 3: Legal & Ayuda (LO QUE PEDISTE) -->
+    <div>
+      <h3 class="font-bold text-lg mb-4 text-white">Ayuda & Legal</h3>
+      <ul class="space-y-3 text-sm text-gray-400">
+        <!-- Estos links deberían llevar a páginas estáticas de texto -->
+        <li><a routerLink="/legal/envios" class="hover:text-emerald-400 transition-colors">Políticas de Envío</a></li>
+        <li><a routerLink="/legal/devoluciones" class="hover:text-emerald-400 transition-colors">Cambios y Devoluciones</a></li>
+        <li><a routerLink="/legal/privacidad" class="hover:text-emerald-400 transition-colors">Privacidad de Datos</a></li>
+        <li><a href="https://librodereclamaciones..." target="_blank" class="flex items-center gap-2 hover:text-emerald-400 transition-colors">
+           <span>📖</span> Libro de Reclamaciones
+        </a></li>
+      </ul>
+    </div>
+
+    <!-- Columna 4: Contacto Directo -->
+    <div>
+      <h3 class="font-bold text-lg mb-4 text-white">Contáctanos</h3>
+      <ul class="space-y-4 text-sm text-gray-400">
+        <li class="flex items-start gap-3">
+          <span class="mt-0.5">📍</span>
+          <span>{{ contactInfo.direccion }}</span>
+        </li>
+        <li class="flex items-center gap-3">
+          <span>✉️</span>
+          <a [href]="'mailto:' + contactInfo.email" class="hover:text-white">{{ contactInfo.email }}</a>
+        </li>
+        <li>
+          <a [href]="'https://wa.me/' + contactInfo.whatsapp" target="_blank" 
+             class="flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1DA851] text-white font-bold py-3 px-4 rounded-lg transition-all w-full">
+             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.017-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+             Chat con Ventas
+          </a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- 3. BOTTOM FOOTER (Copyright y Métodos de Pago) -->
+  <div class="border-t border-gray-800 pt-8 mt-8">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      
+      <p class="text-xs text-gray-500">
+        &copy; {{ currentYear() }} TuTienda S.A.C. Todos los derechos reservados.
+      </p>
+
+      <!-- Iconos de Pago (Visualmente da confianza aunque sea contra entrega) -->
+      <div class="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all">
+        <div class="bg-gray-800 px-2 py-1 rounded text-xs font-bold tracking-wide">YAPE</div>
+        <div class="bg-gray-800 px-2 py-1 rounded text-xs font-bold tracking-wide">PLIN</div>
+        <div class="bg-gray-800 px-2 py-1 rounded text-xs font-bold tracking-wide">EFECTIVO</div>
+      </div>
+
+    </div>
+  </div>
+
+</footer>
