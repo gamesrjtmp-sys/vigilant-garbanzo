@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, OnInit, signal } from '@angular/core';
+import { Component, computed, inject, Input, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductoService } from '../../../core/services/producto.service';
 import { ProductoDto } from '../../../core/models/dto/producto/productoDto';
@@ -18,17 +18,56 @@ export class ProductoComponent implements OnInit {
   private productoService = inject(ProductoService);
   private router = inject(Router);
   // 2. INYECTAR EL SERVICIO (Público si lo usas en el HTML, privado si no)
-  private carritoService = inject(CarritoService); 
+  public carritoService = inject(CarritoService); 
   
   // Signals de estado
   producto = signal<ProductoDto | null>(null);
   loading = signal(true);
   imagenSeleccionada = signal<string | null>(null);
 
+  // ID del producto "Extra" en tu JSON (Caja de Repuesto: 2003)
+  readonly EXTRA_PRODUCT_ID = 2003; 
+  
+  // ID del producto principal que activa el Add-on (Ej: La máquina Vaporizador: 3003)
+  // CAMBIA ESTE ID por el ID real de tu máquina en el JSON
+  readonly MACHINE_PRODUCT_ID = 3002; 
+  extraColageno = signal<ProductoDto | null>(null); // Datos del extra cargados del JSON
+   // 2. ESTADO DEL ADD-ON
+  extraQuantity = signal(0);
+
+  // 3. PRECIO TOTAL VISUAL (Para el botón)
+  totalPrice = computed(() => {
+    const basePrice = this.producto()?.Precio || 0;
+    const extraPrice = (this.extraColageno()?.Precio || 0) * this.extraQuantity();
+    return basePrice + extraPrice;
+  });
+  
+   // Computed: Solo mostramos el bloque si estamos viendo la máquina y el extra cargó bien
+  showAddonBlock = computed(() => {
+    const currentProd = this.producto();
+    return currentProd?.id === this.MACHINE_PRODUCT_ID && this.extraColageno() !== null;
+  });
+
+  // ... ngOnInit y cargarProducto igual ...
+
+  // toggleExtra() {
+  //   this.wantsExtra.update(v => !v);
+  // }
+
   @Input() id!: string; 
 
   ngOnInit() {
     this.cargarProductoJson();
+    this.cargarExtra();
+  }
+
+  // Método auxiliar para cargar la info de las pastillas del JSON
+  cargarExtra() {
+    this.productoService.getProductByIdJson(this.EXTRA_PRODUCT_ID).subscribe({
+      next: (data) => {
+        if (data) this.extraColageno.set(data);
+      }
+    });
   }
 
   cargarProducto() {
@@ -77,24 +116,47 @@ export class ProductoComponent implements OnInit {
 
   // --- ACCIONES DE COMPRA ---
 
+
+  updateExtraQuantity(change: number) {
+    this.extraQuantity.update(v => Math.max(0, v + change));
+  }
+
   // Opción 1: Agregar al carrito (Mantiene al usuario en la página y abre el drawer)
   agregarCarrito(): void {
-    const prod = this.producto();
-    if (!prod) return; // Validación de seguridad
-
-    // Llamamos al servicio. El servicio ya se encarga de abrir el drawer (isOpen.set(true))
+     const prod = this.producto();
+    if (!prod) return;
+    
+    // 1. Agregar producto principal
     this.carritoService.addToCart(prod);
+
+    // 2. Agregar extras solo si corresponde y hay cantidad > 0
+    const extra = this.extraColageno();
+    const qty = this.extraQuantity();
+    
+    if (this.showAddonBlock() && extra && qty > 0) {
+      this.carritoService.addToCart(extra, qty);
+    }
   }
 
   // Opción 2: Comprar ahora (Reemplaza carrito y lleva al checkout)
   comprar(): void {
-    const prod = this.producto();
+     const prod = this.producto();
     if (!prod) return;
 
-    // Usamos el método especial buyNow del servicio
-    this.carritoService.buyNow(prod);
+    // 1. Limpiar carrito y agregar principal
+    this.carritoService.items.set([]);
+    this.carritoService.addToCart(prod);
+    this.carritoService.isOpen.set(false); // Asegurar que el drawer no estorbe
+
+    // 2. Agregar extras si aplica
+    const extra = this.extraColageno();
+    const qty = this.extraQuantity();
     
-    // Navegamos inmediatamente al checkout
+    if (this.showAddonBlock() && extra && qty > 0) {
+      this.carritoService.addToCart(extra, qty);
+    }
+    
+    // 3. Ir a pagar
     this.router.navigate(['/checkout']);
   }
 }

@@ -8,7 +8,7 @@
     <aside class="lg:col-span-3 hidden lg:block">
       <div class="sticky top-24 space-y-6">
         
-        <!-- 1. Menú de Navegación (Limpio) -->
+        <!-- 1. Menú de Navegación (Limpio)
         <div class="bg-white border border-gray-100 rounded-2xl p-6 shadow-sm">
           <h3 class="font-bold text-gray-900 text-lg mb-4 flex items-center gap-2">
             <svg class="w-5 h-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
@@ -33,14 +33,16 @@
               </li>
             }
           </ul>
-        </div>
+        </div> -->
+
+        
 
         <!-- 2. Banner de Confianza -->
         <div class="bg-emerald-50 rounded-2xl p-6 border border-emerald-100 relative overflow-hidden group cursor-default">
           <div class="relative z-10">
             <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center mb-3 shadow-sm text-lg">🚚</div>
             <h4 class="text-emerald-900 font-bold text-lg mb-1">Envío Gratis</h4>
-            <p class="text-emerald-700 text-xs leading-relaxed mb-3">En compras superiores a S/ 200 a todo el país.</p>
+            <p class="text-emerald-700 text-xs leading-relaxed mb-3">En compras superiores a S/ 100 a todo el país.</p>
             <div class="h-1 w-12 bg-emerald-300 rounded-full group-hover:w-20 transition-all duration-500"></div>
           </div>
           <!-- Decoración -->
@@ -61,6 +63,37 @@
             </div>
           </div>
         </div>
+
+        <!-- 2. BANNER DE OFERTA (Visual) -->
+        <div class="relative rounded-2xl overflow-hidden aspect-[4/5] group cursor-pointer">
+          <img src="https://images.unsplash.com/photo-1548767797-d8c844163c4c?q=80&w=600&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" alt="Oferta">
+          <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors"></div>
+          
+          <div class="absolute bottom-0 left-0 w-full p-6 text-white">
+            <span class="bg-red-500 text-white text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider mb-2 inline-block">Flash Sale</span>
+            <h3 class="text-2xl font-serif font-medium mb-1">Oferta Profesional</h3>
+            <p class="text-white/80 text-xs mb-4">Llevate un                                                                                                                                                                                                                            producto profesional para Salones de belleza</p>
+            <button class="w-full bg-white text-black font-bold py-2.5 rounded-lg text-xs uppercase tracking-wider hover:bg-emerald-400 hover:text-white transition-colors">
+              Ver Oferta
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. NEWSLETTER (Captura de Leads) -->
+        <!-- <div class="bg-gray-900 rounded-2xl p-6 text-center relative overflow-hidden">
+           <div class="absolute top-0 right-0 w-16 h-16 bg-white/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+           
+           <h3 class="text-white font-bold text-lg mb-2">¡Gana 10% OFF!</h3>
+           <p class="text-gray-400 text-xs mb-4">Suscríbete y recibe un cupón para tu primera compra inmediatamente.</p>
+           
+           <div class="space-y-2">
+             <input type="email" placeholder="Tu correo electrónico" class="w-full bg-gray-800 border border-gray-700 text-white text-sm rounded-lg px-3 py-2.5 focus:ring-1 focus:ring-emerald-500 outline-none placeholder:text-gray-500">
+             <button class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-2.5 rounded-lg text-xs transition-colors">
+               Suscribirme
+             </button>
+           </div>
+           <p class="text-[10px] text-gray-500 mt-3">Sin spam, puedes cancelar cuando quieras.</p>
+        </div> -->
 
       </div>
     </aside>

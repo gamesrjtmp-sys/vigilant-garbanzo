@@ -14,8 +14,8 @@
               "idSubcategoria": 101,
               "nombreProducto": "Champú Hidratante Profesional",
               "precio": 29.90,
-              "imagen": "https://images.unsplash.com/photo-1585232351009-aa87416fca90?fm=webp&w=800",
-              "descripcion": "Champú formulado para hidratar profundamente, dejando el cabello suave, brillante y sin frizz."
+              "imagenes": ["https://images.unsplash.com/photo-1585232351009-aa87416fca90?fm=webp&w=800"],
+              "descripcion": "Hidratación profunda para cabello seco y dañado."
             },
             {
               "idProducto": 1002,
@@ -23,8 +23,8 @@
               "idSubcategoria": 101,
               "nombreProducto": "Champú Reparador Keratina",
               "precio": 34.50,
-              "imagen": "https://images.unsplash.com/photo-1556228720-19075220964b?fm=webp&w=800",
-              "descripcion": "Repara el cabello dañado gracias a su fórmula con keratina, brindando fuerza y elasticidad."
+              "imagenes": ["https://images.unsplash.com/photo-1556228720-19075220964b?fm=webp&w=800"],
+              "descripcion": "Repara la fibra capilar desde el interior."
             }
           ]
         },
@@ -38,8 +38,8 @@
               "idSubcategoria": 102,
               "nombreProducto": "Plancha TITANIUM Pro 450°F",
               "precio": 159.90,
-              "imagen": "https://images.unsplash.com/photo-1562367642-7f22b7e41e8f?fm=webp&w=800",
-              "descripcion": "Plancha profesional con placas de titanio que alcanzan hasta 450°F para un alisado rápido y duradero."
+              "imagenes": ["https://images.unsplash.com/photo-1562367642-7f22b7e41e8f?fm=webp&w=800"],
+              "descripcion": "Alisado perfecto en una sola pasada."
             },
             {
               "idProducto": 1004,
@@ -47,8 +47,8 @@
               "idSubcategoria": 102,
               "nombreProducto": "Plancha Cerámica Ionic",
               "precio": 129.00,
-              "imagen": "https://images.unsplash.com/photo-1586926952481-d3e82480617e?fm=webp&w=800",
-              "descripcion": "Placas de cerámica con tecnología iónica para eliminar el frizz y lograr un acabado suave y brillante."
+              "imagenes": ["https://images.unsplash.com/photo-1586926952481-d3e82480617e?fm=webp&w=800"],
+              "descripcion": "Tecnología iónica para eliminar el frizz."
             }
           ]
         },
@@ -62,8 +62,8 @@
               "idSubcategoria": 103,
               "nombreProducto": "Tratamiento Capilar Nutritivo",
               "precio": 49.90,
-              "imagen": "https://images.unsplash.com/photo-1571781926291-280553cd34a9?fm=webp&w=800",
-              "descripcion": "Nutre y fortalece el cabello desde la raíz, ideal para recuperar suavidad y vitalidad."
+              "imagenes": ["https://images.unsplash.com/photo-1571781926291-280553cd34a9?fm=webp&w=800"],
+              "descripcion": "Mascarilla intensiva para revitalizar tu cabello."
             },
             {
               "idProducto": 1006,
@@ -71,8 +71,8 @@
               "idSubcategoria": 103,
               "nombreProducto": "Ampollas Reparadoras Pro",
               "precio": 39.90,
-              "imagen": "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?fm=webp&w=800",
-              "descripcion": "Tratamiento intensivo en ampollas para reparar puntas abiertas y cabello quebradizo."
+              "imagenes": ["https://images.unsplash.com/photo-1620916566398-39f1143ab7be?fm=webp&w=800"],
+              "descripcion": "Shot de vitaminas para un cabello radiante."
             }
           ]
         }
@@ -93,7 +93,7 @@
               "idSubcategoria": 201,
               "nombreProducto": "Sérum de Vitamina C 20%",
               "precio": 59.90,
-              "imagen": "https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?fm=webp&w=800",
+              "imagenes": ["https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?fm=webp&w=800"],
               "descripcion": "Sérum antioxidante que ilumina la piel, reduce manchas y favorece la producción de colágeno."
             },
             {
@@ -102,8 +102,17 @@
               "idSubcategoria": 201,
               "nombreProducto": "Crema Facial Hidratante Hyaluronic",
               "precio": 44.90,
-              "imagen": "https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?fm=webp&w=800",
+              "imagenes": ["https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?fm=webp&w=800"],
               "descripcion": "Crema hidratante con ácido hialurónico que mantiene la piel suave y profundamente humectada."
+            },
+            {
+              "idProducto": 2003,
+              "idCatalogo": 2,
+              "idSubcategoria": 201,
+              "nombreProducto": "Caja de Repuesto: 32 Pastillas de Colágeno",
+              "precio": 35.00,
+              "imagenes": ["https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?fm=webp&w=800"],
+              "descripcion": "Pack de 4 tabletas (32 unidades) para continuar tu tratamiento."
             }
           ]
         },
@@ -112,22 +121,22 @@
           "nombreSubcategoria": "Corporales",
           "productos": [
             {
-              "idProducto": 2003,
+              "idProducto": 2004,
               "idCatalogo": 2,
               "idSubcategoria": 202,
               "nombreProducto": "Gel Reductor Anticelulitis",
               "precio": 39.90,
-              "imagen": "https://images.unsplash.com/photo-1629198688000-71f23e745b6e?fm=webp&w=800",
-              "descripcion": "Gel corporal que ayuda a reducir la apariencia de la celulitis y tonificar la piel."
+              "imagenes": ["https://images.unsplash.com/photo-1629198688000-71f23e745b6e?fm=webp&w=800"],
+              "descripcion": "Gel reafirmante para tonificar la piel."
             },
             {
-              "idProducto": 2004,
+              "idProducto": 2005,
               "idCatalogo": 2,
               "idSubcategoria": 202,
               "nombreProducto": "Crema Corporal de Colágeno",
               "precio": 29.90,
-              "imagen": "https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?fm=webp&w=800",
-              "descripcion": "Crema nutritiva con colágeno para mejorar la elasticidad y firmeza de la piel."
+              "imagenes": ["https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?fm=webp&w=800"],
+              "descripcion": "Hidratación corporal intensa."
             }
           ]
         }
@@ -148,8 +157,8 @@
               "idSubcategoria": 301,
               "nombreProducto": "Secadora Profesional 3000W",
               "precio": 199.90,
-              "imagen": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?fm=webp&w=800",
-              "descripcion": "Secadora de alta potencia ideal para uso profesional, reduce tiempos de secado y protege el cabello."
+              "imagenes": ["https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?fm=webp&w=800"],
+              "descripcion": "Potencia y rapidez para un secado perfecto."
             },
             {
               "idProducto": 3002,
@@ -157,8 +166,13 @@
               "idSubcategoria": 301,
               "nombreProducto": "Máquina de Corte Barber PRO",
               "precio": 149.90,
-              "imagen": "https://images.unsplash.com/photo-1621605815971-fbc98d665033?fm=webp&w=800",
-              "descripcion": "Máquina de corte profesional con motor potente y cuchillas de precisión para acabados perfectos."
+              "imagenes": [
+                 "https://images.unsplash.com/photo-1621605815971-fbc98d665033?fm=webp&w=800",
+                 "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?fm=webp&w=800",
+                 "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?fm=webp&w=800",
+                 "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?fm=webp&w=800"
+              ],
+              "descripcion": "Precisión profesional para barbería."
             }
           ]
         },
@@ -172,8 +186,8 @@
               "idSubcategoria": 302,
               "nombreProducto": "Vaporizador Facial NanoMist",
               "precio": 229.00,
-              "imagen": "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?fm=webp&w=800",
-              "descripcion": "Vaporizador facial con tecnología NanoMist ideal para limpiezas profundas y tratamientos estéticos."
+              "imagenes": ["https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?fm=webp&w=800"],
+              "descripcion": "Limpieza facial profunda con vapor iónico."
             },
             {
               "idProducto": 3004,
@@ -181,8 +195,8 @@
               "idSubcategoria": 302,
               "nombreProducto": "Lámpara LED UV 54W",
               "precio": 89.90,
-              "imagen": "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?fm=webp&w=800",
-              "descripcion": "Lámpara LED UV de alta potencia para secado rápido de uñas en gel y acrílicas."
+              "imagenes": ["https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?fm=webp&w=800"],
+              "descripcion": "Secado rápido para uñas de gel."
             }
           ]
         }
@@ -203,8 +217,8 @@
               "idSubcategoria": 401,
               "nombreProducto": "Base Líquida Alta Cobertura",
               "precio": 49.90,
-              "imagen": "https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?fm=webp&w=800",
-              "descripcion": "Base de maquillaje de alta cobertura con acabado natural, ideal para todo tipo de piel."
+              "imagenes": ["https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?fm=webp&w=800"],
+              "descripcion": "Cobertura total con acabado natural."
             },
             {
               "idProducto": 4002,
@@ -212,8 +226,8 @@
               "idSubcategoria": 401,
               "nombreProducto": "Polvo Compacto Profesional",
               "precio": 32.00,
-              "imagen": "https://images.unsplash.com/photo-1596462502278-27bfdd403348?fm=webp&w=800",
-              "descripcion": "Polvo compacto que matifica el rostro y fija el maquillaje para un acabado profesional."
+              "imagenes": ["https://images.unsplash.com/photo-1596462502278-27bfdd403348?fm=webp&w=800"],
+              "descripcion": "Matifica y fija tu maquillaje por horas."
             }
           ]
         },
@@ -227,8 +241,8 @@
               "idSubcategoria": 402,
               "nombreProducto": "Delineador Líquido Waterproof",
               "precio": 25.00,
-              "imagen": "https://images.unsplash.com/photo-1629198727546-e9884d280188?fm=webp&w=800",
-              "descripcion": "Delineador líquido resistente al agua con punta precisa para trazos definidos."
+              "imagenes": ["https://images.unsplash.com/photo-1629198727546-e9884d280188?fm=webp&w=800"],
+              "descripcion": "Trazo preciso y resistente al agua."
             },
             {
               "idProducto": 4004,
@@ -236,8 +250,8 @@
               "idSubcategoria": 402,
               "nombreProducto": "Mascara Volumen Extremo",
               "precio": 29.90,
-              "imagen": "https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?fm=webp&w=800",
-              "descripcion": "Máscara de pestañas que ofrece volumen intenso y larga duración sin grumos."
+              "imagenes": ["https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?fm=webp&w=800"],
+              "descripcion": "Pestañas impactantes con volumen máximo."
             }
           ]
         }

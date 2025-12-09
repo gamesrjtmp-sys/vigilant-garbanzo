@@ -42,17 +42,25 @@ export class CatalogoComunComponent {
     toObservable(this.idSubcategoria).pipe(
       switchMap((id) => this.catalogoSrv.getProductosBySubcategoria(id)),
       // 🔥 MAPPER ON-THE-FLY: Convertimos ProductoJson a ProductoDto aquí mismo
-      map(jsonList => jsonList.map(item => ({
+      // 🔥 MAPPER CORREGIDO
+      map(jsonList => jsonList.map((item: any) => ({
         id: item.idProducto,
         Nombre: item.nombreProducto,
         Precio: item.precio,
-        // Tu JSON trae 'imagen' (string), el DTO pide 'Imagenes' (array)
-        Imagenes: item.imagen ? [item.imagen] : ['assets/images/pelota.jpg'],
-        //Descripcion: item.descripcion || '',
-        Stock: 10 // Valor por defecto si no viene
+        
+        // LÓGICA DE IMÁGENES ROBUSTA:
+        // 1. ¿Tiene array de 'imagenes'? Úsalo.
+        // 2. ¿Tiene solo 'imagen' (texto)? Mételo en un array.
+        // 3. ¿No tiene nada? Usa la foto por defecto.
+        Imagenes: (item.imagenes && item.imagenes.length > 0)
+                  ? item.imagenes
+                  : (item.imagen ? [item.imagen] : ['assets/images/pelota.jpg']),
+
+        Descripcion: item.descripcion || 'Sin descripción',
+        Stock: 10 // Valor por defecto
       } as ProductoDto)))
     ),
-    { initialValue: [] as ProductoDto[] } // Ahora la señal es de tipo DTO
+    { initialValue: [] as ProductoDto[] }// Ahora la señal es de tipo DTO
   );
 
    onViewDetail(id: number) {

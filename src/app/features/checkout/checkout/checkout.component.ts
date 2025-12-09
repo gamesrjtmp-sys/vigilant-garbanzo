@@ -39,25 +39,24 @@ export class CheckoutComponent implements OnInit {
    // Productos sugeridos para el Cross-Selling (Paso 4)
   // Idealmente esto vendría de tu backend: "Productos relacionados"
   suggestedProducts = signal<ProductoDto[]>([]);
-   cargarOfertas() {
-    // Iniciar estado de carga
-    this.loading.set(true);
-    this.error.set(null);
 
-    this.productoService.ListarProductos().subscribe({
-      next: (data) => {
-        // Lógica de Negocio: Filtrar o cortar las ofertas
-        const ofertas = data.slice(0, 10); 
-        this.suggestedProducts.set(ofertas);
-      },
-      error: (err) => {
-        console.error('Error cargando ofertas:', err);
-        this.error.set("No se pudieron cargar las ofertas del mes.");
-        this.loading.set(false);
-      },
-      complete: () => {
-        this.loading.set(false);
-      }
+  cargarSugerencias() {
+    // Lista de IDs que quieres sugerir (El extra + otros manuales)
+    const idsSugeridos = [3002]; 
+
+    // Limpiamos la lista antes de cargar
+    this.suggestedProducts.set([]);
+
+    idsSugeridos.forEach(id => {
+      this.productoService.getProductByIdJson(id).subscribe({
+        next: (data) => {
+          if (data) {
+            // ✅ USAMOS UPDATE: Tomamos la lista anterior y agregamos el nuevo
+            this.suggestedProducts.update(lista => [...lista, data]);
+          }
+        },
+        error: (err) => console.error(`Error cargando producto ${id}:`, err)
+      });
     });
   }
 
@@ -95,7 +94,7 @@ export class CheckoutComponent implements OnInit {
     this.ubigeoService.getDepartamentos().subscribe(data => this.departamentos.set(data));
     this.setupUbigeoListeners();
     this.selectPayment('CASH');
-    this.cargarOfertas();
+    this.cargarSugerencias();
   }
 
   // --- LÓGICA DE CONFIRMACIÓN (FINAL) ---
