@@ -4,8 +4,9 @@ import { map, catchError, tap } from 'rxjs/operators';
 import { ProductoDto } from '../models/dto/producto/productoDto';
 import { mapProducto } from '../mappers/producto.mapper';
 import { Producto } from '../models/api/producto/producto';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Review } from '../models/dto/producto/reviews';
 
 @Injectable({ providedIn: 'root' })
 export class ProductoService {
@@ -50,6 +51,7 @@ export class ProductoService {
 
     private http = inject(HttpClient);
     private readonly JSON_URL = 'assets/data/catalogo/catalogo.json';
+    private readonly REVIEWS_URL = 'assets/data/reviews.json';
 
     // getProductByIdJson(idProducto: number): Observable<ProductoDto | null> {
     //     return this.http.get<any>(this.JSON_URL).pipe(
@@ -167,4 +169,18 @@ export class ProductoService {
             })
         );  
     }
+
+    getReviewsByProduct(productId: number): Observable<Review[]> {
+    return this.http.get<Review[]>(this.REVIEWS_URL).pipe(
+      map(reviews => {
+        // Filtramos para devolver solo las opiniones de ESTE producto
+        return reviews.filter(r => r.productId === productId);
+      }),
+      catchError(err => {
+        console.error('Error cargando reseñas:', err);
+        // Si falla (ej. no existe el archivo), devolvemos array vacío para no romper la página
+        return of([]); 
+      })
+    );
+  }
 }
