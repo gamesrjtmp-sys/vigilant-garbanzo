@@ -1,51 +1,101 @@
-<div class="relative w-full overflow-hidden bg-black text-white">
+<div 
+  class="relative w-full overflow-hidden bg-gray-900 group"
+  (mouseenter)="pauseAutoRotate()"
+  (mouseleave)="startAutoRotate()"
+>
   
-  <div class="relative h-[60vh] md:h-[80vh] flex items-center justify-center">
+  <!-- CONTENEDOR DE SLIDES -->
+  <!-- Usamos h-[500px] para móvil y h-[700px] para desktop (Hero grande) -->
+  <div class="relative h-[500px] md:h-[700px] w-full">
     
-    @for (slide of slides; track slide.id) {
+    @for (slide of slides; track slide.id; let i = $index) {
       
-      @if (currentIndex() === $index) {
+      <!-- Slide Individual -->
+      <div 
+        class="absolute inset-0 transition-opacity duration-1000 ease-in-out w-full h-full"
+        [class.opacity-100]="currentIndex() === i"
+        [class.opacity-0]="currentIndex() !== i"
+        [class.z-10]="currentIndex() === i"
+        [class.z-0]="currentIndex() !== i"
+      >
         
-        <div class="absolute inset-0 transition-opacity duration-1000 ease-in-out"
-             
-             [style.backgroundImage]="'url(' + slide.imgUrl + ')'" 
-             style="background-size: cover; background-position: center;">
-          
-          <div class="max-w-7xl mx-auto p-8 h-full flex items-center justify-start sm:justify-center text-center">
-            <div class="space-y-4">
-              <h3 class="text-4xl md:text-8xl font-extrabold text-orange-500 tracking-tighter">{{ slide.promo }}</h3>
-              <!-- <p class="text-xl md:text-3xl font-light">{{ slide.title }}</p> -->
-              
-              <button (click)="goToPromo(slide.link)"
-                      class="bg-orange-500 text-white px-8 py-3 rounded-full hover:bg-orange-600 transition duration-300">
-                COMPRA HOY
-              </button>
-            </div>
-          </div>
+        <!-- Imagen de Fondo -->
+        <div 
+          class="absolute inset-0 bg-cover bg-center transition-transform duration-[5000ms] ease-out"
+          [style.backgroundImage]="'url(' + slide.imgUrl + ')'"
+          [class.scale-105]="currentIndex() === i" 
+          [class.scale-100]="currentIndex() !== i"
+        ></div>
+        
+        <!-- Overlay Oscuro (Gradiente) para legibilidad -->
+        <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent"></div>
 
+        <!-- Contenido del Texto -->
+        <div class="absolute inset-0 flex items-center px-8 md:px-16 lg:px-24">
+          <div class="max-w-2xl text-white space-y-6 transform transition-all duration-700 delay-300"
+               [class.translate-y-0]="currentIndex() === i"
+               [class.opacity-100]="currentIndex() === i"
+               [class.translate-y-10]="currentIndex() !== i"
+               [class.opacity-0]="currentIndex() !== i">
+            
+            <span class="inline-block py-1 px-3 border border-white/30 rounded-full text-xs font-bold uppercase tracking-widest bg-white/10 backdrop-blur-sm mb-2">
+              {{ slide.title }}
+            </span>
+            
+            <h2 class="text-4xl md:text-7xl font-serif font-bold leading-tight">
+              {{ slide.promo }}
+            </h2>
+            
+            <p class="text-lg md:text-xl font-light text-gray-200 max-w-md">
+              {{ slide.subtitle }}
+            </p>
+            
+            <button 
+              (click)="goToPromo(slide.link)"
+              class="mt-4 px-8 py-4 bg-white text-black font-bold text-sm tracking-widest uppercase rounded-full hover:bg-emerald-500 hover:text-white transition-all duration-300 shadow-lg hover:shadow-emerald-500/30 flex items-center gap-2 group/btn"
+            >
+              {{ slide.cta }}
+              <svg class="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </button>
+
+          </div>
         </div>
-      }
+
+      </div>
     }
   </div>
 
-  <button class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-black/30 p-3 rounded-full text-white hover:bg-black/50 transition z-10 ml-4"
-          (click)="prevSlide()" aria-label="Anterior">
+  <!-- FLECHAS DE NAVEGACIÓN (Solo aparecen en Hover) -->
+  <button 
+    class="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 backdrop-blur text-white hover:bg-white hover:text-black transition-all opacity-0 group-hover:opacity-100 z-20 hidden md:block"
+    (click)="prevSlide()" 
+    aria-label="Anterior"
+  >
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
   </button>
-  <button class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-black/30 p-3 rounded-full text-white hover:bg-black/50 transition z-10 mr-4"
-          (click)="nextSlide()" aria-label="Siguiente">
+  
+  <button 
+    class="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-white/10 backdrop-blur text-white hover:bg-white hover:text-black transition-all opacity-0 group-hover:opacity-100 z-20 hidden md:block"
+    (click)="nextSlide()" 
+    aria-label="Siguiente"
+  >
     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
   </button>
 
-  <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-3 z-10">
-    @for (slide of slides; track slide.id) {
+  <!-- INDICADORES (LAS 3 RAYITAS) -->
+  <div class="absolute bottom-8 left-0 w-full flex justify-center gap-2 z-20">
+    @for (slide of slides; track slide.id; let i = $index) {
       <button
-        [class.bg-white]="currentIndex() === $index"
-        [class.bg-white]="currentIndex() !== $index"
-        class="w-3 h-3 rounded-full transition-colors"
-        (click)="goToSlide($index)"
-        [attr.aria-label]="'Ir al slide ' + ($index + 1)"
+        (click)="goToSlide(i)"
+        class="h-1.5 rounded-full transition-all duration-500 cursor-pointer shadow-sm"
+        [class.w-12]="currentIndex() === i"
+        [class.bg-white]="currentIndex() === i"
+        [class.w-6]="currentIndex() !== i"
+        [class.bg-white]="currentIndex() !== i"
+        [class.hover:bg-white]="currentIndex() !== i"
+        [attr.aria-label]="'Ir al slide ' + (i + 1)"
       ></button>
     }
   </div>
+
 </div>

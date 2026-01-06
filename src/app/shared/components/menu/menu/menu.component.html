@@ -41,7 +41,7 @@
         
         <!-- Logo -->
         <button (click)="goToHome()" class="flex items-center gap-3 focus:outline-none hover:opacity-80 transition-opacity" aria-label="Ir al inicio">
-          <img src="assets/images/pelota.jpg" alt="Logo Qué Patas" class="h-10 w-auto object-contain" />
+          <img src="assets/images/logo.svg" alt="Logo Qué Patas" class="h-10 w-auto object-contain" />
         </button>
         
         <!-- NAV DESKTOP (Menú Principal) -->
@@ -95,15 +95,15 @@
                           <span class="w-1 h-1 bg-gray-300 rounded-full"></span> Champú profesional
                         </a>
                       </li>
-                      <li role="none">
+                      <!-- <li role="none">
                         <a role="menuitem"
                           routerLink="/catalogo-comun"
                           [queryParams]="{ id: 102 }"
                           (click)="closeDropdown()"
                           class="flex items-center gap-3 px-4 py-3 text-sm hover:bg-orange-50 hover:text-orange-600 transition-colors cursor-pointer">
-                          <span class="w-1 h-1 bg-gray-300 rounded-full"></span> Planchas
+                          <span class="w-1 h-1 bg-gray-300 rounded-full"></span> Máquinas Profesionales
                         </a>
-                      </li>
+                      </li> -->
                     </ul>
                  </div>
               </div>
@@ -120,7 +120,7 @@
           <a routerLink="/catalogo-comun" 
              [queryParams]="{ id: 401}"
              class="text-sm font-medium text-gray-700 hover:text-orange-500 transition-colors cursor-pointer">
-             Maquillaje
+             Mascarillas
           </a>
 
           <a routerLink="/catalogo-comun" 
@@ -242,12 +242,12 @@
            <p class="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">Cuidado del Cabello</p>
            <a routerLink="/catalogo-comun" [queryParams]="{id: 103}" (click)="toggleMobile()" class="block px-4 py-2 text-sm text-gray-600 hover:text-orange-600 pl-8">Tratamientos</a>
            <a routerLink="/catalogo-comun" [queryParams]="{id: 101}" (click)="toggleMobile()" class="block px-4 py-2 text-sm text-gray-600 hover:text-orange-600 pl-8">Champú</a>
-           <a routerLink="/catalogo-comun" [queryParams]="{id: 102}" (click)="toggleMobile()" class="block px-4 py-2 text-sm text-gray-600 hover:text-orange-600 pl-8">Planchas</a>
+           <!-- <a routerLink="/catalogo-comun" [queryParams]="{id: 102}" (click)="toggleMobile()" class="block px-4 py-2 text-sm text-gray-600 hover:text-orange-600 pl-8">Máquinas Profesionales</a> -->
         </div>
         
         <!-- Otras Categorías -->
         <a routerLink="/catalogo-comun" [queryParams]="{id: 201}" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-orange-600 transition-colors">Cuidado de la Piel</a>
-        <a routerLink="/catalogo-comun" [queryParams]="{id: 401}" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-orange-600 transition-colors">Maquillaje</a>
+        <a routerLink="/catalogo-comun" [queryParams]="{id: 401}" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-orange-600 transition-colors">Mascarillas</a>
         <a routerLink="/catalogo-comun" [queryParams]="{id: 301}" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-medium text-gray-700 hover:bg-gray-50 hover:text-orange-600 transition-colors">Equipos Profesionales</a>
 
         <a routerLink="/ofertas" (click)="toggleMobile()" class="block px-4 py-3 rounded-xl font-bold text-red-500 hover:bg-red-50 transition-colors mt-2">🔥 Ofertas</a>

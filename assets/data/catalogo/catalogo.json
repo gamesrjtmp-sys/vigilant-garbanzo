@@ -9,46 +9,37 @@
           "nombreSubcategoria": "Champús",
           "productos": [
             {
-              "idProducto": 1001,
+              "idProducto": 7770,
               "idCatalogo": 1,
               "idSubcategoria": 101,
-              "nombreProducto": "Champú Hidratante Profesional",
-              "precio": 29.90,
-              "imagenes": ["https://images.unsplash.com/photo-1585232351009-aa87416fca90?fm=webp&w=800"],
-              "descripcion": "Hidratación profunda para cabello seco y dañado."
+              "nombreProducto": "Drama Queen Coco Shampoo",
+              "precio": 70.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/7770/1758545261DRAMAQUEENCOCOSHAMPOO250ML.webp"
+              ],
+              "descripcion": "Shampoo nutritivo para cabellos secos y frágiles. Repone los aceites y la humedad natural del cabello seco, recupera los nutrientes perdidos, restaura la suavidad, el brillo y la flexibilidad."
             },
             {
-              "idProducto": 1002,
+              "idProducto": 7762,
               "idCatalogo": 1,
               "idSubcategoria": 101,
-              "nombreProducto": "Champú Reparador Keratina",
-              "precio": 34.50,
-              "imagenes": ["https://images.unsplash.com/photo-1556228720-19075220964b?fm=webp&w=800"],
-              "descripcion": "Repara la fibra capilar desde el interior."
-            }
-          ]
-        },
-        {
-          "idSubcategoria": 102,
-          "nombreSubcategoria": "Planchas",
-          "productos": [
-            {
-              "idProducto": 1003,
-              "idCatalogo": 1,
-              "idSubcategoria": 102,
-              "nombreProducto": "Plancha TITANIUM Pro 450°F",
-              "precio": 159.90,
-              "imagenes": ["https://images.unsplash.com/photo-1562367642-7f22b7e41e8f?fm=webp&w=800"],
-              "descripcion": "Alisado perfecto en una sola pasada."
+              "nombreProducto": "Lola Cosmetics Shampoo Matizador Rubia",
+              "precio": 65.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/7762/175854240971e56b0b-2b15-457b-859d-c1553c1f2a3b%20(1).png"
+              ],
+              "descripcion": "Rubia de farmacia es una línea especializada para cabellos rubios naturales, teñidos o con mechas. Neutraliza y matiza los tonos amarillos y naranjas indeseados."
             },
             {
-              "idProducto": 1004,
+              "idProducto": 6559,
               "idCatalogo": 1,
-              "idSubcategoria": 102,
-              "nombreProducto": "Plancha Cerámica Ionic",
-              "precio": 129.00,
-              "imagenes": ["https://images.unsplash.com/photo-1586926952481-d3e82480617e?fm=webp&w=800"],
-              "descripcion": "Tecnología iónica para eliminar el frizz."
+              "idSubcategoria": 101,
+              "nombreProducto": "Shampoo Karseell",
+              "precio": 65.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/6559/1744738055Whats-App-Image-2025-04-14-at-2-17-26-PM.jpg"
+              ],
+              "descripcion": "Tratamiento capilar de calidad profesional, formulado especialmente para revitalizar el cabello dañado, seco o químicamente tratado."
             }
           ]
         },
@@ -57,28 +48,32 @@
           "nombreSubcategoria": "Tratamientos",
           "productos": [
             {
-              "idProducto": 1005,
+              "idProducto": 6555,
               "idCatalogo": 1,
               "idSubcategoria": 103,
-              "nombreProducto": "Tratamiento Capilar Nutritivo",
-              "precio": 49.90,
-              "imagenes": ["https://images.unsplash.com/photo-1571781926291-280553cd34a9?fm=webp&w=800"],
-              "descripcion": "Mascarilla intensiva para revitalizar tu cabello."
+              "nombreProducto": "Brillo Eterno Shampoo Con Colageno Fs",
+              "precio": 89.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/6555/1744736929Whats-App-Image-2025-04-04-at-20-14-56.jpg"
+
+              ],
+              "descripcion": ". Repara profundamente el cabello dañado. Aumenta la elasticidad y fortaleza capilar. Efecto hidratante de larga duración."
             },
             {
-              "idProducto": 1006,
+              "idProducto": 4835,
               "idCatalogo": 1,
               "idSubcategoria": 103,
-              "nombreProducto": "Ampollas Reparadoras Pro",
-              "precio": 39.90,
-              "imagenes": ["https://images.unsplash.com/photo-1620916566398-39f1143ab7be?fm=webp&w=800"],
-              "descripcion": "Shot de vitaminas para un cabello radiante."
+              "nombreProducto": "Serum Up Pro",
+              "precio": 79.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/4835/1733499099serum1.jpg"
+              ],
+              "descripcion": "Fórmula que nutre y fortalece el folículo capilar. Aplicación sencilla y compatible con el maquillaje diario."
             }
           ]
         }
       ]
     },
-
     {
       "idCatalogo": 2,
       "nombreCatalogo": "Cuidado Piel",
@@ -88,61 +83,38 @@
           "nombreSubcategoria": "Faciales",
           "productos": [
             {
-              "idProducto": 2001,
-              "idCatalogo": 2,
-              "idSubcategoria": 201,
-              "nombreProducto": "Sérum de Vitamina C 20%",
-              "precio": 59.90,
-              "imagenes": ["https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?fm=webp&w=800"],
-              "descripcion": "Sérum antioxidante que ilumina la piel, reduce manchas y favorece la producción de colágeno."
-            },
-            {
-              "idProducto": 2002,
-              "idCatalogo": 2,
-              "idSubcategoria": 201,
-              "nombreProducto": "Crema Facial Hidratante Hyaluronic",
-              "precio": 44.90,
-              "imagenes": ["https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?fm=webp&w=800"],
-              "descripcion": "Crema hidratante con ácido hialurónico que mantiene la piel suave y profundamente humectada."
+              "idProducto": 4149,
+              "idCatalogo": 1,
+              "idSubcategoria": 103,
+              "nombreProducto": "Serum Facial Antiarrugas",
+              "precio": 75.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/4149/1724506789Screenshot%202024-08-24%20at%2008.34.41.png",
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/4149/1724506787WhatsApp%20Image%202024-08-20%20at%2011.01.09.jpeg",
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/4149/1724506787WhatsApp%20Image%202024-08-20%20at%2011.01.08.jpeg",
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/4149/1724506788WhatsApp%20Image%202024-08-20%20at%2011.01.08%20(1).jpeg"
+
+              ],
+              "descripcion": "Si estás buscando una solución completa para revitalizar tu piel, reducir las arrugas, aclarar manchas, tratar el acné y devolverle a tu rostro esa luminosidad que siempre has deseado, ¡este tratamiento es la respuesta! Desarrollado con ingredientes de alta eficacia que nutren profundamente la piel, este producto no solo mejora su apariencia, sino que también la fortalece desde adentro."
             },
             {
               "idProducto": 2003,
               "idCatalogo": 2,
               "idSubcategoria": 201,
-              "nombreProducto": "Caja de Repuesto: 32 Pastillas de Colágeno",
+              "nombreProducto": "Caja: 32 Pastillas de Colágeno | 4 tabletas",
               "precio": 35.00,
-              "imagenes": ["https://images.unsplash.com/photo-1611930022073-b7a4ba5fcccd?fm=webp&w=800"],
-              "descripcion": "Pack de 4 tabletas (32 unidades) para continuar tu tratamiento."
-            }
-          ]
-        },
-        {
-          "idSubcategoria": 202,
-          "nombreSubcategoria": "Corporales",
-          "productos": [
-            {
-              "idProducto": 2004,
-              "idCatalogo": 2,
-              "idSubcategoria": 202,
-              "nombreProducto": "Gel Reductor Anticelulitis",
-              "precio": 39.90,
-              "imagenes": ["https://images.unsplash.com/photo-1629198688000-71f23e745b6e?fm=webp&w=800"],
-              "descripcion": "Gel reafirmante para tonificar la piel."
-            },
-            {
-              "idProducto": 2005,
-              "idCatalogo": 2,
-              "idSubcategoria": 202,
-              "nombreProducto": "Crema Corporal de Colágeno",
-              "precio": 29.90,
-              "imagenes": ["https://images.unsplash.com/photo-1608248597279-f99d160bfbc8?fm=webp&w=800"],
-              "descripcion": "Hidratación corporal intensa."
+              "imagenes": [
+                "https://ae-pic-a1.aliexpress-media.com/kf/Sb620275719474516a8e07dce98eb6f0f3.jpg_960x960q75.jpg_.avif",
+                "https://ae-pic-a1.aliexpress-media.com/kf/S36b78bea11fb4f42989a03774217c71e1.jpg_960x960q75.jpg_.avif",
+                "https://ae-pic-a1.aliexpress-media.com/kf/Sb2ae9085f7cf4d68bd5fc466527d5ab15.jpg_960x960q75.jpg_.avif",
+                "https://ae-pic-a1.aliexpress-media.com/kf/S0974c55aa9014df48b98dd80e4ccd2c8I.jpg_960x960q75.jpg_.avif"
+              ],
+              "descripcion": "Pack de 4 tabletas (32 unidades) efervescentes para máquina de mascarillas. Fórmula pura de colágeno hidrolizado."
             }
           ]
         }
       ]
     },
-
     {
       "idCatalogo": 3,
       "nombreCatalogo": "Equipos Profesionales",
@@ -152,27 +124,45 @@
           "nombreSubcategoria": "Herramientas",
           "productos": [
             {
-              "idProducto": 3001,
-              "idCatalogo": 3,
-              "idSubcategoria": 301,
-              "nombreProducto": "Secadora Profesional 3000W",
-              "precio": 199.90,
-              "imagenes": ["https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?fm=webp&w=800"],
-              "descripcion": "Potencia y rapidez para un secado perfecto."
-            },
-            {
               "idProducto": 3002,
               "idCatalogo": 3,
               "idSubcategoria": 301,
-              "nombreProducto": "Máquina de Corte Barber PRO",
-              "precio": 149.90,
+              "nombreProducto": "Máquina Profesional Mascarillas Faciales Naturales Colageno Frutas Verduras | Pack Completo",
+              "precio": 289.00,
               "imagenes": [
-                 "https://images.unsplash.com/photo-1621605815971-fbc98d665033?fm=webp&w=800",
-                 "https://images.unsplash.com/photo-1503951914875-452162b0f3f1?fm=webp&w=800",
-                 "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?fm=webp&w=800",
-                 "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?fm=webp&w=800"
+                "assets/images/Maquinas Profesionales/q2.webp",
+                "assets/images/Maquinas Profesionales/1.webp",
+                "assets/images/Maquinas Profesionales/principal.webp",
+                "assets/images/Maquinas Profesionales/2.webp",
+                "assets/images/Maquinas Profesionales/3.webp",
+                "assets/images/Maquinas Profesionales/4.webp",
+                "assets/images/Maquinas Profesionales/q1.webp",
+                "assets/images/Maquinas Profesionales/q3.webp"
               ],
-              "descripcion": "Precisión profesional para barbería."
+              "descripcion": "Tratamiento Facial automático, colágeno vegetal Natural de frutas, herramienta de belleza para el cuidado de la piel de tus clientes."
+            },
+            {
+              "idProducto": 6511,
+              "idCatalogo": 1,
+              "idSubcategoria": 102,
+              "nombreProducto": "Depilador De Cejas Electrico",
+              "precio": 90.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/6511/1744048001WhatsApp%20Image%202025-04-07%20at%2012.46.06%20PM.jpeg"
+              ],
+              "descripcion": "Este es un depilador eléctrico de precisión para cejas, diseñado para eliminar el vello no deseado de forma rápida, indolora y segura."
+            },
+            {
+              "idProducto": 756,
+              "idCatalogo": 1,
+              "idSubcategoria": 102,
+              "nombreProducto": "Secador De Pelo Profesional",
+              "precio": 230.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/756/170059918435A1538B-CD50-4858-BB0A-B53900AE0971.jpeg",
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/756/1700599184A9AECF12-88C4-4BB8-91A8-DB05C80A8398.jpeg"
+              ],
+              "descripcion": "Secadora Profesional , Seca, suaviza y agrega brillo a tu cabello Gracias al emisor de iones y calor infrarrojo lejano ."
             }
           ]
         },
@@ -184,74 +174,71 @@
               "idProducto": 3003,
               "idCatalogo": 3,
               "idSubcategoria": 302,
-              "nombreProducto": "Vaporizador Facial NanoMist",
-              "precio": 229.00,
-              "imagenes": ["https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?fm=webp&w=800"],
-              "descripcion": "Limpieza facial profunda con vapor iónico."
+              "nombreProducto": "Máquina Inteligente de Mascarillas Faciales",
+              "precio": 369.00,
+              "imagenes": [
+                "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?fm=webp&w=800"
+              ],
+              "descripcion": "Crea tus propias mascarillas de hidrogel en 5 minutos con frutas y colágeno. Incluye molde y kit de inicio."
             },
             {
               "idProducto": 3004,
               "idCatalogo": 3,
               "idSubcategoria": 302,
-              "nombreProducto": "Lámpara LED UV 54W",
-              "precio": 89.90,
-              "imagenes": ["https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?fm=webp&w=800"],
-              "descripcion": "Secado rápido para uñas de gel."
+              "nombreProducto": "Removedor de Puntos Negros Succión Pro",
+              "precio": 45.00,
+              "imagenes": [
+                "https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?fm=webp&w=800"
+              ],
+              "descripcion": "Limpiador de poros eléctrico con 5 cabezales. Elimina grasa, acné y espinillas sin dañar la piel."
             }
           ]
         }
       ]
     },
-
     {
       "idCatalogo": 4,
-      "nombreCatalogo": "Maquillaje",
+      "nombreCatalogo": "Mascarillas",
       "subcategorias": [
         {
           "idSubcategoria": 401,
           "nombreSubcategoria": "Rostro",
           "productos": [
             {
-              "idProducto": 4001,
+              "idProducto": 7413,
               "idCatalogo": 4,
               "idSubcategoria": 401,
-              "nombreProducto": "Base Líquida Alta Cobertura",
-              "precio": 49.90,
-              "imagenes": ["https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?fm=webp&w=800"],
-              "descripcion": "Cobertura total con acabado natural."
+              "nombreProducto": "Mascara Facial De Arandano Y Quinoa 30ml",
+              "precio": 50.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/7413/1752716592Mesadetrabajo36_c5663dbd-e370-4c10-82d8-f348d4726bb5.webp",
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/7413/1752716592Mascarilla-beneficios-ArandanoyQuinoa.webp"
+              ],
+              "descripcion": "Una serie de mascarillas de tela a base de superalimentos, diseñadas para mantener la belleza y salud de la piel del rostro."
             },
             {
-              "idProducto": 4002,
+              "idProducto": 7369,
               "idCatalogo": 4,
               "idSubcategoria": 401,
-              "nombreProducto": "Polvo Compacto Profesional",
-              "precio": 32.00,
-              "imagenes": ["https://images.unsplash.com/photo-1596462502278-27bfdd403348?fm=webp&w=800"],
-              "descripcion": "Matifica y fija tu maquillaje por horas."
-            }
-          ]
-        },
-        {
-          "idSubcategoria": 402,
-          "nombreSubcategoria": "Ojos",
-          "productos": [
-            {
-              "idProducto": 4003,
-              "idCatalogo": 4,
-              "idSubcategoria": 402,
-              "nombreProducto": "Delineador Líquido Waterproof",
-              "precio": 25.00,
-              "imagenes": ["https://images.unsplash.com/photo-1629198727546-e9884d280188?fm=webp&w=800"],
-              "descripcion": "Trazo preciso y resistente al agua."
+              "nombreProducto": "Mascarilla Facial De Arroz 30ml X 10 Pie",
+              "precio": 49.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/7369/1752556680PORTADA_2_3c232d30-03c7-4406-8b99-f913da4f330e.webp",
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/7369/1752556680REALPLAZA-2_4a39a7cb-552e-499d-9757-ad22e3d20e58.webp"
+              ],
+              "descripcion": "Mascarilla Facial de Arroz 30ml x 10 Piezas – Wokali"
             },
             {
-              "idProducto": 4004,
+              "idProducto": 7539,
               "idCatalogo": 4,
-              "idSubcategoria": 402,
-              "nombreProducto": "Mascara Volumen Extremo",
-              "precio": 29.90,
-              "imagenes": ["https://images.unsplash.com/photo-1631214524020-7e18db9a8f92?fm=webp&w=800"],
-              "descripcion": "Pestañas impactantes con volumen máximo."
+              "idSubcategoria": 401,
+              "nombreProducto": "Mascarilla Hidroplastica De Barro Marino",
+              "precio": 46.00,
+              "imagenes": [
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/7539/1754064145REALPLAZA-2_18fcf857-bb97-490c-99d7-002575086491.webp",
+                "https://d39ru7awumhhs2.cloudfront.net/peru/products/7539/1754064145PORTADA_2_4ccc5bc9-651e-44e4-9cde-5df04c5b75dc.webp"
+              ],
+              "descripcion": "NEVADA NATURAL PRODUCTS – BLACK MASK WHITENING BARRO MARINO"
             }
           ]
         }
