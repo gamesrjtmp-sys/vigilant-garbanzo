@@ -16,5 +16,5 @@ export interface ProductoJson {
   idSubcategoria: number;
   nombreProducto: string;
   precio: number;
-  imagen: string;
+  imagenes: string[];
 }

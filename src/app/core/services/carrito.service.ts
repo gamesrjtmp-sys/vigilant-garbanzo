@@ -41,7 +41,7 @@ export class CarritoService {
           Nombre: item.nombreProducto,
           Precio: item.precio,
           // El JSON trae 1 string 'imagen', el DTO quiere array 'Imagenes[]'
-          Imagenes: item.imagen ? [item.imagen] : ['assets/images/pelota.jpg'],
+          Imagenes: item.imagenes ? [item.imagenes] : ['assets/images/pelota.jpg'],
           //Descripcion: item.descripcion || '',
           Stock: 10 // Valor por defecto si no viene del back
         } as ProductoDto)))

@@ -19,7 +19,7 @@ export class CarruselComponent implements OnInit, OnDestroy {
   readonly slides = [
     { 
       id: 1, 
-      imgUrl: 'https://images.unsplash.com/photo-1596462502278-27bfdd403348?q=80&w=1920&auto=format&fit=crop', 
+      imgUrl: 'assets/images/Modelos/4.webp', 
       title: 'Nueva Colección',
       promo: 'Hasta 50% OFF', 
       subtitle: 'Descubre nuestra mejor selección de temporada.', 

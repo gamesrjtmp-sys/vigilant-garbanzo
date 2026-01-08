@@ -21,7 +21,7 @@
         
         <!-- Imagen de Fondo -->
         <div 
-          class="absolute inset-0 bg-cover bg-center transition-transform duration-[5000ms] ease-out"
+          class="absolute inset-0 bg-cover bg-center transition-transform duration-[4000ms] ease-out"
           [style.backgroundImage]="'url(' + slide.imgUrl + ')'"
           [class.scale-105]="currentIndex() === i" 
           [class.scale-100]="currentIndex() !== i"
@@ -32,7 +32,7 @@
 
         <!-- Contenido del Texto -->
         <div class="absolute inset-0 flex items-center px-8 md:px-16 lg:px-24">
-          <div class="max-w-2xl text-white space-y-6 transform transition-all duration-700 delay-300"
+          <div class="max-w-2xl text-white space-y-6 transform transition-all duration-1000 delay-300"
                [class.translate-y-0]="currentIndex() === i"
                [class.opacity-100]="currentIndex() === i"
                [class.translate-y-10]="currentIndex() !== i"

@@ -276,60 +276,7 @@
       </div>
     }
   }
-
-<!-- ========================================================= -->
-<!-- SECCIÓN 1: INTRODUCCIÓN (EL PROBLEMA vs LA SOLUCIÓN)      -->
-<!-- Ángulo: Salud y Naturalidad (Adiós químicos)              -->
-<!-- ========================================================= -->
-<section class="bg-white py-16 lg:py-24 overflow-hidden">
-  <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-      
-      <!-- Contenido -->
-      <div class="order-2 lg:order-1 space-y-8">
-        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-800 text-xs font-bold tracking-wide uppercase">
-          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          Tendencia Skincare 2025
-        </div>
-        
-        <h2 class="text-4xl lg:text-5xl font-serif text-gray-900 leading-tight">
-          Tu piel no necesita conservantes.<br>
-          <span class="text-gray-400 italic">Necesita naturaleza.</span>
-        </h2>
-        
-        <p class="text-lg text-gray-600 leading-relaxed">
-          Las mascarillas convencionales están llenas de químicos, plomo y conservantes para que duren años en una estantería. 
-          <br><br>
-          Con nuestra <strong>Máquina Inteligente</strong>, creas mascarillas de hidrogel fresco en 5 minutos. Sin aditivos. Solo agua, jugo de frutas y nuestras pastillas de colágeno activo. Absorción superior, resultados visibles.
-        </p>
-
-        <div class="flex items-center gap-8 pt-4">
-          <div class="flex flex-col gap-1">
-            <span class="text-3xl font-bold text-gray-900">98%</span>
-            <span class="text-xs text-gray-500 uppercase tracking-wider">Absorción</span>
-          </div>
-          <div class="w-px h-10 bg-gray-200"></div>
-          <div class="flex flex-col gap-1">
-            <span class="text-3xl font-bold text-gray-900">0%</span>
-            <span class="text-xs text-gray-500 uppercase tracking-wider">Químicos</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Imagen Visual -->
-      <div class="order-1 lg:order-2 relative">
-        <div class="aspect-[4/5] rounded-[2.5rem] overflow-hidden shadow-2xl relative z-10">
-          <img src="https://images.unsplash.com/photo-1596704017254-9b1b1b9e8026?q=80&w=800&auto=format&fit=crop" alt="Mujer con piel radiante" class="w-full h-full object-cover">
-          <!-- Overlay Gradiente -->
-          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
-        </div>
-        <!-- Decoración Fondo -->
-        <div class="absolute top-10 -right-10 w-full h-full border-2 border-emerald-100 rounded-[2.5rem] -z-0 hidden lg:block"></div>
-      </div>
-
-    </div>
-  </div>
-</section>
+ @if (showAddonBlock()) { 
 
 <!-- ========================================================= -->
 <!-- SECCIÓN 1: EL MANIFIESTO (FRESCO VS PROCESADO)            -->
@@ -337,285 +284,473 @@
 <!-- ========================================================= -->
 <section class="bg-white py-20 lg:py-32 relative overflow-hidden">
   
-  <!-- Decoración de fondo sutil -->
-  <div class="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-emerald-50/50 to-transparent -z-10"></div>
+  <!-- Decoración de fondo sutil (Onda orgánica) -->
+  <div class="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-emerald-50/40 to-transparent -z-10 pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center">
       
-      <!-- Copy Persuasivo -->
-      <div class="space-y-8 animate-in slide-in-from-bottom-8 duration-700">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black text-white text-[10px] font-bold tracking-widest uppercase shadow-lg">
-          <span class="text-xl">✨</span> Nueva Tecnología Smart-Mask™
+      <!-- COLUMNA IZQUIERDA: Imagen Hero (Visual Principal) -->
+      <div class="relative group cursor-pointer order-1 lg:order-1 lg:pr-8">
+        
+        <!-- Fondo decorativo (Sombra de color) -->
+        <div class="absolute inset-0 bg-emerald-100 rounded-[2.5rem] -rotate-2 scale-105 opacity-60 group-hover:-rotate-3 transition-transform duration-700 ease-out"></div>
+        
+        <!-- IMAGEN 1: Mujer con piel radiante -->
+        <div class="relative rounded-[2.5rem] overflow-hidden shadow-2xl shadow-emerald-900/10 border-4 border-white">
+          <img 
+            src="assets/images/Modelos/1.webp" 
+            alt="Piel luminosa natural" 
+            class="w-full h-full object-cover aspect-[4/5] group-hover:scale-105 transition-transform duration-1000 ease-out"
+          >
+          <!-- Overlay sutil -->
+          <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
         </div>
         
-        <h2 class="text-5xl lg:text-6xl font-serif text-gray-900 leading-[1.1]">
-          ¿Comerías fruta <br>
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">enlatada hace 2 años?</span>
-        </h2>
-        
-        <p class="text-xl text-gray-500 font-light leading-relaxed">
-          Entonces, ¿por qué ponérsela a tu piel? Las mascarillas tradicionales pierden el 60% de sus nutrientes en el estante y dependen de conservantes químicos.
-          <br><br>
-          <strong class="text-gray-900 font-medium">La Revolución Natural:</strong> Nuestra máquina fusiona <strong>Colágeno Activo</strong> con jugo de fruta fresca al instante. Resultado: 98% de absorción y 0% de químicos.
-        </p>
-
-        <!-- Métricas de Autoridad -->
-        <div class="grid grid-cols-3 gap-8 pt-6 border-t border-gray-100">
-          <div>
-            <p class="text-4xl font-bold text-gray-900 mb-1">5 min</p>
-            <p class="text-xs text-gray-400 uppercase tracking-wider font-bold">Tiempo de Prep.</p>
-          </div>
-          <div>
-            <p class="text-4xl font-bold text-gray-900 mb-1">100%</p>
-            <p class="text-xs text-gray-400 uppercase tracking-wider font-bold">Natural</p>
-          </div>
-          <div>
-            <p class="text-4xl font-bold text-gray-900 mb-1">24h</p>
-            <p class="text-xs text-gray-400 uppercase tracking-wider font-bold">Hidratación</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Imagen Hero con Efecto de Profundidad -->
-      <div class="relative group cursor-pointer">
-        <div class="absolute inset-0 bg-emerald-200 rounded-[3rem] rotate-6 scale-95 opacity-20 group-hover:rotate-3 transition-transform duration-500"></div>
-        <img 
-          src="https://images.unsplash.com/photo-1596704017254-9b1b1b9e8026?q=80&w=1000&auto=format&fit=crop" 
-          alt="Piel luminosa natural" 
-          class="relative rounded-[3rem] shadow-2xl w-full object-cover aspect-[4/5] z-10 group-hover:-translate-y-2 transition-transform duration-500"
-        >
-        
-        <!-- Flotante: Ingrediente -->
-        <div class="absolute -left-6 bottom-20 bg-white p-4 rounded-2xl shadow-xl z-20 flex items-center gap-3 animate-bounce-slow">
-           <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center text-2xl">🍓</div>
+        <!-- Tarjeta Flotante: Ingrediente -->
+        <div class="absolute -right-6 bottom-16 bg-white/95 backdrop-blur-md p-4 rounded-2xl shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-white/50 z-20 flex items-center gap-4 animate-in slide-in-from-bottom-4 duration-1000 delay-200">
+           <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-2xl shadow-inner border border-red-100">🍓</div>
            <div>
-             <p class="text-xs text-gray-400 font-bold uppercase">Ingrediente Activo</p>
+             <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">Ingrediente Activo</p>
              <p class="text-sm font-bold text-gray-900">Vitamina C Pura</p>
            </div>
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- SECCIÓN 2: LA CIENCIA DE LA PASTILLA (EL CORAZÓN)         -->
-<!-- Estrategia: Dar valor al consumible (Add-on)              -->
-<!-- ========================================================= -->
-<section class="py-24 bg-gray-900 text-white relative overflow-hidden">
-  
-  <!-- Fondo abstracto -->
-  <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
-
-  <div class="max-w-7xl mx-auto px-6 relative z-10">
-    <div class="text-center mb-16 max-w-3xl mx-auto">
-      <span class="text-emerald-400 font-bold tracking-widest text-xs uppercase mb-2 block">Tecnología Bio-Activa</span>
-      <h2 class="text-3xl lg:text-5xl font-serif mb-6">El secreto está en la <span class="italic text-emerald-400">Píldora</span></h2>
-      <p class="text-gray-400 text-lg">No es magia, es biotecnología. Nuestra pastilla patentada no es solo colágeno; es el vehículo que convierte el jugo en una estructura de hidrogel sólido capaz de penetrar la dermis.</p>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <!-- Card 1 -->
-      <div class="bg-gray-800/50 p-8 rounded-3xl border border-gray-700 hover:border-emerald-500/50 transition-colors group">
-        <div class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">💧</div>
-        <h3 class="text-xl font-bold mb-3">Colágeno Hidrolizado</h3>
-        <p class="text-gray-400 text-sm leading-relaxed">Péptidos de bajo peso molecular que restauran la elasticidad perdida y rellenan líneas finas.</p>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="bg-gray-800/50 p-8 rounded-3xl border border-gray-700 hover:border-emerald-500/50 transition-colors group">
-        <div class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">🧬</div>
-        <h3 class="text-xl font-bold mb-3">Activador de Enzimas</h3>
-        <p class="text-gray-400 text-sm leading-relaxed">Potencia la acción de las vitaminas de la fruta, evitando que se oxiden durante el proceso.</p>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="bg-gray-800/50 p-8 rounded-3xl border border-gray-700 hover:border-emerald-500/50 transition-colors group">
-        <div class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">🦠</div>
-        <h3 class="text-xl font-bold mb-3">Ácido Hialurónico</h3>
-        <p class="text-gray-400 text-sm leading-relaxed">Retiene 1000 veces su peso en agua, creando una barrera de hidratación instantánea.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- SECCIÓN 3: RECETAS DEL CHEF (TU MENÚ DE BELLEZA)          -->
-<!-- Estrategia: Visualizar el uso y la personalización        -->
-<!-- ========================================================= -->
-<section class="py-24 bg-[#FAFAF9]">
-  <div class="max-w-7xl mx-auto px-6">
-    
-    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
-      <div>
-        <h2 class="text-4xl font-serif text-gray-900 mb-2">Diseña tu tratamiento</h2>
-        <p class="text-gray-500">Tú eres el alquimista. Elige tu ingrediente según tu objetivo.</p>
-      </div>
-      <button class="px-6 py-3 border border-gray-300 rounded-full text-sm font-bold hover:bg-black hover:text-white transition-colors">
-        Ver Recetario Completo
-      </button>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-      
-      <!-- Receta: Anti-Aging -->
-      <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1596524430615-b46476ddc6aa?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 p-6">
-          <div class="bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3">Piel Madura</div>
-          <h3 class="text-2xl text-white font-serif mb-1">Vino Tinto</h3>
-          <p class="text-white/80 text-sm">Polifenoles potentes para combatir arrugas profundas.</p>
-        </div>
-      </div>
-
-      <!-- Receta: Glow -->
-      <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1582979512210-99b6a53385f9?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 p-6">
-          <div class="bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3">Manchas</div>
-          <h3 class="text-2xl text-white font-serif mb-1">Naranja & Miel</h3>
-          <p class="text-white/80 text-sm">Vitamina C pura para un brillo instantáneo y tono uniforme.</p>
-        </div>
-      </div>
-
-      <!-- Receta: Detox -->
-      <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1604177091026-42d348a73507?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 p-6">
-          <div class="bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3">Acné</div>
-          <h3 class="text-2xl text-white font-serif mb-1">Pepino & Aloe</h3>
-          <p class="text-white/80 text-sm">Calma la inflamación y reduce rojeces al instante.</p>
-        </div>
-      </div>
-
-      <!-- Receta: Hidratación -->
-      <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer">
-        <img src="https://images.unsplash.com/photo-1523049673856-006f7a6374e7?q=80&w=600&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-        <div class="absolute bottom-0 p-6">
-          <div class="bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3">Piel Seca</div>
-          <h3 class="text-2xl text-white font-serif mb-1">Leche & Rosas</h3>
-          <p class="text-white/80 text-sm">Ácido láctico suave para una piel de bebé.</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ========================================================= -->
-<!-- SECCIÓN 4: PASO A PASO VISUAL (LA SIMPLICIDAD)            -->
-<!-- Estrategia: Eliminar el miedo a "es difícil de usar"      -->
-<!-- ========================================================= -->
-<section class="py-24 bg-white border-t border-gray-100">
-  <div class="max-w-5xl mx-auto px-6">
-    
-    <div class="text-center mb-16">
-      <h2 class="text-4xl font-serif text-gray-900 mb-4">Tan fácil como hacer café</h2>
-      <p class="text-gray-500">Sin complicaciones. La máquina te guía con voz inteligente en cada paso.</p>
-    </div>
-
-    <div class="relative">
-      <!-- Línea de conexión -->
-      <div class="hidden md:block absolute top-12 left-20 right-20 h-0.5 bg-gray-100 -z-0 border-t-2 border-dashed border-gray-200"></div>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <!-- COLUMNA DERECHA: Copy Persuasivo -->
+      <div class="order-2 lg:order-2 space-y-8 animate-in slide-in-from-bottom-8 duration-700 delay-100">
         
-        <!-- Paso 1 -->
-        <div class="relative z-10 bg-white text-center group">
-          <div class="w-24 h-24 bg-emerald-50 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300 border border-emerald-100">
-            <span class="text-4xl">🍹</span>
-          </div>
-          <h4 class="text-xl font-bold text-gray-900 mb-2">1. Vierte</h4>
-          <p class="text-sm text-gray-500 leading-relaxed px-4">Agrega 60ml de agua y 20ml de tu jugo favorito. La máquina te avisará si falta o sobra.</p>
+        <!-- Badge Superior -->
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black text-white text-[10px] font-bold tracking-[0.2em] uppercase shadow-lg shadow-emerald-500/10 hover:bg-emerald-900 transition-colors cursor-default">
+          <span class="text-lg">✨</span> Nueva Tecnología Smart-Mask™
+        </div>
+        
+        <!-- Titular de Impacto -->
+        <h2 class="text-4xl lg:text-6xl font-serif text-gray-900 leading-[1.1] tracking-tight">
+          ¿Comerías fruta <br>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500 italic pr-2">enlatada hace 2 años?</span>
+        </h2>
+        
+        <!-- Párrafo -->
+        <div class="text-lg text-gray-500 font-light leading-relaxed space-y-4">
+          <p>
+            Entonces, ¿por qué ponérsela a tu piel? Las mascarillas tradicionales pierden el <strong class="text-emerald-700 font-medium">60% de sus nutrientes</strong> en el estante y dependen de conservantes químicos agresivos.
+          </p>
+          <p class="text-gray-900 font-medium border-l-4 border-emerald-500 pl-4 py-1 bg-emerald-50/50 rounded-r-lg">
+            La Revolución Natural: Nuestra máquina fusiona <strong>Colágeno Activo</strong> con jugo de fruta fresca al instante. Resultado: 98% de absorción y 0% de químicos.
+          </p>
         </div>
 
-        <!-- Paso 2 -->
-        <div class="relative z-10 bg-white text-center group">
-          <div class="w-24 h-24 bg-emerald-50 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300 border border-emerald-100">
-            <span class="text-4xl">💊</span>
+        <!-- Métricas de Autoridad (Grid limpio) -->
+        <div class="grid grid-cols-3 gap-4 pt-4 border-t border-gray-100">
+          <div class="text-center px-2 py-3 rounded-xl hover:bg-gray-50 transition-colors">
+            <p class="text-3xl lg:text-4xl font-black text-gray-900 mb-1">5 <span class="text-lg font-medium text-gray-400">min</span></p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Tiempo Prep.</p>
           </div>
-          <h4 class="text-xl font-bold text-gray-900 mb-2">2. Activa</h4>
-          <p class="text-sm text-gray-500 leading-relaxed px-4">Introduce la pastilla de colágeno y presiona "Start". En 5 minutos la mezcla estará lista.</p>
-        </div>
-
-        <!-- Paso 3 -->
-        <div class="relative z-10 bg-white text-center group">
-          <div class="w-24 h-24 bg-emerald-50 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300 border border-emerald-100">
-            <span class="text-4xl">💆‍♀️</span>
+          <div class="text-center px-2 py-3 rounded-xl hover:bg-gray-50 transition-colors border-l border-r border-gray-100">
+            <p class="text-3xl lg:text-4xl font-black text-emerald-600 mb-1">100<span class="text-lg font-medium text-emerald-400">%</span></p>
+            <p class="text-[10px] text-emerald-700/60 uppercase tracking-widest font-bold">Natural</p>
           </div>
-          <h4 class="text-xl font-bold text-gray-900 mb-2">3. Disfruta</h4>
-          <p class="text-sm text-gray-500 leading-relaxed px-4">Presiona el botón de salida sobre el molde. Deja enfriar 2 min y aplícala.</p>
+          <div class="text-center px-2 py-3 rounded-xl hover:bg-gray-50 transition-colors">
+            <p class="text-3xl lg:text-4xl font-black text-gray-900 mb-1">24<span class="text-lg font-medium text-gray-400">h</span></p>
+            <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Hidratación</p>
+          </div>
         </div>
-
       </div>
-    </div>
 
+    </div>
   </div>
 </section>
 
-<!-- ========================================================= -->
-<!-- SECCIÓN 5: UNBOXING DIGITAL (QUÉ INCLUYE)                 -->
-<!-- Estrategia: Transparencia total para justificar el precio -->
-<!-- ========================================================= -->
-<section class="py-20 bg-gray-50">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="bg-white rounded-[3rem] p-8 lg:p-12 shadow-xl border border-gray-100 flex flex-col lg:flex-row gap-12 items-center">
+
+    <!-- ========================================================= -->
+    <!-- SECCIÓN 2: LA CIENCIA DE LA PASTILLA (EL CORAZÓN)         -->
+    <!-- Estrategia: Dar valor al consumible (Add-on)              -->
+    <!-- ========================================================= -->
+    <section class="py-24 bg-gray-900 text-white relative overflow-hidden">
       
-      <!-- Imagen del Kit -->
-      <div class="flex-1 relative w-full aspect-square bg-gray-100 rounded-3xl overflow-hidden">
-        <img src="https://images.unsplash.com/photo-1556228720-19075220964b?q=80&w=800&auto=format&fit=crop" alt="Kit Completo" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply p-4">
-      </div>
+      <!-- Fondo abstracto -->
+      <div class="absolute top-0 left-0 w-full h-full opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
 
-      <!-- Lista de Contenido -->
-      <div class="flex-1 space-y-8">
-        <div>
-          <h3 class="text-3xl font-serif text-gray-900 mb-2">Todo lo que necesitas</h3>
-          <p class="text-gray-500">Un kit completo para empezar tu spa en casa desde el día 1.</p>
+      <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <div class="text-center mb-16 max-w-3xl mx-auto">
+          <span class="text-emerald-400 font-bold tracking-widest text-xs uppercase mb-2 block">Tecnología Bio-Activa</span>
+          <h2 class="text-3xl lg:text-5xl font-serif mb-6">El secreto está en la <span class="italic text-emerald-400">Píldora</span></h2>
+          <p class="text-gray-400 text-lg">No es magia, es biotecnología. Nuestra pastilla patentada no es solo colágeno; es el vehículo que convierte el jugo en una estructura de hidrogel sólido capaz de penetrar la dermis.</p>
         </div>
 
-        <div class="space-y-4">
-          <!-- Item Lista -->
-          <div class="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-emerald-200 transition-colors">
-            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <span class="font-bold text-gray-700">Máquina Inteligente de Mascarillas</span>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Card 1 -->
+          <div class="bg-gray-800/50 p-8 rounded-3xl border border-gray-700 hover:border-emerald-500/50 transition-colors group">
+            <div class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">💧</div>
+            <h3 class="text-xl font-bold mb-3">Colágeno Hidrolizado</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Péptidos de bajo peso molecular que restauran la elasticidad perdida y rellenan líneas finas.</p>
           </div>
 
-          <!-- Item Lista -->
-          <div class="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-emerald-200 transition-colors">
-            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <span class="font-bold text-gray-700">1x Caja de Colágeno (32 Pastillas)</span>
-            <span class="ml-auto bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded">REGALO</span>
+          <!-- Card 2 -->
+          <div class="bg-gray-800/50 p-8 rounded-3xl border border-gray-700 hover:border-emerald-500/50 transition-colors group">
+            <div class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">🧬</div>
+            <h3 class="text-xl font-bold mb-3">Activador de Enzimas</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Potencia la acción de las vitaminas de la fruta, evitando que se oxiden durante el proceso.</p>
           </div>
 
-          <!-- Item Lista -->
-          <div class="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-emerald-200 transition-colors">
-            <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <span class="font-bold text-gray-700">Molde Facial Reutilizable + Espátula</span>
+          <!-- Card 3 -->
+          <div class="bg-gray-800/50 p-8 rounded-3xl border border-gray-700 hover:border-emerald-500/50 transition-colors group">
+            <div class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">🦠</div>
+            <h3 class="text-xl font-bold mb-3">Ácido Hialurónico</h3>
+            <p class="text-gray-400 text-sm leading-relaxed">Retiene 1000 veces su peso en agua, creando una barrera de hidratación instantánea.</p>
           </div>
         </div>
-
-        <!-- CTA Final -->
-        <button (click)="comprar()" class="w-full bg-black text-white py-5 rounded-xl font-bold text-lg hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-1">
-          ¡Lo quiero ahora!
-        </button>
-
       </div>
+    </section>
+    <!-- ========================================================= -->
+<!-- NUEVA SECCIÓN: PURA NATURALEZA (MINIMALISTA)              -->
+<!-- Estrategia: Enfoque sensorial "Menos es más"              -->
+<!-- ========================================================= -->
+<section class="py-32 bg-[#FDFCF8] relative overflow-hidden">
+  
+  <!-- Título Gigante de Fondo (Marca de agua sutil) -->
+  <h2 class="absolute top-1/2 left-0 -translate-y-1/2 text-[10rem] lg:text-[18rem] font-serif text-gray-100/50 pointer-events-none whitespace-nowrap select-none leading-none -ml-20">
+    Organic
+  </h2>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
+       
+       <!-- COLUMNA IZQUIERDA: Manifiesto Minimalista -->
+       <div class="lg:w-5/12 text-center lg:text-left space-y-10">
+          <div class="w-16 h-0.5 bg-black mx-auto lg:mx-0"></div>
+          
+          <h2 class="text-6xl lg:text-7xl font-serif text-gray-900 leading-[0.9]">
+            Pura <br>
+            <span class="italic text-emerald-600 font-light">Esencia.</span>
+          </h2>
+          
+          <div class="space-y-6">
+            <p class="text-xl text-gray-500 font-light leading-relaxed max-w-sm mx-auto lg:mx-0">
+              Sin químicos ocultos. <br>
+              Sin conservantes artificiales. <br>
+              <span class="text-gray-900 font-medium">Solo la vitalidad de la fruta fresca.</span>
+            </p>
+            
+            <div class="pt-6 flex flex-col items-center lg:items-start gap-2">
+               <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-gray-400">La Fórmula Maestra</span>
+               <p class="text-2xl font-serif text-gray-900">Agua + Jugo + Colágeno</p>
+            </div>
+          </div>
+       </div>
+
+       <!-- COLUMNA DERECHA: Arte Visual (Composición) -->
+       <div class="lg:w-7/12 relative w-full">
+          <!-- Fondo de luz -->
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] bg-emerald-50/60 rounded-full blur-3xl -z-10"></div>
+          
+          <div class="grid grid-cols-2 gap-6 lg:gap-8 items-center">
+             
+             <!-- Imagen 1: La Materia Prima (Textura) -->
+             <div class="space-y-4 mt-16 lg:mt-24 transform transition-transform duration-700 hover:-translate-y-2">
+                <div class="aspect-[3/4] rounded-full overflow-hidden shadow-2xl border-4 border-white">
+                   <!-- Foto de textura de Kiwi/Fruta fresca -->
+                   <img src="assets/images/Modelos/2.webp" alt="Textura Natural" class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2s]">
+                </div>
+                <p class="text-center text-[10px] font-bold uppercase tracking-widest text-emerald-800/60">01. Materia Viva</p>
+             </div>
+             
+             <!-- Imagen 2: El Resultado (Piel) -->
+             <div class="space-y-4 mb-8 lg:mb-12 transform transition-transform duration-700 hover:-translate-y-2">
+                <div class="aspect-[3/4] rounded-t-full rounded-b-[10rem] overflow-hidden shadow-2xl border-4 border-white">
+                   <!-- Foto de piel con mascarilla o textura suave -->
+                   <img src="assets/images/Modelos/3.webp" alt="Resultado Puro" class="w-full h-full object-cover hover:scale-110 transition-transform duration-[2s]">
+                </div>
+                <p class="text-center text-[10px] font-bold uppercase tracking-widest text-emerald-800/60">02. Hidrogel Puro</p>
+             </div>
+
+          </div>
+          
+          <!-- Elemento decorativo flotante -->
+          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-4 rounded-full shadow-xl z-20">
+             <span class="text-2xl">🌿</span>
+          </div>
+       </div>
+
     </div>
   </div>
 </section>
+    <!-- ========================================================= -->
+    <!-- SECCIÓN 3: RECETAS DEL CHEF (TU MENÚ DE BELLEZA)          -->
+    <!-- Estrategia: Visualizar el uso y la personalización        -->
+    <!-- ========================================================= -->
+    <section class="py-24 bg-[#FAFAF9]">
+      <div class="max-w-7xl mx-auto px-6">
+        
+        <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+          <div>
+            <h2 class="text-4xl font-serif text-gray-900 mb-2">Diseña tu tratamiento</h2>
+            <p class="text-gray-500">Tú eres el alquimista. Elige tu ingrediente según tu objetivo.</p>
+          </div>
+        </div>
 
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Receta: Anti-Aging -->
+          <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer">
+            <img src="assets/images/Modelos/t1.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 p-6">
+              <div class="bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3">Piel Madura</div>
+              <h3 class="text-2xl text-white font-serif mb-1">Vino Tinto</h3>
+              <p class="text-white/80 text-sm">Polifenoles potentes para combatir arrugas profundas.</p>
+            </div>
+          </div>
+
+          <!-- Receta: Glow -->
+          <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer">
+            <img src="assets/images/Modelos/t2.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 p-6">
+              <div class="bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3">Manchas</div>
+              <h3 class="text-2xl text-white font-serif mb-1">Naranja & Miel</h3>
+              <p class="text-white/80 text-sm">Vitamina C pura para un brillo instantáneo y tono uniforme.</p>
+            </div>
+          </div>
+
+          <!-- Receta: Detox -->
+          <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer">
+            <img src="assets/images/Modelos/t3.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 p-6">
+              <div class="bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3">Acné</div>
+              <h3 class="text-2xl text-white font-serif mb-1">Pepino & Aloe</h3>
+              <p class="text-white/80 text-sm">Calma la inflamación y reduce rojeces al instante.</p>
+            </div>
+          </div>
+
+          <!-- Receta: Hidratación -->
+          <div class="group relative aspect-[3/4] rounded-3xl overflow-hidden cursor-pointer">
+            <img src="assets/images/Modelos/t4.webp" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <div class="absolute bottom-0 p-6">
+              <div class="bg-white/20 backdrop-blur-md border border-white/30 text-white text-xs font-bold px-3 py-1 rounded-full w-fit mb-3">Piel Seca</div>
+              <h3 class="text-2xl text-white font-serif mb-1">Leche & Rosas</h3>
+              <p class="text-white/80 text-sm">Ácido láctico suave para una piel de bebé.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+<!-- ========================================================= -->
+<!-- NUEVA SECCIÓN: SHOWCASE DE LA MÁQUINA (TECNOLOGÍA)        -->
+<!-- Estrategia: Revelar la "Verdad" técnica con elegancia     -->
+<!-- ========================================================= -->
+<section class="py-24 bg-white relative overflow-hidden font-sans">
+  
+  <!-- Decoración de fondo sutil (Patrón de puntos) -->
+  <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(#059669 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+       
+       <!-- COLUMNA IZQUIERDA: La Máquina (Visual Hero) -->
+       <div class="relative order-2 lg:order-1">
+          <!-- Imagen Principal con efecto de profundidad -->
+          <div class="relative aspect-[3/4]  rounded-[3rem] overflow-hidden shadow-2xl border-[10px] border-white bg-gray-100 z-10 group cursor-default">
+             <img src="assets/images/Maquinas Profesionales/principal.webp " 
+                  alt="Ingeniería de Belleza" 
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-out grayscale-[20%] group-hover:grayscale-0">
+             
+             <!-- Overlay degradado para texto flotante -->
+             <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-60"></div>
+             
+             <div class="absolute bottom-8 left-8 text-white">
+                <p class="text-xs font-bold tracking-widest uppercase mb-1 opacity-80">Modelo Pro-V3</p>
+                <p class="text-2xl font-serif">Smart Mask Maker</p>
+             </div>
+          </div>
+          
+          <!-- Card Flotante: La Verdad Térmica -->
+          <div class="absolute top-10 -right-12 bg-white/95 backdrop-blur-xl p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-emerald-100 z-20 flex items-center gap-4 animate-in slide-in-from-right-8 duration-1000 delay-300 hover:-translate-y-1 transition-transform cursor-help" title="La temperatura exacta para activar el colágeno sin degradar las vitaminas">
+            <div class="w-14 h-14 bg-red-50 text-red-500 rounded-full flex items-center justify-center text-2xl shrink-0 shadow-inner">🔥</div>
+            <div>
+              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">Control Térmico</p>
+              <p class="text-base font-bold text-gray-900">80°C Precisos</p>
+              <p class="text-[10px] text-red-400 font-medium">Activa, no quema.</p>
+            </div>
+          </div>
+
+          <!-- Card Flotante: Higiene -->
+          <div class="absolute -left-12 bottom-24 bg-white/95 backdrop-blur-xl p-5 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.1)] border border-emerald-100 z-20 flex items-center gap-4 animate-in slide-in-from-left-8 duration-1000 delay-500 hover:-translate-y-1 transition-transform">
+            <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center text-2xl shrink-0 shadow-inner">💧</div>
+            <div>
+              <p class="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-0.5">Modo Limpieza</p>
+              <p class="text-base font-bold text-gray-900">Esterilización UV</p>
+              <p class="text-[10px] text-blue-400 font-medium">10 seg. Auto-Wash</p>
+            </div>
+          </div>
+       </div>
+
+       <!-- COLUMNA DERECHA: La Narrativa (La Verdad) -->
+       <div class="space-y-10 order-1 lg:order-2">
+          
+          <div>
+            <div class="inline-block px-3 py-1 bg-gray-900 text-white text-[10px] font-bold uppercase tracking-widest rounded-md mb-4">Ingeniería Cosmética</div>
+            <h2 class="text-4xl lg:text-5xl font-serif text-gray-900 leading-[1.15]">
+              No es un electrodoméstico.<br>
+              <span class="text-emerald-700">Es un laboratorio.</span>
+            </h2>
+          </div>
+          
+          <p class="text-lg text-gray-600 leading-relaxed font-light">
+            La mayoría cree que basta con mezclar fruta y gelatina. <strong class="text-gray-900 font-medium">Falso.</strong> Para que la piel absorba los nutrientes, la mascarilla debe tener una estructura molecular específica.
+            <br><br>
+            Nuestra máquina calienta y centrifuga la mezcla a la temperatura exacta donde los péptidos de colágeno se enlazan con las vitaminas sin oxidarlas. El resultado es un <span class="italic text-emerald-700 font-serif">hidrogel vivo</span> que tu piel reconoce y absorbe.
+          </p>
+
+          <!-- Features Grid -->
+          <div class="grid gap-6 pt-4">
+             
+             <!-- Feature 1 -->
+             <div class="group flex items-start gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
+                <div class="w-12 h-12 rounded-xl bg-gray-100 text-gray-600 flex items-center justify-center text-xl shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">🧠</div>
+                <div>
+                   <h4 class="font-bold text-gray-900 text-base mb-1">Cerebro Inteligente</h4>
+                   <p class="text-sm text-gray-500 leading-snug">Sensores que detectan la viscosidad de la mezcla y ajustan el tiempo de procesamiento automáticamente.</p>
+                </div>
+             </div>
+             
+             <!-- Feature 2 -->
+             <div class="group flex items-start gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
+                <div class="w-12 h-12 rounded-xl bg-gray-100 text-gray-600 flex items-center justify-center text-xl shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">🔊</div>
+                <div>
+                   <h4 class="font-bold text-gray-900 text-base mb-1">Guía por Voz</h4>
+                   <p class="text-sm text-gray-500 leading-snug">No necesitas manual. La máquina te dice: "Agrega agua", "Agrega jugo", "Listo para verter".</p>
+                </div>
+             </div>
+
+             <!-- Feature 3 -->
+             <div class="group flex items-start gap-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors border border-transparent hover:border-gray-100">
+                <div class="w-12 h-12 rounded-xl bg-gray-100 text-gray-600 flex items-center justify-center text-xl shrink-0 group-hover:bg-emerald-600 group-hover:text-white transition-colors duration-300">🛡️</div>
+                <div>
+                   <h4 class="font-bold text-gray-900 text-base mb-1">Cerámica Anti-Bacteriana</h4>
+                   <p class="text-sm text-gray-500 leading-snug">El tanque interior evita que residuos de fruta fermenten. Higiene clínica en cada uso.</p>
+                </div>
+             </div>
+
+          </div>
+          
+       </div>
+
+    </div>
+  </div>
+</section>
+    <!-- ========================================================= -->
+    <!-- SECCIÓN 4: PASO A PASO VISUAL (LA SIMPLICIDAD)            -->
+    <!-- Estrategia: Eliminar el miedo a "es difícil de usar"      -->
+    <!-- ========================================================= -->
+    <section class="py-24 bg-white border-t border-gray-100">
+      <div class="max-w-5xl mx-auto px-6">
+        
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-serif text-gray-900 mb-4">Tan fácil como hacer café</h2>
+          <p class="text-gray-500">Sin complicaciones. La máquina te guía con voz inteligente en cada paso.</p>
+        </div>
+
+        <div class="relative">
+          <!-- Línea de conexión -->
+          <div class="hidden md:block absolute top-12 left-20 right-20 h-0.5 bg-gray-100 -z-0 border-t-2 border-dashed border-gray-200"></div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
+            
+            <!-- Paso 1 -->
+            <div class="relative z-10 bg-white text-center group">
+              <div class="w-24 h-24 bg-emerald-50 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300 border border-emerald-100">
+                <span class="text-4xl">🍹</span>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 mb-2">1. Vierte</h4>
+              <p class="text-sm text-gray-500 leading-relaxed px-4">Agrega 60ml de agua y 20ml de tu jugo favorito. La máquina te avisará si falta o sobra.</p>
+            </div>
+
+            <!-- Paso 2 -->
+            <div class="relative z-10 bg-white text-center group">
+              <div class="w-24 h-24 bg-emerald-50 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300 border border-emerald-100">
+                <span class="text-4xl">💊</span>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 mb-2">2. Activa</h4>
+              <p class="text-sm text-gray-500 leading-relaxed px-4">Introduce la pastilla de colágeno y presiona "Start". En 5 minutos la mezcla estará lista.</p>
+            </div>
+
+            <!-- Paso 3 -->
+            <div class="relative z-10 bg-white text-center group">
+              <div class="w-24 h-24 bg-emerald-50 rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-sm group-hover:scale-110 transition-transform duration-300 border border-emerald-100">
+                <span class="text-4xl">💆‍♀️</span>
+              </div>
+              <h4 class="text-xl font-bold text-gray-900 mb-2">3. Disfruta</h4>
+              <p class="text-sm text-gray-500 leading-relaxed px-4">Presiona el botón de salida sobre el molde. Deja enfriar 2 min y aplícala.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================= -->
+    <!-- SECCIÓN 5: UNBOXING DIGITAL (QUÉ INCLUYE)                 -->
+    <!-- Estrategia: Transparencia total para justificar el precio -->
+    <!-- ========================================================= -->
+    <section class="py-20 bg-gray-50">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="bg-white rounded-[3rem] p-8 lg:p-12 shadow-xl border border-gray-100 flex flex-col lg:flex-row gap-12 items-center">
+          
+          <!-- Imagen del Kit -->
+          <div class="flex-1 relative w-full aspect-square bg-gray-100 rounded-3xl overflow-hidden">
+            <img src="assets/images/Maquinas Profesionales/3.webp" alt="Kit Completo" class="absolute inset-0 w-full h-full object-cover mix-blend-multiply p-4">
+          </div>
+
+          <!-- Lista de Contenido -->
+          <div class="flex-1 space-y-8">
+            <div>
+              <h3 class="text-3xl font-serif text-gray-900 mb-2">Todo lo que necesitas</h3>
+              <p class="text-gray-500">Un kit completo para empezar tu spa en casa desde el día 1.</p>
+            </div>
+
+            <div class="space-y-4">
+              <!-- Item Lista -->
+              <div class="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-emerald-200 transition-colors">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <span class="font-bold text-gray-700">Máquina Inteligente de Mascarillas</span>
+              </div>
+
+              <!-- Item Lista -->
+              <div class="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-emerald-200 transition-colors">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <span class="font-bold text-gray-700">1x Caja de Colágeno (32 Pastillas)</span>
+                <span class="ml-auto bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded">REGALO</span>
+              </div>
+
+              <!-- Item Lista -->
+              <div class="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-emerald-200 transition-colors">
+                <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-emerald-500 shadow-sm">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                </div>
+                <span class="font-bold text-gray-700">Molde Facial Reutilizable + Espátula</span>
+              </div>
+            </div>
+
+            <!-- CTA Final -->
+            <button (click)="comprar()" class="w-full bg-black text-white py-5 rounded-xl font-bold text-lg hover:bg-gray-800 transition-all shadow-lg hover:-translate-y-1">
+              ¡Lo quiero ahora!
+            </button>
+
+          </div>
+        </div>
+      </div>
+    </section>
+}
 
  @if (producto(); as p) {
 
