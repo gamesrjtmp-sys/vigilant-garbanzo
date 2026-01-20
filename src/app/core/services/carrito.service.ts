@@ -1,7 +1,8 @@
-import { Injectable, signal, computed, inject } from '@angular/core';
+import { Injectable, signal, computed, inject, effect,PLATFORM_ID } from '@angular/core';
 import { ProductoDto } from '../models/dto/producto/productoDto';
 import { CatalogoService } from './catalogo.service';
 import { map } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 // Interfaz para el item del carrito
 export interface CartItem {
@@ -15,20 +16,49 @@ export interface CartItem {
 export class CarritoService {
 
   private catalogoService = inject(CatalogoService);
+  
+  // Para verificar si estamos en el navegador (y no en el servidor si usas SSR)
+  private platformId = inject(PLATFORM_ID);
+  private readonly STORAGE_KEY = 'lumina_cart';
+
   // 1. ESTADO (SIGNALS)
   
   // Controla si el drawer lateral está visible
   isOpen = signal(false);
   
-  // Lista de productos en el carrito
-  items = signal<CartItem[]>([]);
+  // Lista de productos en el carrito (Inicializada desde Storage)
+  items = signal<CartItem[]>(this.loadFromStorage());
 
   // Productos sugeridos (Upsell) que se muestran abajo en el carrito
   upsellItems = signal<ProductoDto[]>([]);
 
   constructor() {
+    // 🧠 EFECTO AUTOMÁTICO:
+    // Cada vez que 'items' cambie (agregues, quites, edites), 
+    // este código se ejecuta y guarda el nuevo estado en localStorage.
+    effect(() => {
+      this.saveToStorage(this.items());
+    });
+
     // Cargamos datos iniciales (Mock ID 101 por ejemplo)
     this.loadUpsellProducts(101); 
+  }
+
+  // --- PERSISTENCIA (LOCAL STORAGE) ---
+
+  private loadFromStorage(): CartItem[] {
+    // Verificamos si estamos en el navegador para evitar errores en SSR
+    if (isPlatformBrowser(this.platformId)) {
+      const stored = localStorage.getItem(this.STORAGE_KEY);
+      return stored ? JSON.parse(stored) : [];
+    }
+    return [];
+  }
+
+  private saveToStorage(items: CartItem[]) {
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.setItem(this.STORAGE_KEY, JSON.stringify(items));
+    }
   }
 
   private loadUpsellProducts(idSubcategoria: number) {
@@ -78,7 +108,7 @@ export class CarritoService {
   );
 
   // Meta para envío gratis (S/ 300.00)
-  readonly freeShippingThreshold = 100;
+  readonly freeShippingThreshold = 300;
   
   // Costo de envío (0 si supera la meta, 15 si no)
   deliveryCost = computed(() => {

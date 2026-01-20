@@ -58,16 +58,44 @@ export class CheckoutComponent implements OnInit {
   // --- FORMULARIO ---
   checkoutForm: FormGroup = this.fb.group({
     datosCliente: this.fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      email: ['', [Validators.required, Validators.email]],
-      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
+       name: ['', [
+        Validators.required, 
+        Validators.minLength(2), 
+        Validators.maxLength(50),
+        Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/) 
+      ]],
+      
+      // Email: Formato estándar estricto
+      email: ['', [
+        Validators.required, 
+        Validators.email,
+        Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)
+      ]],
+      
+      // Celular Perú: Empieza con 9 y tiene 9 dígitos exactos
+      phone: ['', [
+        Validators.required, 
+        Validators.pattern(/^9\d{8}$/),
+        Validators.minLength(9), 
+        Validators.maxLength(12)
+      ]],
     }),
     datosEnvio: this.fb.group({
-      departamento: ['', Validators.required],
+     departamento: ['', Validators.required],
       provincia: [{ value: '', disabled: true }, Validators.required],
       distrito: [{ value: '', disabled: true }, Validators.required],
-      direccion: ['', [Validators.required, Validators.minLength(10)]],
-      referencia: ['']
+      
+      // Dirección: Mínimo para que sea real, máximo para no desbordar etiquetas
+      direccion: ['', [
+        Validators.required, 
+        Validators.minLength(10), 
+        Validators.maxLength(300)
+      ]],
+      
+      // Referencia: Opcional, pero si escriben, que no sea una novela
+      referencia: ['', [
+        Validators.maxLength(150)
+      ]]
     }),
     datosPago: this.fb.group({
       method: ['', Validators.required]
